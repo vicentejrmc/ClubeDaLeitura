@@ -2,6 +2,8 @@
 
 public class TelaAmigo
 {
+    RepositorioAmigo[] repositorioAmigo = new RepositorioAmigo[100];
+
     private void ExibirCabecalho()
     {
         Console.Clear();
@@ -75,7 +77,17 @@ public class TelaAmigo
         if(resultadoValidacao.Length > 0)
         {
             Notificador.ExibirMensagem(resultadoValidacao, ConsoleColor.Red);
+
+            return;
         }
+
+        // Criar Metod para Validar conflito de dados inseridos Classe Amigo
+
+
+
+        //Criar Metodo Inserir dentro da Classe RepositorioAmigo.
+
+
 
     }
 

@@ -5,12 +5,14 @@ public class Amigo
     public string Nome;
     public string Responsavel;
     public string Telefone;
+    public int Id;
 
     public Amigo(string nome, string responsavel, string telefone)
     {
         Nome = nome;
         Responsavel = responsavel;
         Telefone = telefone;
+        Id = GeradorDeId.GerarIdAmigo();
     }
 
     public string ValidarEntradas()
