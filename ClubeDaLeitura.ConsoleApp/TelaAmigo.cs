@@ -2,7 +2,7 @@
 
 public class TelaAmigo
 {
-    public void ExibirCabecalho()
+    private void ExibirCabecalho()
     {
         Console.Clear();
         Console.WriteLine("-----------------------------------------------------");
@@ -36,13 +36,13 @@ public class TelaAmigo
                 EditarAmigoCadastrado();
                 break;
             case "3":
-                // ExcluirAmigoCadastrado();
+                ExcluirAmigoCadastrado();
                 break;
             case "4":
-                // ListarAmigosCadastrados();
+                ListarAmigosCadastrados();
                 break;
             case "5":
-                // VisualizarEmprestimos();
+                VisualizarEmprestimos();
                 break;
             default:
                 Console.WriteLine("Opção inválida! Tente novamente.");
@@ -67,7 +67,7 @@ public class TelaAmigo
         string telefone = Console.ReadLine();
     }
 
-    private void EditarAmigoCadastrado()
+    public void EditarAmigoCadastrado()
     {
         ExibirCabecalho();
 
@@ -85,6 +85,39 @@ public class TelaAmigo
        
         Console.Write("Digite o novo Telefone de contato: ");
         string telefone = Console.ReadLine();
+    }
+
+    public void ExcluirAmigoCadastrado()
+    {
+        ExibirCabecalho();
+
+        Console.WriteLine("Excluindo Amigo Cadastrado...");
+        Console.WriteLine("-----------------------------------------------------\n");
+
+        Console.Write("Digite o ID do Amigo: ");
+        int id = Convert.ToInt32(Console.ReadLine());
+
+        //Criar Metodo Obter AmigoPorId dentro da Classe RepositorioAmigo.
+    }
+
+    public void ListarAmigosCadastrados()
+    {
+        ExibirCabecalho();
+        Console.WriteLine("Listando Amigos Cadastrados...");
+        Console.WriteLine("-----------------------------------------------------\n");
+        
+        //Criar Metodo ListarAmigos dentro da Classe RepositorioAmigo.
+        //Listar todos os amigos cadastrados.
+    }
+
+    public void VisualizarEmprestimos()
+    {
+        ExibirCabecalho();
+        Console.WriteLine("Visualizando Empréstimos...");
+        Console.WriteLine("-----------------------------------------------------\n");
+
+        //Criar Metodo ListarEmprestimos dentro da Classe RepositorioEmprestimo.
+        //Listar todos os empréstimos cadastrados.
     }
 
 
