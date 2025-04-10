@@ -65,6 +65,18 @@ public class TelaAmigo
 
         Console.Write("Digite o Telefone de contato: ");
         string telefone = Console.ReadLine();
+
+        Amigo amigo = new Amigo("", "", "");
+
+        amigo = new Amigo(nome, nomeResponsavel, telefone);
+
+        string resultadoValidacao = amigo.ValidarEntradas();
+
+        if(resultadoValidacao.Length > 0)
+        {
+            Notificador.ExibirMensagem(resultadoValidacao, ConsoleColor.Red);
+        }
+
     }
 
     public void EditarAmigoCadastrado()

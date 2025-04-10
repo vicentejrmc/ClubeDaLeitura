@@ -6,6 +6,12 @@ public class Amigo
     public string Responsavel;
     public string Telefone;
 
+    public Amigo(string nome, string responsavel, string telefone)
+    {
+        Nome = nome;
+        Responsavel = responsavel;
+        Telefone = telefone;
+    }
 
     public string ValidarEntradas()
     { 
