@@ -19,7 +19,7 @@ public class TelaPrincipal
         Console.WriteLine("-----------------------------------------------------\n");
 
         Console.Write("Digite uma opção válida: ");
-        string opcao = Console.ReadLine();
+        string opcao = Console.ReadLine().ToUpper(); ;
 
         return opcao;
     }
