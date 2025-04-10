@@ -66,7 +66,7 @@ public class TelaAmigo
         string nomeResponsavel = Console.ReadLine();
 
         Console.Write("Digite o Telefone de contato: ");
-        string telefone = Console.ReadLine();
+        string telefone = Console.ReadLine().Trim();
 
         Amigo amigo = new Amigo("", "", "");
 
