@@ -1,4 +1,7 @@
-﻿namespace ClubeDaLeitura.ConsoleApp
+﻿using ClubeDaLeitura.ConsoleApp.Compatilhado;
+using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
+
+namespace ClubeDaLeitura.ConsoleApp
 {
     internal class Program : TelaPrincipal
     {

@@ -1,4 +1,6 @@
-﻿namespace ClubeDaLeitura.ConsoleApp;
+﻿using ClubeDaLeitura.ConsoleApp.Compatilhado;
+
+namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo;
 
 public class Amigo
 {
@@ -13,6 +15,11 @@ public class Amigo
         Responsavel = responsavel;
         Telefone = telefone;
         Id = GeradorDeId.GerarIdAmigo();
+    }
+
+    public string GerarIdAmigo()
+    {
+        return Id.ToString();
     }
 
     public string ValidarEntradas()
@@ -30,4 +37,24 @@ public class Amigo
 
         return resultadoValidacao;
     }
+
+    //public string ValidarAmigoExiste(string nome, string responsavel, string telefone)
+    //{
+    //    string amigoExiste = "";
+    //    for (int i = 0; i < vetorDeAmigos.Length; i++)
+    //    {
+    //        if (vetorDeAmigos[i].Nome == nome)
+    //        {
+    //            amigoExiste += "!...Já existe um amigo cadastrado com esse NOME...!\n";
+    //        }
+
+    //        if (vetorDeAmigos[i].Telefone == telefone)
+    //        {
+    //            amigoExiste += "!...!...Já existe um amigo cadastrado com esse TELEFONE...!\n";
+    //        }
+    //    }
+
+    //    return amigoExiste;
+    //}
+
 }

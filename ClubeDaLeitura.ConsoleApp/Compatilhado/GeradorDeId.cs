@@ -1,10 +1,11 @@
-﻿namespace ClubeDaLeitura.ConsoleApp
+﻿namespace ClubeDaLeitura.ConsoleApp.Compatilhado
 {
     public class GeradorDeId
     {
+        public static int idAmigo = 0;
+
         public static int GerarIdAmigo()
         {
-            int idAmigo = 0 ;
             idAmigo++;
 
             return idAmigo;

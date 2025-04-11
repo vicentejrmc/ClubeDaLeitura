@@ -1,8 +1,16 @@
-﻿namespace ClubeDaLeitura.ConsoleApp;
+﻿using ClubeDaLeitura.ConsoleApp.Compatilhado;
+using System.Reflection;
+
+namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo;
 
 public class TelaAmigo
 {
     RepositorioAmigo[] repositorioAmigo = new RepositorioAmigo[100];
+
+    public TelaAmigo(RepositorioAmigo[] repositorioAmigo)
+    {
+        this.repositorioAmigo = repositorioAmigo;
+    }
 
     private void ExibirCabecalho()
     {
@@ -66,23 +74,21 @@ public class TelaAmigo
         string nomeResponsavel = Console.ReadLine();
 
         Console.Write("Digite o Telefone de contato: ");
-        string telefone = Console.ReadLine().Trim();
+        string telefone = Console.ReadLine().Trim(' ');
 
-        Amigo amigo = new Amigo("", "", "");
+        Amigo novoAmigo = new Amigo(nome, nomeResponsavel, telefone);
 
-        amigo = new Amigo(nome, nomeResponsavel, telefone);
+        string resultadoValidacao = novoAmigo.ValidarEntradas();
 
-        string resultadoValidacao = amigo.ValidarEntradas();
-
-        if(resultadoValidacao.Length > 0)
+        if (resultadoValidacao.Length > 0)
         {
             Notificador.ExibirMensagem(resultadoValidacao, ConsoleColor.Red);
 
             return;
         }
+       
 
-        // Criar Metod para Validar conflito de dados inseridos Classe Amigo
-
+        string amigoExiste = repositorioAmigo[0].ValidarAmigoExiste(nome, nomeResponsavel, telefone);
 
 
         //Criar Metodo Inserir dentro da Classe RepositorioAmigo.
@@ -97,18 +103,20 @@ public class TelaAmigo
 
         Console.WriteLine("Editando Amigo Cadastrado...");
         Console.WriteLine("-----------------------------------------------------\n");
-        
+
         Console.Write("Digite o ID do Amigo: ");
         int id = Convert.ToInt32(Console.ReadLine());
-        
+
         Console.Write("Digite o novo nome do Amigo: ");
         string nome = Console.ReadLine();
-        
+
         Console.Write("Digite o novo nome do Responsável: ");
         string nomeResponsavel = Console.ReadLine();
-       
+
         Console.Write("Digite o novo Telefone de contato: ");
         string telefone = Console.ReadLine();
+
+        // Criar Metodo e assosiar os dados a um novo objeto Amigo dentro da classe repositorio amigo.
     }
 
     public void ExcluirAmigoCadastrado()
@@ -129,7 +137,7 @@ public class TelaAmigo
         ExibirCabecalho();
         Console.WriteLine("Listando Amigos Cadastrados...");
         Console.WriteLine("-----------------------------------------------------\n");
-        
+
         //Criar Metodo ListarAmigos dentro da Classe RepositorioAmigo.
         //Listar todos os amigos cadastrados.
     }
