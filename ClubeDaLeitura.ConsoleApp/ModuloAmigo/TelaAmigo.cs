@@ -7,11 +7,6 @@ public class TelaAmigo
 {
     RepositorioAmigo[] repositorioAmigo = new RepositorioAmigo[100];
 
-    public TelaAmigo(RepositorioAmigo[] repositorioAmigo)
-    {
-        this.repositorioAmigo = repositorioAmigo;
-    }
-
     private void ExibirCabecalho()
     {
         Console.Clear();
@@ -86,9 +81,6 @@ public class TelaAmigo
 
             return;
         }
-       
-
-        string amigoExiste = repositorioAmigo[0].ValidarAmigoExiste(nome, nomeResponsavel, telefone);
 
 
         //Criar Metodo Inserir dentro da Classe RepositorioAmigo.
