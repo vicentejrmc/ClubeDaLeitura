@@ -4,11 +4,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo;
 
 public class RepositorioAmigo
 {
-    public Amigo Nome;
-    public Amigo Responsavel;
-    public Amigo Telefone;
-
-
+   
     public Amigo[] vetorDeAmigos = new Amigo[100];
     public int contAmigos = 0;
 

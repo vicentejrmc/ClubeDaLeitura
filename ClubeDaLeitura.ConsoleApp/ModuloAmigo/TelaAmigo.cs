@@ -5,7 +5,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo;
 
 public class TelaAmigo
 {
-    RepositorioAmigo[] repositorioAmigo = new RepositorioAmigo[100];
+    RepositorioAmigo repositorioAmigo = new RepositorioAmigo();
 
     private void ExibirCabecalho()
     {
@@ -82,11 +82,13 @@ public class TelaAmigo
             return;
         }
 
+        repositorioAmigo.InserirNovoAmigo(novoAmigo);
 
-        //Criar Metodo Inserir dentro da Classe RepositorioAmigo.
+        Notificador.ExibirMensagem("Amigo Cadastrado Com Sucesso!", ConsoleColor.Green);
+        Console.WriteLine("Pressione {Enter]");
+        Console.ReadLine();
 
-
-
+        return;
     }
 
     public void EditarAmigoCadastrado()
