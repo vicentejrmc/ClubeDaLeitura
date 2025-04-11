@@ -9,38 +9,43 @@ namespace ClubeDaLeitura.ConsoleApp
         {
             TelaPrincipal telaPrincipal = new TelaPrincipal();
             TelaAmigo telaAmigo = new TelaAmigo();
+            string opcao;
 
-            string opcao = telaPrincipal.MenuPrincipal();
-
-            switch(opcao)
+            do
             {
-                case "1":
-                    telaAmigo.GerenciarAmigos();
-                    break;
+                Console.Clear();
+                opcao = telaPrincipal.MenuPrincipal();
 
-                case "2":
-                    // GerenciarCaixas
-                    break;
+                switch (opcao)
+                {
+                    case "1":
+                        telaAmigo.GerenciarAmigos();
+                        break;
 
-                case "3":
-                    // GerenciarRevistas
-                    break;
+                    case "2":
+                        // GerenciarCaixas
+                        break;
 
-                case "4":
-                    // GerenciarEmpréstimos
-                    break;
+                    case "3":
+                        // GerenciarRevistas
+                        break;
 
-                case "S":
-                    Console.WriteLine("Saindo do sistema...");
-                    break;
+                    case "4":
+                        // GerenciarEmpréstimos
+                        break;
 
-                default:
-                    Console.WriteLine("Opção inválida! Tente novamente.");
-                    break;
-            }
+                    case "S":
+                        Console.WriteLine("Saindo do sistema...");
+                        break;
 
+                    default:
+                        Console.WriteLine("Opção inválida! Tente novamente.");
+                        break;
+                }
 
-            Console.ReadLine();
+            } while (opcao != "S");
+            
+            
         }
     }
 

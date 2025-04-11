@@ -86,9 +86,7 @@ public class TelaAmigo
 
         Notificador.ExibirMensagem("Amigo Cadastrado Com Sucesso!", ConsoleColor.Green);
         Console.WriteLine("Pressione {Enter]");
-        Console.ReadLine();
 
-        return;
     }
 
     public void EditarAmigoCadastrado()
@@ -129,11 +127,11 @@ public class TelaAmigo
     public void ListarAmigosCadastrados()
     {
         ExibirCabecalho();
-        Console.WriteLine("Listando Amigos Cadastrados...");
-        Console.WriteLine("-----------------------------------------------------\n");
 
-        //Criar Metodo ListarAmigos dentro da Classe RepositorioAmigo.
-        //Listar todos os amigos cadastrados.
+        repositorioAmigo.VisualizarAmigosCadastrados();
+
+        Notificador.ExibirMensagem("Pressione [Enter] para Continuar...", ConsoleColor.Green);
+        
     }
 
     public void VisualizarEmprestimos()
