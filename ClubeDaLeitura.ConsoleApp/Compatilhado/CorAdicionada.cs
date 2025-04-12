@@ -1,6 +1,8 @@
-﻿namespace ClubeDaLeitura.ConsoleApp.Compatilhado
+﻿using System.Runtime.ConstrainedExecution;
+
+namespace ClubeDaLeitura.ConsoleApp.Compatilhado
 {
-    internal class Notificador
+    internal class CorAdicionada
     {
         public static void ExibirMensagem(string mensagem, ConsoleColor cor)
         {
@@ -24,5 +26,13 @@
             Console.Write("Pressione ENTER para tentar novamente...");
             Console.ReadLine();
         }
+
+        public static void ExibirCores(string descricao, ConsoleColor cor)
+        {
+            Console.ForegroundColor = cor;
+            Console.WriteLine(descricao);
+            Console.ResetColor();
+        }
+
     }
 }

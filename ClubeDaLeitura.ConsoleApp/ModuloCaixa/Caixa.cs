@@ -6,20 +6,20 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
     public class Caixa
     {
         public string Etiqueta;
-        public Color Cor;
+        public Color CorCaixa;
         public int DiasEmprestimo;
 
-        public Caixa(string etiqueta, Color cor, int diasEmprestimo)
+        public Caixa(string etiqueta, Color corCaixa, int diasEmprestimo)
         {
             Etiqueta = etiqueta;
-            Cor = cor;
+            CorCaixa = corCaixa;
             DiasEmprestimo = diasEmprestimo;
         }
 
         public Caixa(string etiqueta, Color cor) // Sobre Carga para DiasEmprestimo Padrão
         {
             Etiqueta = etiqueta;
-            Cor = cor;
+            CorCaixa = cor;
             DiasEmprestimo = 7;
         }
 
@@ -47,6 +47,5 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
         {
             throw new NotImplementedException();
         }
-
     }
 }
