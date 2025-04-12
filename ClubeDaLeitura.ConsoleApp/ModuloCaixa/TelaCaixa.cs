@@ -74,7 +74,7 @@ public class TelaCaixa
         string etiqueta = Console.ReadLine()!.Trim(' ');
 
         string corDaCaixa = EcolherCoresDisponiveis();
-       
+
         Console.WriteLine($"Cor Escolhida: {corDaCaixa}");
 
         Console.Write("Quantos dias durarão os emprestimos da caixa? (padrão = 7) ");
@@ -82,7 +82,7 @@ public class TelaCaixa
 
         Caixa novaCaixa = new Caixa(etiqueta, corDaCaixa, diasEmprestimo);
 
-       
+
         string caixaEhValida = novaCaixa.ValidarCaixa();
 
         if (caixaEhValida.Length > 0)
@@ -100,6 +100,22 @@ public class TelaCaixa
 
     public void EditarCaixa()
     {
+        ExibirCabecalho();
+
+        Console.WriteLine("Editar Caixa!");
+        Console.WriteLine("-----------------------------------------------------\n");
+
+        Console.Write("Antes de iniciar deseja visualizar as caixas? S/N: ");
+        string verOuNao = Console.ReadLine()!.ToUpper();
+
+        if (verOuNao == "S")
+        {
+            Console.Clear();
+            VisualizarCaixas();
+            NotificarCor.ExibirMensagem("Pressione [Enter] para continuar.", ConsoleColor.Yellow);
+            Console.ReadLine();
+        }
+
         ExibirCabecalho();
 
         Console.WriteLine("Editar Caixa!");
@@ -137,9 +153,15 @@ public class TelaCaixa
         throw new NotImplementedException();
     }
 
-    private void VisualizarCaixas()
+    public void VisualizarCaixas()
     {
-        
+        ExibirCabecalho();
+
+        Console.WriteLine("Gerenciar Caixas!");
+        Console.WriteLine("-----------------------------------------------------\n");
+
+        repositorioCaixa.SelecionarTodos();
+
     }
 
     public string EcolherCoresDisponiveis()
@@ -163,7 +185,7 @@ public class TelaCaixa
 
         string corEscolhida = Console.ReadLine();
 
-        switch(corEscolhida)
+        switch (corEscolhida)
         {
             case "1":
                 corEscolhida = "Red";

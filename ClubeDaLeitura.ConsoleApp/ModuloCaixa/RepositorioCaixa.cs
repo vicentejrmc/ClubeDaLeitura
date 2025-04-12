@@ -47,7 +47,15 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
 
         public void SelecionarTodos()
         {
-           
+            for (int i = 0; i < vetorDeCaixa.Length; i++)
+        {
+            if (vetorDeCaixa[i] != null)
+            {
+                Console.WriteLine($"ID: {vetorDeCaixa[i].IdCaixa} | Nome: {vetorDeCaixa[i].Etiqueta} | Responsável: {vetorDeCaixa[i].CorCaixa} |");
+                Console.WriteLine("---------------------------------------------------------------------------------------------------------------------------------------------");
+            }
+        }
+        Console.WriteLine();
         }
 
         public void SelecionarPorId()
