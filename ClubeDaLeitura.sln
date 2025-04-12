@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35931.197 d17.13
+VisualStudioVersion = 17.13.35931.197
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClubeDaLeitura.ConsoleApp", "ClubeDaLeitura.ConsoleApp\ClubeDaLeitura.ConsoleApp.csproj", "{6DEF25BF-039A-41F1-B8BF-7F9C9883F0D4}"
 EndProject
