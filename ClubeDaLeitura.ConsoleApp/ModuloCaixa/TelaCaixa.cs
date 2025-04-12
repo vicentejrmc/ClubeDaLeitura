@@ -166,7 +166,6 @@ public class TelaCaixa
         }
 
         NotificarCor.ExibirMensagem("Caixa Excluida com Sucesso!", ConsoleColor.Green);
-
     }
 
     public void VisualizarCaixas()

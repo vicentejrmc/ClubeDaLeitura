@@ -1,4 +1,5 @@
 ﻿using ClubeDaLeitura.ConsoleApp.Compatilhado;
+using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -70,9 +71,18 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
         Console.WriteLine();
         }
 
-        public void SelecionarPorId()
+        public Caixa SelecionarPorId(int idCaixa)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < vetorDeCaixa.Length; i++)
+            {
+                Caixa obterCaixaID = vetorDeCaixa[i];
+                if (obterCaixaID == null) continue;
+
+                else if (obterCaixaID.IdCaixa == idCaixa)
+                    return obterCaixaID;
+            }
+
+            return null;
         }
     }
 }
