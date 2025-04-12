@@ -15,6 +15,44 @@ public class RepositorioAmigo
        vetorDeAmigos[contAmigos++] = novoAmigo;
     }
 
+    public bool EditarAmigoCadastrado(Amigo amigoEditado, int id)
+    {
+        for (int i = 0; i < vetorDeAmigos.Length; i++)
+        {
+            if (vetorDeAmigos[i] == null)
+                continue;
+
+            if (vetorDeAmigos[i].Id == id)
+            {
+                vetorDeAmigos[i].Nome = amigoEditado.Nome;
+                vetorDeAmigos[i].Responsavel = amigoEditado.Responsavel;
+                vetorDeAmigos[i].Telefone = amigoEditado.Telefone;
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public bool ExcluirAmigoCadastrado(int amigoExcluir)
+    {
+        for (int i = 0; i < vetorDeAmigos.Length; i++)
+        {
+            if (vetorDeAmigos[i] == null)
+                continue;
+
+            else if (vetorDeAmigos[i].Id == amigoExcluir)
+            {
+                vetorDeAmigos[i] = null;
+
+                return true;
+            }
+        }
+        return false;
+    }
+
+
     public Amigo ObterAmigoPorId(int idAmigo)
     {
         for (int i = 0; i < vetorDeAmigos.Length; i++)
@@ -29,41 +67,7 @@ public class RepositorioAmigo
 
         return null;
     }
-    public bool EditarAmigoCadastrado(Amigo amigoEditado, int id)
-    {
-        for (int i = 0; i < vetorDeAmigos.Length; i++)
-        {
-            if (vetorDeAmigos[i] == null) 
-                continue;
-            
-            if (vetorDeAmigos[i].Id == id)
-            {
-                vetorDeAmigos[i].Nome = amigoEditado.Nome;
-                vetorDeAmigos[i].Responsavel = amigoEditado.Responsavel;
-                vetorDeAmigos[i].Telefone = amigoEditado.Telefone;
 
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public bool ExcluirAmigoCadastrado(int idAmigo)
-    {
-        for (int i = 0; i < vetorDeAmigos.Length; i++)
-        {
-            if (vetorDeAmigos[i] != null)
-                continue;
-            else if (vetorDeAmigos[i].Id == idAmigo)
-            {
-                vetorDeAmigos[i] = null;
-                
-                return true;
-            }
-        }
-        return false;
-    }
 
     public Amigo[] ObterTodosOsAmigos()
     {
@@ -76,9 +80,10 @@ public class RepositorioAmigo
         {
             if (vetorDeAmigos[i] != null)
             {
-                Console.WriteLine($"ID: {vetorDeAmigos[i].Id}, Nome: {vetorDeAmigos[i].Nome}, Responsável: {vetorDeAmigos[i].Responsavel}, Telefone: {vetorDeAmigos[i].Telefone}");
+                Console.WriteLine($"ID: {vetorDeAmigos[i].Id} | Nome: {vetorDeAmigos[i].Nome} | Responsável: {vetorDeAmigos[i].Responsavel} | Telefone: {vetorDeAmigos[i].Telefone}");
                 Console.WriteLine("---------------------------------------------------------------------------------------------------------------------------------------------");
             }
         }
+        Console.WriteLine();
     }
 }

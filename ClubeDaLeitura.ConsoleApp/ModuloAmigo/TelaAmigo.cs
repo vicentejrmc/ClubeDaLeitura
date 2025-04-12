@@ -124,10 +124,23 @@ public class TelaAmigo
         Console.WriteLine("Excluindo Amigo Cadastrado...");
         Console.WriteLine("-----------------------------------------------------\n");
 
-        Console.Write("Digite o ID do Amigo: ");
-        int id = Convert.ToInt32(Console.ReadLine());
+        repositorioAmigo.VisualizarAmigosCadastrados();
 
-        //Criar Metodo Obter AmigoPorId dentro da Classe RepositorioAmigo.
+        Console.Write("Digite o ID do Amigo: ");
+        int idExcluir = Convert.ToInt32(Console.ReadLine());
+
+        bool excluiu = repositorioAmigo.ExcluirAmigoCadastrado(idExcluir);
+        // Criar validação para verificar se o amigo está vinculado a algum empréstimo.
+
+        if (!excluiu)
+        {
+            Notificador.ExibirMensagem("Houve um erro durante a exclusao do Amigo", ConsoleColor.Red);
+
+            return;
+        }
+        else
+            Notificador.ExibirMensagem("Amigo excluído com sucesso!", ConsoleColor.Green);
+
     }
 
     public void ListarAmigosCadastrados()

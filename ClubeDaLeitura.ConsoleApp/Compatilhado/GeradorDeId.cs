@@ -2,7 +2,7 @@
 {
     public class GeradorDeId
     {
-        public static int idAmigo = 0;
+        public static int idAmigo = - 1;
 
         public static int GerarIdAmigo()
         {
