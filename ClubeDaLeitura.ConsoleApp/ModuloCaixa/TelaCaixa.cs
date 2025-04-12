@@ -105,16 +105,7 @@ public class TelaCaixa
         Console.WriteLine("Editar Caixa!");
         Console.WriteLine("-----------------------------------------------------\n");
 
-        Console.Write("Antes de iniciar deseja visualizar as caixas? S/N: ");
-        string verOuNao = Console.ReadLine()!.ToUpper();
-
-        if (verOuNao == "S")
-        {
-            Console.Clear();
-            VisualizarCaixas();
-            NotificarCor.ExibirMensagem("Pressione [Enter] para continuar.", ConsoleColor.Yellow);
-            Console.ReadLine();
-        }
+        VerOuNao();
 
         ExibirCabecalho();
 
@@ -148,9 +139,34 @@ public class TelaCaixa
 
     }
 
-    private void ExcluirCaixa()
+    public void ExcluirCaixa()
     {
-        throw new NotImplementedException();
+        ExibirCabecalho();
+
+        Console.WriteLine("Editar Caixa!");
+        Console.WriteLine("-----------------------------------------------------\n");
+
+        VerOuNao();
+
+        ExibirCabecalho();
+
+        Console.WriteLine("Editar Caixa!");
+        Console.WriteLine("-----------------------------------------------------\n");
+
+        Console.Write("Insira o Id da Caixa que deseja Excluir: ");
+        int IdExcluir = Convert.ToInt32(Console.ReadLine());
+
+        bool conseguiuEcluir = repositorioCaixa.Excluir(IdExcluir); // Criar Validação de Caixa sem emprestimos em Aberto.
+
+        if (!conseguiuEcluir)
+        {
+            NotificarCor.ExibirMensagem("Não foi possivel Excluir a caixa, Verifique se existe algum emprestimo em Aberto.", ConsoleColor.Red);
+
+            return;
+        }
+
+        NotificarCor.ExibirMensagem("Caixa Excluida com Sucesso!", ConsoleColor.Green);
+
     }
 
     public void VisualizarCaixas()
@@ -227,4 +243,19 @@ public class TelaCaixa
         return corEscolhida;
 
     } // Necessita de melhorias Refatorações finais.
+
+    public void VerOuNao()
+    {
+        Console.Write("Antes de iniciar deseja visualizar as caixas? S/N: ");
+        string verOuNao = Console.ReadLine()!.ToUpper();
+
+        if (verOuNao == "S")
+        {
+            Console.Clear();
+            VisualizarCaixas();
+            
+        }
+        NotificarCor.ExibirMensagem("Pressione [Enter] para continuar.", ConsoleColor.Yellow);
+        Console.ReadLine();
+    }
 }

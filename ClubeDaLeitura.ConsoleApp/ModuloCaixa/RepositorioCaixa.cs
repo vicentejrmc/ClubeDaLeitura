@@ -40,9 +40,21 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
             return false;
         }
 
-        public void Excluir()
+        public bool Excluir(int excluirCaixa)
         {
-            throw new NotImplementedException();
+            for (int i = 0; i < vetorDeCaixa.Length; i++)
+            {
+                if (vetorDeCaixa[i] == null)
+                    continue;
+
+                else if (vetorDeCaixa[i].IdCaixa == excluirCaixa)
+                {
+                    vetorDeCaixa[i] = null;
+
+                    return true;
+                }
+            }
+            return false;
         }
 
         public void SelecionarTodos()
