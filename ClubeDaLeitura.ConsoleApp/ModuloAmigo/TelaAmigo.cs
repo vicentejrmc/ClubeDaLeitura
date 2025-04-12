@@ -50,7 +50,7 @@ public class TelaAmigo
                 VisualizarEmprestimos();
                 break;
             default:
-                Console.WriteLine("Opção inválida! Tente novamente.");
+                Notificador.ExibirMensagem("Opção inválida!", ConsoleColor.Cyan);
                 break;
         }
     }

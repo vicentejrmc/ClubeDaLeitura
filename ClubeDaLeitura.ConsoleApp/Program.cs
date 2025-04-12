@@ -1,5 +1,6 @@
 ﻿using ClubeDaLeitura.ConsoleApp.Compatilhado;
 using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
+using ClubeDaLeitura.ConsoleApp.ModuloCaixa;
 
 namespace ClubeDaLeitura.ConsoleApp
 {
@@ -9,6 +10,8 @@ namespace ClubeDaLeitura.ConsoleApp
         {
             TelaPrincipal telaPrincipal = new TelaPrincipal();
             TelaAmigo telaAmigo = new TelaAmigo();
+            TelaCaixa telaCaixa = new TelaCaixa();
+
             string opcao;
 
             do
@@ -23,7 +26,7 @@ namespace ClubeDaLeitura.ConsoleApp
                         break;
 
                     case "2":
-                        // GerenciarCaixas
+                        telaCaixa.GerenciarCaixas();
                         break;
 
                     case "3":
