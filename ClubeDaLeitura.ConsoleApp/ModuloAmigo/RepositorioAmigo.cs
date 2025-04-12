@@ -3,8 +3,8 @@
 namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo;
 
 public class RepositorioAmigo
-{
-   
+{  
+
     public Amigo[] vetorDeAmigos = new Amigo[100];
     public int contAmigos = 0;
 
@@ -15,13 +15,28 @@ public class RepositorioAmigo
        vetorDeAmigos[contAmigos++] = novoAmigo;
     }
 
-    public bool EditarAmigoCadastrado(int idAmigo, Amigo amigoEditado)
+    public Amigo ObterAmigoPorId(int idAmigo)
     {
         for (int i = 0; i < vetorDeAmigos.Length; i++)
         {
-            if (vetorDeAmigos[i] != null) 
+            Amigo amigo = vetorDeAmigos[i];
+
+            if (amigo == null) continue;
+
+            else if (amigo.Id == idAmigo)
+                return amigo;
+        }
+
+        return null;
+    }
+    public bool EditarAmigoCadastrado(Amigo amigoEditado, int id)
+    {
+        for (int i = 0; i < vetorDeAmigos.Length; i++)
+        {
+            if (vetorDeAmigos[i] == null) 
                 continue;
-            else if (vetorDeAmigos[i].Id == idAmigo)
+            
+            if (vetorDeAmigos[i].Id == id)
             {
                 vetorDeAmigos[i].Nome = amigoEditado.Nome;
                 vetorDeAmigos[i].Responsavel = amigoEditado.Responsavel;
@@ -30,6 +45,7 @@ public class RepositorioAmigo
                 return true;
             }
         }
+
         return false;
     }
 
@@ -49,21 +65,6 @@ public class RepositorioAmigo
         return false;
     }
 
-    public Amigo ObterAmigoPorId(int idAmigo)
-    {
-        for (int i = 0; i < vetorDeAmigos.Length; i++)
-        {
-            Amigo amigo = vetorDeAmigos[i];
-
-            if (amigo == null) continue;
-
-            else if (amigo.Id == idAmigo)
-                return amigo;
-        }
-
-        return null;
-    }
-
     public Amigo[] ObterTodosOsAmigos()
     {
         return vetorDeAmigos;
@@ -71,8 +72,6 @@ public class RepositorioAmigo
 
     public void VisualizarAmigosCadastrados()
     {
-        Console.WriteLine("Lista de Amigos Cadastrados:");
-        Console.WriteLine("-----------------------------------------------------\n");
         for (int i = 0; i < vetorDeAmigos.Length; i++)
         {
             if (vetorDeAmigos[i] != null)
@@ -82,5 +81,4 @@ public class RepositorioAmigo
             }
         }
     }
-
 }

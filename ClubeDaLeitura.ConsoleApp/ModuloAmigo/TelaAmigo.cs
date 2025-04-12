@@ -62,16 +62,8 @@ public class TelaAmigo
         Console.WriteLine("Inserindo novo Amigo...");
         Console.WriteLine("-----------------------------------------------------\n");
 
-        Console.Write("Digite o nome do Amigo: ");
-        string nome = Console.ReadLine();
-
-        Console.Write("Digite o nome do Responsável: ");
-        string nomeResponsavel = Console.ReadLine();
-
-        Console.Write("Digite o Telefone de contato: ");
-        string telefone = Console.ReadLine().Trim(' ');
-
-        Amigo novoAmigo = new Amigo(nome, nomeResponsavel, telefone);
+        Amigo novoAmigo = new Amigo("", "", "");
+        novoAmigo = ObterDadosAmigo();
 
         string resultadoValidacao = novoAmigo.ValidarEntradas();
 
@@ -96,19 +88,33 @@ public class TelaAmigo
         Console.WriteLine("Editando Amigo Cadastrado...");
         Console.WriteLine("-----------------------------------------------------\n");
 
-        Console.Write("Digite o ID do Amigo: ");
-        int id = Convert.ToInt32(Console.ReadLine());
+        repositorioAmigo.VisualizarAmigosCadastrados();
 
-        Console.Write("Digite o novo nome do Amigo: ");
-        string nome = Console.ReadLine();
+        Console.Write("Digite o ID do Amigo que deseja Editar: ");
+        int idSelecionado = Convert.ToInt32(Console.ReadLine());
 
-        Console.Write("Digite o novo nome do Responsável: ");
-        string nomeResponsavel = Console.ReadLine();
+        Amigo amigoEditado = new Amigo("", "", "");
+        amigoEditado = ObterDadosAmigo();
 
-        Console.Write("Digite o novo Telefone de contato: ");
-        string telefone = Console.ReadLine();
+        string resultadoValidacao = amigoEditado.ValidarEntradas();
 
-        // Criar Metodo e assosiar os dados a um novo objeto Amigo dentro da classe repositorio amigo.
+        if (resultadoValidacao.Length > 0)
+        {
+            Notificador.ExibirMensagem(resultadoValidacao, ConsoleColor.Red);
+
+            return;
+        }
+
+        bool editou = repositorioAmigo.EditarAmigoCadastrado(amigoEditado, idSelecionado);
+
+        if (!editou)
+        {
+            Notificador.ExibirMensagem("Amigo não encontrado! Edição cancelada", ConsoleColor.Red);
+            
+            return;
+        }
+
+        Notificador.ExibirMensagem("Amigo Editado Com Sucesso!", ConsoleColor.Green);
     }
 
     public void ExcluirAmigoCadastrado()
@@ -128,10 +134,12 @@ public class TelaAmigo
     {
         ExibirCabecalho();
 
+        Console.WriteLine("Lista de Amigos Cadastrados:");
+        Console.WriteLine("-----------------------------------------------------\n");
+
         repositorioAmigo.VisualizarAmigosCadastrados();
 
         Notificador.ExibirMensagem("Pressione [Enter] para Continuar...", ConsoleColor.Green);
-        
     }
 
     public void VisualizarEmprestimos()
@@ -144,5 +152,19 @@ public class TelaAmigo
         //Listar todos os empréstimos cadastrados.
     }
 
+    public Amigo ObterDadosAmigo()
+    {
+        Console.Write("Digite nome do Amigo: ");
+        string nome = Console.ReadLine();
 
+        Console.Write("Digite nome do Responsável: ");
+        string responsavel = Console.ReadLine();
+
+        Console.Write("Digite Telefone de contato: ");
+        string telefone = Console.ReadLine().Trim(' ');
+
+        Amigo dadosObtidosAmigo = new Amigo(nome, responsavel, telefone);
+
+        return dadosObtidosAmigo;
+    }
 }
