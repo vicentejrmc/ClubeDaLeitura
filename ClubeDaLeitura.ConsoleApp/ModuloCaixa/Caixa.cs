@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Data;
+using System.Drawing;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
 {
@@ -35,6 +36,17 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
 
         }
         // Implementar Validaçoes para: Etiqueta Duplicada, Dias Emprestimo(caso esteja em brando/Usar ou Não, valor padrão)
+
+        public void AdicionarRevista()
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public void RemoverRevista()
+        {
+            throw new NotImplementedException();
+        }
 
     }
 }
