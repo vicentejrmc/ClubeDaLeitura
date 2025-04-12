@@ -5,37 +5,30 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
 {
     public class Caixa
     {
+        public int IdCaixa;
         public string Etiqueta;
-        public Color CorCaixa;
+        public string CorCaixa;   /// Construtor precisa ser corrigo para passar uma cor
         public int DiasEmprestimo;
 
-        public Caixa(string etiqueta, Color corCaixa, int diasEmprestimo)
+        public Caixa(string etiqueta, string corCaixa, int diasEmprestimo)
         {
             Etiqueta = etiqueta;
             CorCaixa = corCaixa;
             DiasEmprestimo = diasEmprestimo;
         }
 
-        public Caixa(string etiqueta, Color cor) // Sobre Carga para DiasEmprestimo Padrão
-        {
-            Etiqueta = etiqueta;
-            CorCaixa = cor;
-            DiasEmprestimo = 7;
-        }
-
-
-        public void ValidarCaixa()
+        public string ValidarCaixa()
         {
             string caixaEhvalida = "";
 
             if (Etiqueta.Length > 50)
-                caixaEhvalida += "!...A Etiqueda deve conter um texto únido de no maximo 50 caracteres...!";
+                caixaEhvalida += "!...A Etiqueda deve conter um texto de no maximo 50 caracteres sem espaços em branco...!";
 
-            if (DiasEmprestimo == null)
-                caixaEhvalida += "Você Não Definio valor para o o limite de dias do Emprestimo...(Valor padrão = 7)!";
+            // Implementar Validaçoes para: Etiqueta Duplicada, Dias Emprestimo(caso esteja em brando/Usar ou Não, valor padrão)
 
+            return caixaEhvalida;
         }
-        // Implementar Validaçoes para: Etiqueta Duplicada, Dias Emprestimo(caso esteja em brando/Usar ou Não, valor padrão)
+
 
         public void AdicionarRevista()
         {

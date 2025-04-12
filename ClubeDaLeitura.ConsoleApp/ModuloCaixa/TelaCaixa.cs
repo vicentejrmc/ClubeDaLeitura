@@ -11,7 +11,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa;
 
 public class TelaCaixa
 {
-    RepositorioCaixa repositorioCaixa = new RepositorioCaixa();
+    public RepositorioCaixa repositorioCaixa = new RepositorioCaixa();
 
     private void ExibirCabecalho()
     {
@@ -55,7 +55,7 @@ public class TelaCaixa
                 break;
 
             default:
-                CorAdicionada.ExibirMensagem("Opcção Invalida...!", ConsoleColor.Cyan);
+                NotificarCor.ExibirMensagem("Opcção Invalida...!", ConsoleColor.Cyan);
                 break;
 
         }
@@ -63,7 +63,7 @@ public class TelaCaixa
 
     }
 
-    private void CadastrarCaixa()
+    public void CadastrarCaixa()
     {
         ExibirCabecalho();
 
@@ -77,13 +77,59 @@ public class TelaCaixa
        
         Console.WriteLine($"Cor Escolhida: {corDaCaixa}");
 
-        Console.ReadLine();
+        Console.Write("Quantos dias durarão os emprestimos da caixa? (padrão = 7) ");
+        int diasEmprestimo = Convert.ToInt32(Console.ReadLine());
+
+        Caixa novaCaixa = new Caixa(etiqueta, corDaCaixa, diasEmprestimo);
+
+       
+        string caixaEhValida = novaCaixa.ValidarCaixa();
+
+        if (caixaEhValida.Length > 0)
+        {
+            NotificarCor.ExibirMensagem(caixaEhValida, ConsoleColor.Red);
+
+            return;
+        }
+
+        repositorioCaixa.Inserir(novaCaixa);
+
+        NotificarCor.ExibirMensagem("Caixa Criada com Sucesso!", ConsoleColor.Green);
 
     }
 
-    private void EditarCaixa()
+    public void EditarCaixa()
     {
-        throw new NotImplementedException();
+        ExibirCabecalho();
+
+        Console.WriteLine("Editar Caixa!");
+        Console.WriteLine("-----------------------------------------------------\n");
+
+        Console.Write("Selecione o Id da Caixa que deseja Editar: ");
+        int idCaixa = Convert.ToInt32(Console.ReadLine());
+
+        Console.Write("Insira a Nova etiqueta: ");
+        string novaEtiqueta = Console.ReadLine()!.Trim(' ');
+
+        Console.WriteLine("Selecione a Nova Cor.... ");
+        string novaCor = EcolherCoresDisponiveis();
+
+        Console.Write("Insira o Novo prazo de emprestimos da caixa: ");
+        int novoLimeteDias = Convert.ToInt32(Console.ReadLine());
+
+        Caixa caixaEditada = new Caixa(novaEtiqueta, novaCor, novoLimeteDias);
+
+        bool editou = repositorioCaixa.Editar(idCaixa, caixaEditada);
+
+        if (!editou)
+        {
+            NotificarCor.ExibirMensagem("Houve um erro ao tentar editar a caixa! reinicie o precesso!", ConsoleColor.Red);
+
+            return;
+        }
+
+        NotificarCor.ExibirMensagem("Caixa editada com sucesso!", ConsoleColor.Green);
+
     }
 
     private void ExcluirCaixa()
@@ -93,7 +139,7 @@ public class TelaCaixa
 
     private void VisualizarCaixas()
     {
-        throw new NotImplementedException();
+        
     }
 
     public string EcolherCoresDisponiveis()
@@ -101,16 +147,16 @@ public class TelaCaixa
         Console.WriteLine("Seleção de Cor da Caixa");
         Console.WriteLine("-----------------------------------------------------");
 
-        CorAdicionada.ExibirCores("1: Red ##", ConsoleColor.Red);
-        CorAdicionada.ExibirCores("2: White ##", ConsoleColor.White);
-        CorAdicionada.ExibirCores("3: Blue ##", ConsoleColor.Blue);
-        CorAdicionada.ExibirCores("4: DarkBlue ##", ConsoleColor.DarkBlue);
-        CorAdicionada.ExibirCores("5: Green ##", ConsoleColor.Green);
-        CorAdicionada.ExibirCores("6: DarkGreen ##", ConsoleColor.DarkGreen);
-        CorAdicionada.ExibirCores("7: Cyan ##", ConsoleColor.Cyan);
-        CorAdicionada.ExibirCores("8: DarkCyan ##", ConsoleColor.DarkCyan);
-        CorAdicionada.ExibirCores("9: Yellow ##", ConsoleColor.Yellow);
-        CorAdicionada.ExibirCores("10: DarkYellow ##", ConsoleColor.DarkYellow);
+        NotificarCor.ExibirCores("1: Red ##", ConsoleColor.Red);
+        NotificarCor.ExibirCores("2: White ##", ConsoleColor.White);
+        NotificarCor.ExibirCores("3: Blue ##", ConsoleColor.Blue);
+        NotificarCor.ExibirCores("4: DarkBlue ##", ConsoleColor.DarkBlue);
+        NotificarCor.ExibirCores("5: Green ##", ConsoleColor.Green);
+        NotificarCor.ExibirCores("6: DarkGreen ##", ConsoleColor.DarkGreen);
+        NotificarCor.ExibirCores("7: Cyan ##", ConsoleColor.Cyan);
+        NotificarCor.ExibirCores("8: DarkCyan ##", ConsoleColor.DarkCyan);
+        NotificarCor.ExibirCores("9: Yellow ##", ConsoleColor.Yellow);
+        NotificarCor.ExibirCores("10: DarkYellow ##", ConsoleColor.DarkYellow);
         Console.WriteLine("-----------------------------------------------------");
 
         Console.Write("Escolha uma Cor: ");
@@ -151,12 +197,12 @@ public class TelaCaixa
                 corEscolhida = "DarkYellow";
                 break;
             default:
-                CorAdicionada.ExibirMensagem("Opção Invalida!", ConsoleColor.Red);
+                NotificarCor.ExibirMensagem("Opção Invalida!", ConsoleColor.Red);
                 break;
 
         }
 
         return corEscolhida;
 
-    }
+    } // Necessita de melhorias Refatorações finais.
 }

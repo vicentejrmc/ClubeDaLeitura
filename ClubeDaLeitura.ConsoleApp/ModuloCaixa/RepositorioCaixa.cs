@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClubeDaLeitura.ConsoleApp.Compatilhado;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -9,17 +10,34 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
 {
     public class RepositorioCaixa
     {
-        public Caixa[] caixa = new Caixa[100];
+        public Caixa[] vetorDeCaixa = new Caixa[100];
         int contCaixa = 0;
 
-        public void Inserir()
+        public void Inserir(Caixa novaCaixa)
         {
-            throw new NotImplementedException();
+            vetorDeCaixa[contCaixa++] = novaCaixa;
+
+            novaCaixa.IdCaixa = GeradorDeId.GerarIdCaixa();
         }
 
-        public void Editar()
+        public bool Editar(int id, Caixa caixaEditada)
         { 
-            throw new NotImplementedException();
+            for (int i = 0; i < vetorDeCaixa.Length; i++)
+            {
+                if (vetorDeCaixa[i] ==  null)
+                    continue;
+
+                if (vetorDeCaixa[i].IdCaixa == id)
+                {
+                    vetorDeCaixa[i].Etiqueta = caixaEditada.Etiqueta;
+                    vetorDeCaixa[i].DiasEmprestimo = caixaEditada.DiasEmprestimo;
+                    vetorDeCaixa[i].CorCaixa = caixaEditada.CorCaixa;
+
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         public void Excluir()
@@ -29,28 +47,12 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
 
         public void SelecionarTodos()
         {
-            throw new NotImplementedException();
+           
         }
 
         public void SelecionarPorId()
         {
             throw new NotImplementedException();
-        }
-
-        public bool VerificarCor(Color cor)
-        {
-            for (int i = 0; i < caixa.Length; i++)
-            {
-                if(cor == caixa[i].CorCaixa)
-                {
-                    Console.WriteLine(" Está cor já está em uso! escolha outra");
-
-                    return false;
-                }
-            }
-
-            return true;
-
         }
     }
 }

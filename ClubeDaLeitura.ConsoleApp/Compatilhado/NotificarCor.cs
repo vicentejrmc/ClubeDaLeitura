@@ -2,7 +2,7 @@
 
 namespace ClubeDaLeitura.ConsoleApp.Compatilhado
 {
-    internal class CorAdicionada
+    internal class NotificarCor
     {
         public static void ExibirMensagem(string mensagem, ConsoleColor cor)
         {

@@ -2,13 +2,21 @@
 {
     public class GeradorDeId
     {
-        public static int idAmigo = - 1;
+        public static int IdAmigo = - 1;
+        public static int IdCaixa = - 1;
 
         public static int GerarIdAmigo()
         {
-            idAmigo++;
+            IdAmigo++;
 
-            return idAmigo;
+            return IdAmigo;
+        }
+
+        public static int GerarIdCaixa()
+        {
+            IdCaixa++;
+
+            return IdCaixa;
         }
 
     }
