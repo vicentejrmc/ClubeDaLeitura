@@ -1,11 +1,14 @@
 ﻿
 
 using ClubeDaLeitura.ConsoleApp.Compatilhado;
+using ClubeDaLeitura.ConsoleApp.ModuloCaixa;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloRevistas;
 
 public class TelaRevistas
 {
+    public RepositorioRevistas repositorioRevistas = new RepositorioRevistas();
+    public RepositorioCaixa repositorioCaixa = new RepositorioCaixa();
 
     private void ExibirCabecalho()
     {
@@ -33,19 +36,19 @@ public class TelaRevistas
         switch (opcao)
         {
             case "1":
-                CadastrarRevista();
+                repositorioCaixa.CadastrarRevista();
                 break;
 
             case "2":
-                EditarRevista();
+                repositorioCaixa.EditarRevista();
                 break;
 
             case "3":
-                ExcluirRevista();
+                repositorioCaixa.ExcluirRevista();
                 break;
 
             case "4":
-                VisualizarRevista();
+                repositorioCaixa,VisualizarRevista();
                 break;
 
             default:
@@ -55,23 +58,4 @@ public class TelaRevistas
         }
     }
 
-    private void CadastrarRevista()
-    {
-        throw new NotImplementedException();
-    }
-
-    private void EditarRevista()
-    {
-        throw new NotImplementedException();
-    }
-
-    private void ExcluirRevista()
-    {
-        throw new NotImplementedException();
-    }
-
-    private void VisualizarRevista()
-    {
-        throw new NotImplementedException();
-    }
 }
