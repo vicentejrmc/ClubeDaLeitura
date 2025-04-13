@@ -8,5 +8,14 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevistas
 {
     public class RepositorioRevistas
     {
+
+        public Revistas[] revistas = new Revistas[100];
+
+        public void CadastrarRevista()
+        {
+           
+        }
+
     }
 }
+    
