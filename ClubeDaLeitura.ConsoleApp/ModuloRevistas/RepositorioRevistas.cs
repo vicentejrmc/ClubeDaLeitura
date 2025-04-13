@@ -42,35 +42,30 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevistas
             }
 
             return false;
+        } //ok
+
+        public bool Excluir(int excluirRevista)
+        {
+            for (int i = 0; i < vetorRevista.Length; i++)
+            {
+                if (vetorRevista[i] == null)
+                    continue;
+
+                else if (vetorRevista[i].IdRevista == excluirRevista)
+                {
+                    vetorRevista[i] = null;
+
+                    return true;
+                }
+            }
+            return false;
         }
-
-        //public bool Excluir(int excluirCaixa)
-        //{
-        //    for (int i = 0; i < vetorRevista.Length; i++)
-        //    {
-        //        if (vetorRevista[i] == null)
-        //            continue;
-
-        //        else if (vetorRevista[i].IdRevista == excluirCaixa)
-        //        {
-        //            vetorRevista[i] = null;
-
-        //            return true;
-        //        }
-        //    }
-        //    return false;
-        //}
 
         public Revistas[] SelecionarRevistas()
         {
             return vetorRevista;
         }
 
-        public void VisualizarRevistas()
-        {
-            
-
-        }
 
         public Revistas SelecionarPorId(int idRevista)
         {

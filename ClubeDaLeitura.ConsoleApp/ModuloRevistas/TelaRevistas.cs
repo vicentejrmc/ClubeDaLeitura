@@ -49,7 +49,7 @@ public class TelaRevistas
                 break;
 
             case "4":
-                VisualizarRevista();
+                VisualizarRevistas();
                 break;
 
             default:
@@ -112,7 +112,7 @@ public class TelaRevistas
         string simNao = Console.ReadLine().ToUpper();
 
         if (simNao == "S")
-            VisualizarRevista();
+            VisualizarRevistas();
 
         Console.Write("Selecione o Id da Revista que deseja editar: ");
         int idEditarRevista = Convert.ToInt32(Console.ReadLine());
@@ -156,20 +156,57 @@ public class TelaRevistas
 
         if(ehValida.Length > 0)
         {
-            NotificarCor.ExibirMensagem(ehValida, ConsoleColor.Red)
+            NotificarCor.ExibirMensagem(ehValida, ConsoleColor.Red);
 
             return;
         }
 
+        repositorioRevistas.Editar(idEditarRevista, revistaEditada);
+
         NotificarCor.ExibirMensagem("Revista Editada com Sucesso!", ConsoleColor.Green);
     }
 
-    private void ExcluirRevista()
+    public void ExcluirRevista()
     {
-        throw new NotImplementedException();
+        ExibirCabecalho();
+
+        Console.WriteLine("Ecluir Revista!");
+        Console.WriteLine("-----------------------------------------------------\n");
+
+        VisualizarRevistas();
+
+        Console.WriteLine("Selecione o Id da Revista que deseja Excluir: ");
+        int idExcluir = Convert.ToInt32(Console.ReadLine());
+
+        Revistas excluir =  repositorioRevistas.SelecionarPorId(idExcluir);
+
+        Console.WriteLine(
+            "{0, -10} | {1, -15} | {2, -11} | {3, -15} | {4, -15} | {5, -10}",
+            "IdRevista", "Titulo", "Num. Edição", "Ano Edição", "Status", "CaixaAtual"
+        );
+        Console.WriteLine(
+               "{0, -10} | {1, -15} | {2, -11} | {3, -15} | {4, -15} | {5, -10}",
+               excluir.IdRevista, excluir.TituloRevista, excluir.NumEdicao, excluir.AnoEdicao, excluir.StatusEmprestimo, excluir.CaixaAtual
+           );
+
+        Console.Write("\nComfirmar Exclusão? S/N ");
+        string simNao = Console.ReadLine().ToUpper();
+
+        if (simNao == "S")
+        {
+            bool excluiu = repositorioRevistas.Excluir(idExcluir);
+
+            if (excluiu)
+                NotificarCor.ExibirMensagem("Revista Excluida com Sucesso!", ConsoleColor.Green);
+        }
+        else if (simNao == "N")
+            NotificarCor.ExibirMensagem("Exclusão Cancelada!", ConsoleColor.Cyan);
+
+        else
+            NotificarCor.ExibirMensagem("Hove um Erro durante a exclusão! tente novamente!", ConsoleColor.Red);
     }
 
-    public void VisualizarRevista()
+    public void VisualizarRevistas()
     {
         ExibirCabecalho();
 
