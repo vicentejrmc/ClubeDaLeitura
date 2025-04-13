@@ -12,6 +12,8 @@ public class Revistas
 {
     public Caixa caixa = new Caixa("", "", 0);
 
+
+    public int IdRevista;
     public string TituloRevista;
     public int NumEdicao;
     public DateTime AnoEdicao;  
@@ -27,15 +29,9 @@ public class Revistas
         CaixaAtual = caixa;
     }
 
-                    //Regras de Negócio: ok
-                    //● Campos obrigatórios: ok
-                    //○ Título(2-100 caracteres) ok
-                    //○ Número da edição(número positivo) ok
-                    //○ Ano de publicação(data válida) ok
-                    //○ Caixa(seleção obrigatória) ok
-                    //● Não pode haver revistas com mesmo título e edição - Refatorar
-                    //● Status possíveis: Disponível / Emprestada / Reservada  - Refatorar
-                    //● Ao cadastrar, o status padrão é "Disponível" - Refatorar para Int 0 1 2 
+    //● Não pode haver revistas com mesmo título e edição - Refatorar
+    //● Status possíveis: Disponível / Emprestada / Reservada  - Refatorar
+    //● Ao cadastrar, o status padrão é "Disponível" - Refatorar para Int 0 1 2 
 
     public string ValidarRevista()
     {
@@ -62,7 +58,8 @@ public class Revistas
     }
 
     public void EmprestarRevista()
-    { }
+    { 
+    }
 
     public void DevolverRevista() { }
 

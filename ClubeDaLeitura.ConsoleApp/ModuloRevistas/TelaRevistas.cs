@@ -41,15 +41,15 @@ public class TelaRevistas
                 break;
 
             case "2":
-                //repositorioRevistas.EditarRevista();
+                EditarRevista();
                 break;
 
             case "3":
-                //repositorioRevistas.ExcluirRevista();
+                ExcluirRevista();
                 break;
 
             case "4":
-                //repositorioRevistas.VisualizarRevista();
+                VisualizarRevista();
                 break;
 
             default:
@@ -59,7 +59,7 @@ public class TelaRevistas
         }
     }
 
-    private void CadastrarRevista()
+    public void CadastrarRevista()
     {
         ExibirCabecalho();
 
@@ -87,22 +87,76 @@ public class TelaRevistas
 
         Revistas novaRevista = new Revistas(titulo, numEdicao, anoPublicacao, statusCaixa, caixaObtida);
 
-        string revistaValida =  novaRevista.ValidarRevista();
+        string revistaValida = novaRevista.ValidarRevista();
 
-        if(revistaValida.Length > 0)
+        if (revistaValida.Length > 0)
         {
             NotificarCor.ExibirMensagem(revistaValida, ConsoleColor.Red);
+
+            return;
+        }
+
+        repositorioRevistas.CadastrarRevista(novaRevista);
+
+        NotificarCor.ExibirMensagem("Revista Cadastrada...", ConsoleColor.Green);
+    }
+
+    public void EditarRevista()
+    {
+        ExibirCabecalho();
+
+        Console.WriteLine("Editando Revista!");
+        Console.WriteLine("-----------------------------------------------------\n");
+
+        Console.Write("Selecione o Id da Revista que deseja editar: ");
+        int idEditarRevista = Convert.ToInt32(Console.ReadLine());
+
+
+
+
+
+        Console.Write("Digite o Titulo da Revista: ");
+        string titulo = Console.ReadLine();
+
+        Console.Write("Numero de Edição: ");
+        int numEdicao = Convert.ToInt32(Console.ReadLine());
+
+        Console.Write("Ano de Publicação. (yyyy): ");
+        DateTime anoPublicacao = Convert.ToDateTime(Console.ReadLine());
+    }
+
+    private void ExcluirRevista()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void VisualizarRevista()
+    {
+        ExibirCabecalho();
+
+        Console.WriteLine("Visualizando Revistas...");
+        Console.WriteLine("--------------------------------------------");
+        Console.WriteLine(
+            "{0, -10} | {1, -15} | {2, -11} | {3, -15} | {4, -15} | {5, -10}",
+            "IdRevista", "Titulo", "Num. Edição", "Ano Edição", "Status", "CaixaAtual"
+        );
+
+        Revistas[] revistasCadastradas = repositorioRevistas.SelecionarRevistas();
+
+        for (int i = 0; i < revistasCadastradas.Length; i++)
+        {
+            Revistas rev = revistasCadastradas[i];
+
+            if (rev == null) continue;
+
+            Console.WriteLine(
+                "{0, -10} | {1, -15} | {2, -11} | {3, -15} | {4, -15} | {5, -10}",
+                rev.IdRevista, rev.TituloRevista, rev.NumEdicao, rev.AnoEdicao, rev.StatusEmprestimo, rev.CaixaAtual
+            );
         }
 
 
 
-
-
-
-
-                    //        ○ Título(2 - 100 caracteres)
-                    //○ Número da edição(número positivo)
-                    //○ Ano de publicação(data válida)
-                    //○ Caixa(seleção obrigatória)
     }
+
 }
