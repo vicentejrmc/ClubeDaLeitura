@@ -33,6 +33,7 @@ public class TelaCaixa
         Console.WriteLine("3 - Excluir Caixa.");
         Console.WriteLine("4 - Visualizar Caixas.");
         Console.WriteLine("-----------------------------------------------------\n");
+        Console.Write("Escolha uma opção válida: ");
 
         string opcao = Console.ReadLine().ToUpper();
 
