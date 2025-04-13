@@ -68,10 +68,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevistas
 
         public void VisualizarRevistas()
         {
-            for(int i = 0;i < vetorRevista.Length;i++)
-            {
-                
-            }
+            
 
         }
 

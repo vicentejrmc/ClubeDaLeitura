@@ -108,12 +108,14 @@ public class TelaRevistas
         Console.WriteLine("Editando Revista!");
         Console.WriteLine("-----------------------------------------------------\n");
 
+        Console.Write("Deseja visualizar revistas? S/N: ");
+        string simNao = Console.ReadLine().ToUpper();
+
+        if (simNao == "S")
+            VisualizarRevista();
+
         Console.Write("Selecione o Id da Revista que deseja editar: ");
         int idEditarRevista = Convert.ToInt32(Console.ReadLine());
-
-
-
-
 
         Console.Write("Digite o Titulo da Revista: ");
         string titulo = Console.ReadLine();
@@ -123,6 +125,43 @@ public class TelaRevistas
 
         Console.Write("Ano de Publicação. (yyyy): ");
         DateTime anoPublicacao = Convert.ToDateTime(Console.ReadLine());
+
+        repositorioCaixa.SelecionarTodos();
+        Console.Write("Selecione uma Caixa: ");
+        int idCaixa = Convert.ToInt32(Console.ReadLine());
+
+        Caixa caixa = repositorioCaixa.SelecionarPorId(idCaixa);
+
+        Console.Write("Status atual da Revista: [1 - Disponivel] [2 - Emprestada] [3 - Reservada]");
+        int statusRevista = Convert.ToInt32(Console.ReadLine());
+
+        string statusAtual="";
+        switch (statusRevista)
+        {
+            case 1:
+                statusAtual = "Disponível";
+                break;
+            case 2:
+                statusAtual = "Emprestada";
+                break;
+            case 3:
+                statusAtual = "Reservada";
+                break;
+
+        }
+
+        Revistas revistaEditada = new Revistas(titulo, numEdicao, anoPublicacao, statusAtual, caixa );
+
+        string ehValida = revistaEditada.ValidarRevista();
+
+        if(ehValida.Length > 0)
+        {
+            NotificarCor.ExibirMensagem(ehValida, ConsoleColor.Red)
+
+            return;
+        }
+
+        NotificarCor.ExibirMensagem("Revista Editada com Sucesso!", ConsoleColor.Green);
     }
 
     private void ExcluirRevista()
