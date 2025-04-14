@@ -53,7 +53,7 @@ public class TelaRevista
                 break;
 
             default:
-                NotificarCor.ExibirMensagem("Opcção Invalida...!", ConsoleColor.Cyan);
+                Notificar.ExibirMensagem("Opcção Invalida...!", ConsoleColor.Cyan);
                 break;
 
         }
@@ -75,7 +75,7 @@ public class TelaRevista
 
         if (!caixaVazia)
         {
-            NotificarCor.ExibirMensagem("Você Precisa Criar uma caixa antes de Cadastrar uma nova Revista!", ConsoleColor.Red);
+            Notificar.ExibirMensagem("Você Precisa Criar uma caixa antes de Cadastrar uma nova Revista!", ConsoleColor.Red);
 
             return;
         }
@@ -106,7 +106,7 @@ public class TelaRevista
 
         if (revistaValida.Length > 0)
         {
-            NotificarCor.ExibirMensagem(revistaValida, ConsoleColor.Red);
+            Notificar.ExibirMensagem(revistaValida, ConsoleColor.Red);
 
             return;
         }
@@ -114,7 +114,7 @@ public class TelaRevista
         repositorioRevista.CadastrarRevista(novaRevista);
 
 
-        NotificarCor.ExibirMensagem("Revista Cadastrada...", ConsoleColor.Green);
+        Notificar.ExibirMensagem("Revista Cadastrada...", ConsoleColor.Green);
     }
 
     public void EditarRevista()
@@ -172,14 +172,14 @@ public class TelaRevista
 
         if (ehValida.Length > 0)
         {
-            NotificarCor.ExibirMensagem(ehValida, ConsoleColor.Red);
+            Notificar.ExibirMensagem(ehValida, ConsoleColor.Red);
 
             return;
         }
 
         repositorioRevista.Editar(idEditarRevista, revistaEditada);
 
-        NotificarCor.ExibirMensagem("Revista Editada com Sucesso!", ConsoleColor.Green);
+        Notificar.ExibirMensagem("Revista Editada com Sucesso!", ConsoleColor.Green);
     }
 
     public void ExcluirRevista()
@@ -213,13 +213,13 @@ public class TelaRevista
             bool excluiu = repositorioRevista.Excluir(idExcluir);
 
             if (excluiu)
-                NotificarCor.ExibirMensagem("Revista Excluida com Sucesso!", ConsoleColor.Green);
+                Notificar.ExibirMensagem("Revista Excluida com Sucesso!", ConsoleColor.Green);
         }
         else if (simNao == "N")
-            NotificarCor.ExibirMensagem("Exclusão Cancelada!", ConsoleColor.Cyan);
+            Notificar.ExibirMensagem("Exclusão Cancelada!", ConsoleColor.Cyan);
 
         else
-            NotificarCor.ExibirMensagem("Hove um Erro durante a exclusão! tente novamente!", ConsoleColor.Red);
+            Notificar.ExibirMensagem("Hove um Erro durante a exclusão! tente novamente!", ConsoleColor.Red);
     }
 
     public void VisualizarRevistas()

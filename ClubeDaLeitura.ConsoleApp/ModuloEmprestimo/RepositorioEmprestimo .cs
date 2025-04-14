@@ -41,7 +41,22 @@ public class RepositorioEmprestimo
 
         return false;
     }
-    public void Excluir() { }
+    public bool Excluir(int empExcluir)
+    {
+        for (int i = 0; i < vetorEmprestimos.Length; i++)
+        {
+            if (vetorEmprestimos[i] == null)
+                continue;
+
+            else if (vetorEmprestimos[i].IdEmprestimo == empExcluir)
+            {
+                vetorEmprestimos[i] = null;
+
+                return true;
+            }
+        }
+        return false;
+    }
     public void SelecionarTodos() { }
     public Emprestimo SelecionarPorId(int idEmp)
     {

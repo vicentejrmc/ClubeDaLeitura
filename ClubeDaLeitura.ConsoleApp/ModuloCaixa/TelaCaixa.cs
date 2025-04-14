@@ -56,7 +56,7 @@ public class TelaCaixa
                 break;
 
             default:
-                NotificarCor.ExibirMensagem("Opcção Invalida...!", ConsoleColor.Cyan);
+                Notificar.ExibirMensagem("Opcção Invalida...!", ConsoleColor.Cyan);
                 break;
 
         }
@@ -88,14 +88,14 @@ public class TelaCaixa
 
         if (caixaEhValida.Length > 0)
         {
-            NotificarCor.ExibirMensagem(caixaEhValida, ConsoleColor.Red);
+            Notificar.ExibirMensagem(caixaEhValida, ConsoleColor.Red);
 
             return;
         }
 
         repositorioCaixa.Inserir(novaCaixa);
 
-        NotificarCor.ExibirMensagem("Caixa Criada com Sucesso!", ConsoleColor.Green);
+        Notificar.ExibirMensagem("Caixa Criada com Sucesso!", ConsoleColor.Green);
 
     }
 
@@ -131,12 +131,12 @@ public class TelaCaixa
 
         if (!editou)
         {
-            NotificarCor.ExibirMensagem("Houve um erro ao tentar editar a caixa! reinicie o precesso!", ConsoleColor.Red);
+            Notificar.ExibirMensagem("Houve um erro ao tentar editar a caixa! reinicie o precesso!", ConsoleColor.Red);
 
             return;
         }
 
-        NotificarCor.ExibirMensagem("Caixa editada com sucesso!", ConsoleColor.Green);
+        Notificar.ExibirMensagem("Caixa editada com sucesso!", ConsoleColor.Green);
 
     }
 
@@ -161,12 +161,12 @@ public class TelaCaixa
 
         if (!conseguiuEcluir)
         {
-            NotificarCor.ExibirMensagem("Não foi possivel Excluir a caixa, Verifique se existe algum emprestimo em Aberto.", ConsoleColor.Red);
+            Notificar.ExibirMensagem("Não foi possivel Excluir a caixa, Verifique se existe algum emprestimo em Aberto.", ConsoleColor.Red);
 
             return;
         }
 
-        NotificarCor.ExibirMensagem("Caixa Excluida com Sucesso!", ConsoleColor.Green);
+        Notificar.ExibirMensagem("Caixa Excluida com Sucesso!", ConsoleColor.Green);
     }
 
     public void VisualizarCaixas()
@@ -188,16 +188,16 @@ public class TelaCaixa
         Console.WriteLine("Seleção de Cor da Caixa");
         Console.WriteLine("-----------------------------------------------------");
 
-        NotificarCor.ExibirCores("1: Red ##", ConsoleColor.Red);
-        NotificarCor.ExibirCores("2: White ##", ConsoleColor.White);
-        NotificarCor.ExibirCores("3: Blue ##", ConsoleColor.Blue);
-        NotificarCor.ExibirCores("4: DarkBlue ##", ConsoleColor.DarkBlue);
-        NotificarCor.ExibirCores("5: Green ##", ConsoleColor.Green);
-        NotificarCor.ExibirCores("6: DarkGreen ##", ConsoleColor.DarkGreen);
-        NotificarCor.ExibirCores("7: Cyan ##", ConsoleColor.Cyan);
-        NotificarCor.ExibirCores("8: DarkCyan ##", ConsoleColor.DarkCyan);
-        NotificarCor.ExibirCores("9: Yellow ##", ConsoleColor.Yellow);
-        NotificarCor.ExibirCores("10: DarkYellow ##", ConsoleColor.DarkYellow);
+        Notificar.ExibirCores("1: Red ##", ConsoleColor.Red);
+        Notificar.ExibirCores("2: White ##", ConsoleColor.White);
+        Notificar.ExibirCores("3: Blue ##", ConsoleColor.Blue);
+        Notificar.ExibirCores("4: DarkBlue ##", ConsoleColor.DarkBlue);
+        Notificar.ExibirCores("5: Green ##", ConsoleColor.Green);
+        Notificar.ExibirCores("6: DarkGreen ##", ConsoleColor.DarkGreen);
+        Notificar.ExibirCores("7: Cyan ##", ConsoleColor.Cyan);
+        Notificar.ExibirCores("8: DarkCyan ##", ConsoleColor.DarkCyan);
+        Notificar.ExibirCores("9: Yellow ##", ConsoleColor.Yellow);
+        Notificar.ExibirCores("10: DarkYellow ##", ConsoleColor.DarkYellow);
         Console.WriteLine("-----------------------------------------------------");
 
         Console.Write("Escolha uma Cor: ");
@@ -238,7 +238,7 @@ public class TelaCaixa
                 corEscolhida = "DarkYellow";
                 break;
             default:
-                NotificarCor.ExibirMensagem("Opção Invalida!", ConsoleColor.Red);
+                Notificar.ExibirMensagem("Opção Invalida!", ConsoleColor.Red);
                 Console.WriteLine("Press [Enter] Continuar");
                 GerenciarCaixas();
                 break;
@@ -260,7 +260,7 @@ public class TelaCaixa
             VisualizarCaixas();
             
         }
-        NotificarCor.ExibirMensagem("Pressione [Enter] para continuar.", ConsoleColor.Yellow);
+        Notificar.ExibirMensagem("Pressione [Enter] para continuar.", ConsoleColor.Yellow);
         Console.ReadLine();
     }
 }

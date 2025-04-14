@@ -50,7 +50,7 @@ public class TelaAmigo
                 VisualizarEmprestimos();
                 break;
             default:
-                NotificarCor.ExibirMensagem("Opção inválida!", ConsoleColor.Cyan);
+                Notificar.ExibirMensagem("Opção inválida!", ConsoleColor.Cyan);
                 break;
         }
     }
@@ -69,14 +69,14 @@ public class TelaAmigo
 
         if (resultadoValidacao.Length > 0)
         {
-            NotificarCor.ExibirMensagem(resultadoValidacao, ConsoleColor.Red);
+            Notificar.ExibirMensagem(resultadoValidacao, ConsoleColor.Red);
 
             return;
         }
 
         repositorioAmigo.InserirNovoAmigo(novoAmigo);
 
-        NotificarCor.ExibirMensagem("Amigo Cadastrado Com Sucesso!", ConsoleColor.Green);
+        Notificar.ExibirMensagem("Amigo Cadastrado Com Sucesso!", ConsoleColor.Green);
         Console.WriteLine("Pressione {Enter]");
 
     }
@@ -100,7 +100,7 @@ public class TelaAmigo
 
         if (resultadoValidacao.Length > 0)
         {
-            NotificarCor.ExibirMensagem(resultadoValidacao, ConsoleColor.Red);
+            Notificar.ExibirMensagem(resultadoValidacao, ConsoleColor.Red);
 
             return;
         }
@@ -109,12 +109,12 @@ public class TelaAmigo
 
         if (!editou)
         {
-            NotificarCor.ExibirMensagem("Amigo não encontrado! Edição cancelada", ConsoleColor.Red);
+            Notificar.ExibirMensagem("Amigo não encontrado! Edição cancelada", ConsoleColor.Red);
             
             return;
         }
 
-        NotificarCor.ExibirMensagem("Amigo Editado Com Sucesso!", ConsoleColor.Green);
+        Notificar.ExibirMensagem("Amigo Editado Com Sucesso!", ConsoleColor.Green);
     }
 
     public void ExcluirAmigoCadastrado()
@@ -134,12 +134,12 @@ public class TelaAmigo
 
         if (!excluiu)
         {
-            NotificarCor.ExibirMensagem("Houve um erro durante a exclusao do Amigo", ConsoleColor.Red);
+            Notificar.ExibirMensagem("Houve um erro durante a exclusao do Amigo", ConsoleColor.Red);
 
             return;
         }
         else
-            NotificarCor.ExibirMensagem("Amigo excluído com sucesso!", ConsoleColor.Green);
+            Notificar.ExibirMensagem("Amigo excluído com sucesso!", ConsoleColor.Green);
 
     }
 
@@ -152,7 +152,7 @@ public class TelaAmigo
 
         repositorioAmigo.VisualizarAmigosCadastrados();
 
-        NotificarCor.ExibirMensagem("Pressione [Enter] para Continuar...", ConsoleColor.Green);
+        Notificar.ExibirMensagem("Pressione [Enter] para Continuar...", ConsoleColor.Green);
     }
 
     public void VisualizarEmprestimos()

@@ -81,9 +81,19 @@ public class TelaEmprestimo
 
         Emprestimo novoEmprestimo = new Emprestimo(revistaEmp, "Emprestada", DateTime.Now, amigoEmp);
 
+        string validar = novoEmprestimo.Validar(novoEmprestimo);
+
+        string ehValido = "";
+        if(validar.Length > 0)
+        {
+            Notificar.ExibirMensagem(ehValido, ConsoleColor.Red);
+
+            return;
+        }
+
         repositorioEmprestimo.Inserir(novoEmprestimo);
 
-        NotificarCor.ExibirMensagem($"Revista {revistaEmp} emprestada para {amigoEmp.Nome}", ConsoleColor.Yellow);
+        Notificar.ExibirMensagem($"Revista {revistaEmp} emprestada para {amigoEmp.Nome}", ConsoleColor.Yellow);
 
         Console.ReadLine();
 
@@ -93,7 +103,7 @@ public class TelaEmprestimo
     {
         ExibirCabecalho();
 
-        Console.WriteLine("Registrando Emprestimo...");
+        Console.WriteLine("Edição de Emprestimo...");
         Console.WriteLine("-----------------------------------------------------\n");
 
         VisualizarTodos();
@@ -107,16 +117,39 @@ public class TelaEmprestimo
 
         if(!editou)
         {
-            NotificarCor.ExibirMensagem("Houve um erro ao Editar o Emprestimo!", ConsoleColor.Red);
+            Notificar.ExibirMensagem("Houve um erro ao Editar o Emprestimo!", ConsoleColor.Red);
 
             return;
         }
 
-        NotificarCor.ExibirMensagem("Emprestimo Editado!", ConsoleColor.Green);
+        Notificar.ExibirMensagem("Emprestimo Editado!", ConsoleColor.Green);
         
     }
 
-    public void Excluir() { }
+    public void Excluir()
+    {
+        ExibirCabecalho();
+
+        Console.WriteLine("Exclusão de Emprestimo...");
+        Console.WriteLine("-----------------------------------------------------\n");
+
+        VisualizarTodos();
+
+        Console.Write("Selecione o Id do Emprestimo: ");
+        int idEmprestimo = Convert.ToInt32(Console.ReadLine());
+
+        bool excluir = repositorioEmprestimo.Excluir(idEmprestimo);
+
+        if(!excluir)
+        {
+            Notificar.ExibirMensagem("Houve um erro ao tentar Excluir o Emprestimo!", ConsoleColor.Red)
+
+            return;
+        }
+
+        Notificar.ExibirMensagem("Emprestimo Excluido com Sucesso!", ConsoleColor.Green);
+
+    }
 
     public void VisualizarTodos() // Visualizar Emprestimos
     {
@@ -135,5 +168,18 @@ public class TelaEmprestimo
         }
     }
     public void RegistrarDevolucao()// abertos e fechados
-    { }
+    {
+        ExibirCabecalho();
+
+        Console.WriteLine("Devolução de Emprestimo...");
+        Console.WriteLine("-----------------------------------------------------\n");
+
+        VisualizarTodos();
+
+        Console.Write("Selecione o Id do Emprestimo: ");
+        int idEmprestimo = Convert.ToInt32(Console.ReadLine());
+
+
+
+    }
 }

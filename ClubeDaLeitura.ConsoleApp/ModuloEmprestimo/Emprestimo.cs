@@ -1,4 +1,5 @@
-﻿using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
+﻿using ClubeDaLeitura.ConsoleApp.Compatilhado;
+using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
 using ClubeDaLeitura.ConsoleApp.ModuloRevistas;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo;
@@ -18,27 +19,32 @@ public class Emprestimo
         Data = data;
         AmigoEmp = amigo;
     }
-
-
-    public bool Validar()
-    {
-
-
-        return true;
-    }
-
-    public void ObterDataDevolucao() { }
-
-    public void RegistrarDevolucao() { }
-}
-
     // Campos obrigatórios:
-    //○ Amigo
-    //○ Revista (disponível no momento)
-    //○ Data empréstimo (automática)
-    //○ Data devolução (calculada conforme caixa)
+
     //● Status possíveis: Aberto / Concluído / Atrasado
     //● Cada amigo só pode ter um empréstimo ativo por vez
     //● Empréstimos atrasados devem ser destacados visualmente
     //● A data de devolução é calculada automaticamente (data empréstimo + dias da
     //caixa)
+
+    public string Validar(Emprestimo novo)
+    {
+        string invalidado = " ";
+
+        if (string.IsNullOrWhiteSpace(novo.AmigoEmp.Nome) == null)
+            invalidado += "O Campo Amigo é Obrigatorio!";
+
+        if(novo.RevistaEmp.StatusEmprestimo == "Emprestada")
+            invalidado += "Essa Revista está Indisponível no Momento!";
+
+        return invalidado;
+    }
+
+    public void ObterDataDevolucao() { }
+
+    public void RegistrarDevolucao()
+    {   
+    }
+}
+
+    
