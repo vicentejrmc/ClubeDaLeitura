@@ -30,12 +30,10 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
             return caixaEhvalida;
         }
 
-
         public void AdicionarRevista(Revista novaRevista)
         {
             Revista revista = novaRevista;
         }
-
 
         public void RemoverRevista()
         {

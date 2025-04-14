@@ -41,6 +41,7 @@ public class RepositorioEmprestimo
 
         return false;
     }
+
     public bool Excluir(int empExcluir)
     {
         for (int i = 0; i < vetorEmprestimos.Length; i++)
@@ -57,7 +58,9 @@ public class RepositorioEmprestimo
         }
         return false;
     }
+
     public void SelecionarTodos() { }
+
     public Emprestimo SelecionarPorId(int idEmp)
     {
         for (int i = 0; i < vetorEmprestimos.Length; i++)

@@ -1,4 +1,5 @@
 ﻿using ClubeDaLeitura.ConsoleApp.Compatilhado;
+using ClubeDaLeitura.ConsoleApp.ModuloEmprestimo;
 using System.Reflection;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo;
@@ -6,6 +7,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo;
 public class TelaAmigo
 {
     RepositorioAmigo repositorioAmigo = new RepositorioAmigo();
+    RepositorioEmprestimo rep = new RepositorioEmprestimo();
 
     private void ExibirCabecalho()
     {
@@ -161,8 +163,11 @@ public class TelaAmigo
         Console.WriteLine("Visualizando Empréstimos...");
         Console.WriteLine("-----------------------------------------------------\n");
 
-        //Criar Metodo ListarEmprestimos dentro da Classe RepositorioEmprestimo.
-        //Listar todos os empréstimos cadastrados.
+        TelaEmprestimo emprestimo = new TelaEmprestimo();
+
+        emprestimo.VisualizarTodos();
+
+        Console.ReadLine();    
     }
 
     public Amigo ObterDadosAmigo()

@@ -142,7 +142,7 @@ public class TelaEmprestimo
 
         if(!excluir)
         {
-            Notificar.ExibirMensagem("Houve um erro ao tentar Excluir o Emprestimo!", ConsoleColor.Red)
+            Notificar.ExibirMensagem("Houve um erro ao tentar Excluir o Emprestimo!", ConsoleColor.Red);
 
             return;
         }

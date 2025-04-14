@@ -52,7 +52,6 @@ public class RepositorioAmigo
         return false;
     }
 
-
     public Amigo ObterAmigoPorId(int idAmigo)
     {
         for (int i = 0; i < vetorDeAmigos.Length; i++)
@@ -67,7 +66,6 @@ public class RepositorioAmigo
 
         return null;
     }
-
 
     public Amigo[] ObterTodosOsAmigos()
     {
