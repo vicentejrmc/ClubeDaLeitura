@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using ClubeDaLeitura.ConsoleApp.ModuloRevistas;
+using System.Data;
 using System.Drawing;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
@@ -30,9 +31,9 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
         }
 
 
-        public void AdicionarRevista()
+        public void AdicionarRevista(Revista novaRevista)
         {
-            throw new NotImplementedException();
+            Revista revista = novaRevista;
         }
 
 

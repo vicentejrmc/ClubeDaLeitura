@@ -1,5 +1,6 @@
 ﻿using ClubeDaLeitura.ConsoleApp.Compatilhado;
 using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
+using ClubeDaLeitura.ConsoleApp.ModuloCaixa;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,10 +21,41 @@ public class RepositorioEmprestimo
         GeradorDeId.GerarIdEmprestimo();
     }
 
-    public void Editar() { }
+    public bool Editar(int idEmprestimo, Emprestimo emprestimo)
+    {
+        for (int i = 0; i < vetorEmprestimos.Length; i++)
+        {
+            if (vetorEmprestimos[i] == null)
+                continue;
+
+            if (vetorEmprestimos[i].IdEmprestimo == idEmprestimo)
+            {
+                vetorEmprestimos[i].IdEmprestimo = emprestimo.IdEmprestimo;
+                vetorEmprestimos[i].AmigoEmp = emprestimo.AmigoEmp; 
+                vetorEmprestimos[i].Situacao = emprestimo.Situacao;
+                vetorEmprestimos[i].RevistaEmp = emprestimo.RevistaEmp;
+
+                return true;
+            }
+        }
+
+        return false;
+    }
     public void Excluir() { }
     public void SelecionarTodos() { }
-    public void SelecionarPorId() { }
+    public Emprestimo SelecionarPorId(int idEmp)
+    {
+        for (int i = 0; i < vetorEmprestimos.Length; i++)
+        {
+            Emprestimo obterEmp = vetorEmprestimos[i];
+            if (obterEmp == null) continue;
+
+            else if (obterEmp.IdEmprestimo == idEmp)
+                return obterEmp;
+        }
+
+        return null;
+    }
 
 }
 

@@ -5,6 +5,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo;
 
 public class Emprestimo
 {
+    public int IdEmprestimo;
     public Amigo AmigoEmp;
     public Revista RevistaEmp;
     public DateTime Data;
@@ -19,7 +20,12 @@ public class Emprestimo
     }
 
 
-    public void Validar() { }
+    public bool Validar()
+    {
+
+
+        return true;
+    }
 
     public void ObterDataDevolucao() { }
 

@@ -48,11 +48,7 @@ public class Revista
         if (NumEdicao < 1)
             resultadoValidacao += "!...O numero de Edição não pode ser menor que 0 ou Negativo...!";
 
-        DateTime anoAtual = DateTime.Now;
-        Convert.ToDateTime(anoAtual).ToString("yyyy");
-        int anoInt = Convert.ToInt32(anoAtual);
-
-        if (AnoEdicao > anoInt)
+        if (AnoEdicao > 2026) // refatorar Validação
             resultadoValidacao += "!...A menos que você seja um visitante do Futuro, essa data não é válida...!";
 
         if (CaixaAtual == null)

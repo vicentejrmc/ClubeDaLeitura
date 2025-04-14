@@ -1,5 +1,6 @@
 ﻿using ClubeDaLeitura.ConsoleApp.Compatilhado;
 using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
+using ClubeDaLeitura.ConsoleApp.ModuloCaixa;
 using ClubeDaLeitura.ConsoleApp.ModuloRevistas;
 using System;
 using System.Collections.Generic;
@@ -55,6 +56,7 @@ public class TelaEmprestimo
         }
 
     }
+
     public void Inserir()
     {
         ExibirCabecalho();
@@ -70,6 +72,7 @@ public class TelaEmprestimo
         Console.WriteLine();
 
         telaRevista.VisualizarRevistas();
+
         Console.Write("Selecione o Id da Revista: ");
         int idRevista = Convert.ToInt32(Console.ReadLine());
         
@@ -85,11 +88,51 @@ public class TelaEmprestimo
         Console.ReadLine();
 
     }
-    public void Editar() { }
+
+    public void Editar()
+    {
+        ExibirCabecalho();
+
+        Console.WriteLine("Registrando Emprestimo...");
+        Console.WriteLine("-----------------------------------------------------\n");
+
+        VisualizarTodos();
+
+        Console.Write("Selecione o Id do Emprestimo: ");
+        int idEmprestimo = Convert.ToInt32(Console.ReadLine());
+
+        Emprestimo empEditado = repositorioEmprestimo.SelecionarPorId(idEmprestimo);
+
+        bool editou = repositorioEmprestimo.Editar(idEmprestimo, empEditado);
+
+        if(!editou)
+        {
+            NotificarCor.ExibirMensagem("Houve um erro ao Editar o Emprestimo!", ConsoleColor.Red);
+
+            return;
+        }
+
+        NotificarCor.ExibirMensagem("Emprestimo Editado!", ConsoleColor.Green);
+        
+    }
+
     public void Excluir() { }
+
     public void VisualizarTodos() // Visualizar Emprestimos
     {
-    
+        for (int i = 0; i < repositorioEmprestimo.vetorEmprestimos.Length; i++)
+        {
+            Emprestimo emp;
+            emp = repositorioEmprestimo.vetorEmprestimos[i];
+
+            if (emp == null) continue;
+
+            if (emp != null)
+            {
+                Console.WriteLine($"Id Emprestimo: {emp.IdEmprestimo} | Revista: {emp.RevistaEmp.TituloRevista} | Amigo: {emp.AmigoEmp.Nome} | Data {emp.Data}");
+                Console.WriteLine("---------------------------------------------------------------------------------------------------------------------------------------------");
+            }
+        }
     }
     public void RegistrarDevolucao()// abertos e fechados
     { }

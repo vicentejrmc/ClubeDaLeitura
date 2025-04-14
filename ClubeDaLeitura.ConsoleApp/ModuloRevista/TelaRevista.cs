@@ -89,7 +89,7 @@ public class TelaRevista
         Console.Write("Ano de Publicação. (yyyy): ");
         int anoPublicacao = Convert.ToInt32(Console.ReadLine());
 
-        repositorioCaixa.VisualizarCaixas();
+       repositorioCaixa.VisualizarCaixas();
 
         Console.WriteLine("-----------------------------------------------------\n");
 
@@ -112,6 +112,7 @@ public class TelaRevista
         }
 
         repositorioRevista.CadastrarRevista(novaRevista);
+
 
         NotificarCor.ExibirMensagem("Revista Cadastrada...", ConsoleColor.Green);
     }
@@ -227,10 +228,7 @@ public class TelaRevista
 
         Console.WriteLine("Visualizando Revistas...");
         Console.WriteLine("--------------------------------------------");
-        Console.WriteLine(
-            "{0, -10} | {1, -15} | {2, -11} | {3, -15} | {4, -15} | {5, -10}",
-            "IdRevista", "Titulo", "Num. Edição", "Ano Edição", "Status", "CaixaAtual"
-        );
+        Console.WriteLine();
 
         Revista[] revistasCadastradas = repositorioRevista.SelecionarRevistas();
 
@@ -240,10 +238,7 @@ public class TelaRevista
 
             if (rev == null) continue;
 
-            Console.WriteLine(
-                "{0, -10} | {1, -15} | {2, -11} | {3, -15} | {4, -15} | {5, -10}",
-                rev.IdRevista, rev.TituloRevista, rev.NumEdicao, rev.AnoEdicao, rev.StatusEmprestimo, rev.CaixaAtual
-            );
+            Console.WriteLine($"Id: {rev.TituloRevista} | Titulo: {rev.NumEdicao} |  Edição: {rev.AnoEdicao} | Ano: {rev.AnoEdicao} | Status: {rev.StatusEmprestimo} |   Caixa: {rev.CaixaAtual}");
         }
 
 
