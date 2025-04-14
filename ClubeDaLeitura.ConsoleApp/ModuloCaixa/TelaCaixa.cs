@@ -176,7 +176,7 @@ public class TelaCaixa
         Console.WriteLine("Gerenciar Caixas!");
         Console.WriteLine("-----------------------------------------------------\n");
 
-        repositorioCaixa.SelecionarTodos();
+        repositorioCaixa.VisualizarCaixas();
 
         Console.WriteLine("Press [Enter] continuar");
         Console.ReadLine();
@@ -239,6 +239,8 @@ public class TelaCaixa
                 break;
             default:
                 NotificarCor.ExibirMensagem("Opção Invalida!", ConsoleColor.Red);
+                Console.WriteLine("Press [Enter] Continuar");
+                GerenciarCaixas();
                 break;
 
         }

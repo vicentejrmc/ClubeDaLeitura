@@ -16,9 +16,9 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
 
         public void Inserir(Caixa novaCaixa)
         {
-            vetorDeCaixa[contCaixa++] = novaCaixa;
-
             novaCaixa.IdCaixa = GeradorDeId.GerarIdCaixa();
+
+            vetorDeCaixa[contCaixa++] = novaCaixa;
         }
 
         public bool Editar(int id, Caixa caixaEditada)
@@ -58,10 +58,8 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
             return false;
         }
 
-        public void SelecionarTodos()
+        public void VisualizarCaixas()
         {
-            Console.WriteLine("{0 , -15} | {0, -20} | {0, -15} | {0, -20}",
-                        "Id Caixa", "Etiqueta", "Cor");
             for (int i = 0; i < vetorDeCaixa.Length; i++)
             {
                 Caixa[] caixaCadastrada = SelcionarCaixa();
@@ -69,11 +67,9 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
 
                 if (vetorDeCaixa[i] != null)
                 {
-                    Console.WriteLine("{0 , -15} | {0, -20} | {0, -15} | {0, -20}",
-                     cx.IdCaixa, cx.Etiqueta, cx.CorCaixa);             
+                    Console.WriteLine($"ID: {cx.IdCaixa}   | Cor: {cx.CorCaixa}   | Etiqueta: {cx.Etiqueta}");
                 }
             }
-            Console.WriteLine();
         }
 
         public Caixa SelecionarPorId(int idCaixa)

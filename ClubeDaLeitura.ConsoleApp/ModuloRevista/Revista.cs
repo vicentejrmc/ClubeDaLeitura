@@ -1,4 +1,5 @@
-﻿using ClubeDaLeitura.ConsoleApp.ModuloCaixa;
+﻿using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
+using ClubeDaLeitura.ConsoleApp.ModuloCaixa;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevistas;
 public class Revista
 {
     public Caixa caixa = new Caixa("", "", 0);
+    public RepositorioRevista repoRevista = new RepositorioRevista();
+    public RepositorioAmigo amigo = new RepositorioAmigo();
 
     public int IdRevista;
     public string TituloRevista;
@@ -60,7 +63,18 @@ public class Revista
         return resultadoValidacao;
     }
 
-    public void EmprestarRevista() { }
+    public void EmprestarRevista(int idRevista)
+    {
+       for (int i = 0; i < repoRevista.vetorRevista.Length; i++)
+        {
+            if (repoRevista.vetorRevista[i] == null) continue;
+
+            else if(idRevista == repoRevista.vetorRevista[i].IdRevista)
+            {
+                repoRevista.vetorRevista[i].StatusEmprestimo = "Emprestada";
+            }
+        }
+    }
 
     public void DevolverRevista() { }
 

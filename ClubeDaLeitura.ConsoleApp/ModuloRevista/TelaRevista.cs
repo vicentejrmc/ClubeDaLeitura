@@ -66,19 +66,19 @@ public class TelaRevista
         Console.WriteLine("Cadastrando Revista!");
         Console.WriteLine("-----------------------------------------------------\n");
 
-        //bool caixaVazia = false;
-        //for (int i = 0; i < repositorioCaixa.vetorDeCaixa.Length; i++)
-        //{
-        //    if (repositorioCaixa.vetorDeCaixa[i] != null)
-        //        caixaVazia = true;
-        //}
+        bool caixaVazia = true;
+        for (int i = 0; i < repositorioCaixa.vetorDeCaixa.Length; i++)
+        {
+            if (repositorioCaixa.vetorDeCaixa[i] != null)
+                caixaVazia = true;
+        }
 
-        //if (!caixaVazia)
-        //{
-        //    NotificarCor.ExibirMensagem("Você Precisa Criar uma caixa antes de Cadastrar uma nova Revista!", ConsoleColor.Red);
+        if (!caixaVazia)
+        {
+            NotificarCor.ExibirMensagem("Você Precisa Criar uma caixa antes de Cadastrar uma nova Revista!", ConsoleColor.Red);
 
-        //    return;
-        //}
+            return;
+        }
 
         Console.Write("Digite o Titulo da Revista: ");
         string titulo = Console.ReadLine();
@@ -89,7 +89,7 @@ public class TelaRevista
         Console.Write("Ano de Publicação. (yyyy): ");
         int anoPublicacao = Convert.ToInt32(Console.ReadLine());
 
-        repositorioCaixa.SelecionarTodos();
+        repositorioCaixa.VisualizarCaixas();
 
         Console.WriteLine("-----------------------------------------------------\n");
 
@@ -141,7 +141,7 @@ public class TelaRevista
         Console.Write("Ano de Publicação. (yyyy): ");
         int anoPublicacao = Convert.ToInt32(Console.ReadLine());
 
-        repositorioCaixa.SelecionarTodos();
+        repositorioCaixa.VisualizarCaixas();
         Console.Write("Selecione uma Caixa: ");
         int idCaixa = Convert.ToInt32(Console.ReadLine());
 

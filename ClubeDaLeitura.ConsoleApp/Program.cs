@@ -1,6 +1,7 @@
 ﻿using ClubeDaLeitura.ConsoleApp.Compatilhado;
 using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
 using ClubeDaLeitura.ConsoleApp.ModuloCaixa;
+using ClubeDaLeitura.ConsoleApp.ModuloEmprestimo;
 using ClubeDaLeitura.ConsoleApp.ModuloRevistas;
 
 namespace ClubeDaLeitura.ConsoleApp
@@ -13,6 +14,7 @@ namespace ClubeDaLeitura.ConsoleApp
             TelaAmigo telaAmigo = new TelaAmigo();
             TelaCaixa telaCaixa = new TelaCaixa();
             TelaRevista telaRevistas = new TelaRevista();
+            TelaEmprestimo telaEmprestimo = new TelaEmprestimo();
 
             string opcao;
 
@@ -36,7 +38,7 @@ namespace ClubeDaLeitura.ConsoleApp
                         break;
 
                     case "4":
-                        // GerenciarEmpréstimos
+                        telaEmprestimo.GerenciarEmprestimo();
                         break;
 
                     case "S":
