@@ -22,10 +22,10 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
         }
 
         public bool Editar(int id, Caixa caixaEditada)
-        { 
+        {
             for (int i = 0; i < vetorDeCaixa.Length; i++)
             {
-                if (vetorDeCaixa[i] ==  null)
+                if (vetorDeCaixa[i] == null)
                     continue;
 
                 if (vetorDeCaixa[i].IdCaixa == id)
@@ -60,15 +60,20 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
 
         public void SelecionarTodos()
         {
+            Console.WriteLine("{0 , -15} | {0, -20} | {0, -15} | {0, -20}",
+                        "Id Caixa", "Etiqueta", "Cor");
             for (int i = 0; i < vetorDeCaixa.Length; i++)
-        {
-            if (vetorDeCaixa[i] != null)
             {
-                Console.WriteLine($"ID: {vetorDeCaixa[i].IdCaixa} | Nome: {vetorDeCaixa[i].Etiqueta} | Responsável: {vetorDeCaixa[i].CorCaixa} |");
-                Console.WriteLine("---------------------------------------------------------------------------------------------------------------------------------------------");
+                Caixa[] caixaCadastrada = SelcionarCaixa();
+                Caixa cx = caixaCadastrada[i];
+
+                if (vetorDeCaixa[i] != null)
+                {
+                    Console.WriteLine("{0 , -15} | {0, -20} | {0, -15} | {0, -20}",
+                     cx.IdCaixa, cx.Etiqueta, cx.CorCaixa);             
+                }
             }
-        }
-        Console.WriteLine();
+            Console.WriteLine();
         }
 
         public Caixa SelecionarPorId(int idCaixa)
@@ -83,6 +88,11 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
             }
 
             return null;
+        }
+
+        public Caixa[] SelcionarCaixa()
+        {
+            return vetorDeCaixa;
         }
     }
 }

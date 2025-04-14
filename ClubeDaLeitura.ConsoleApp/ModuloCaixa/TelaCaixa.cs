@@ -178,6 +178,9 @@ public class TelaCaixa
 
         repositorioCaixa.SelecionarTodos();
 
+        Console.WriteLine("Press [Enter] continuar");
+        Console.ReadLine();
+
     }
 
     public string EcolherCoresDisponiveis()

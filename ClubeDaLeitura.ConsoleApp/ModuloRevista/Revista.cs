@@ -8,19 +8,18 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloRevistas;
 
-public class Revistas
+public class Revista
 {
     public Caixa caixa = new Caixa("", "", 0);
-
 
     public int IdRevista;
     public string TituloRevista;
     public int NumEdicao;
-    public DateTime AnoEdicao;  
+    public int AnoEdicao;  
     public string StatusEmprestimo;
     public Caixa CaixaAtual;
 
-    public Revistas(string titulo, int numEdicao, DateTime anoEdicao, string status, Caixa caixa)
+    public Revista(string titulo, int numEdicao, int anoEdicao, string status, Caixa caixa)
     {
         TituloRevista = titulo;
         NumEdicao = numEdicao;
@@ -46,7 +45,11 @@ public class Revistas
         if (NumEdicao < 1)
             resultadoValidacao += "!...O numero de Edição não pode ser menor que 0 ou Negativo...!";
 
-        if (AnoEdicao > DateTime.Now)
+        DateTime anoAtual = DateTime.Now;
+        Convert.ToDateTime(anoAtual).ToString("yyyy");
+        int anoInt = Convert.ToInt32(anoAtual);
+
+        if (AnoEdicao > anoInt)
             resultadoValidacao += "!...A menos que você seja um visitante do Futuro, essa data não é válida...!";
 
         if (CaixaAtual == null)
@@ -57,9 +60,7 @@ public class Revistas
         return resultadoValidacao;
     }
 
-    public void EmprestarRevista()
-    { 
-    }
+    public void EmprestarRevista() { }
 
     public void DevolverRevista() { }
 

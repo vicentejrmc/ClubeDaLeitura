@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloRevistas
 {
-    public class RepositorioRevistas
+    public class RepositorioRevista
     {
 
-        public Revistas[] vetorRevista = new Revistas[100];
+        public Revista[] vetorRevista = new Revista[100];
         public int contRevista = 0;
 
-        public void CadastrarRevista(Revistas novaRevista)
+        public void CadastrarRevista(Revista novaRevista)
         {
             vetorRevista[contRevista++] = novaRevista;
 
@@ -22,7 +22,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevistas
            
         }
 
-        public bool Editar(int id, Revistas novaRevista)
+        public bool Editar(int id, Revista novaRevista)
         {
             for (int i = 0; i < vetorRevista.Length; i++)
             {
@@ -61,17 +61,17 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevistas
             return false;
         }
 
-        public Revistas[] SelecionarRevistas()
+        public Revista[] SelecionarRevistas()
         {
             return vetorRevista;
         }
 
 
-        public Revistas SelecionarPorId(int idRevista)
+        public Revista SelecionarPorId(int idRevista)
         {
             for (int i = 0; i < vetorRevista.Length; i++)
             {
-                Revistas obterIdRevista = vetorRevista[i];
+                Revista obterIdRevista = vetorRevista[i];
                 if (obterIdRevista == null) continue;
 
                 else if (obterIdRevista.IdRevista == idRevista)

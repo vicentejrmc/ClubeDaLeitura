@@ -40,5 +40,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
         {
             throw new NotImplementedException();
         }
+
+       
     }
 }

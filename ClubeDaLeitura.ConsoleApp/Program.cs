@@ -12,7 +12,7 @@ namespace ClubeDaLeitura.ConsoleApp
             TelaPrincipal telaPrincipal = new TelaPrincipal();
             TelaAmigo telaAmigo = new TelaAmigo();
             TelaCaixa telaCaixa = new TelaCaixa();
-            TelaRevistas telaRevistas = new TelaRevistas();
+            TelaRevista telaRevistas = new TelaRevista();
 
             string opcao;
 

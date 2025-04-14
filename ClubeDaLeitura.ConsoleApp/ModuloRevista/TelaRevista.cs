@@ -6,9 +6,9 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloRevistas;
 
-public class TelaRevistas
+public class TelaRevista
 {
-    public RepositorioRevistas repositorioRevistas = new RepositorioRevistas();
+    public RepositorioRevista repositorioRevista = new RepositorioRevista();
     public RepositorioCaixa repositorioCaixa = new RepositorioCaixa();
 
     private void ExibirCabecalho()
@@ -31,7 +31,7 @@ public class TelaRevistas
         Console.WriteLine("4 - Visualizar Revistas.");
         Console.WriteLine("-----------------------------------------------------\n");
 
-
+        Console.WriteLine("Escolha uma Opção Válida: ");
         string opcao = Console.ReadLine().ToUpper();
 
         switch (opcao)
@@ -66,6 +66,20 @@ public class TelaRevistas
         Console.WriteLine("Cadastrando Revista!");
         Console.WriteLine("-----------------------------------------------------\n");
 
+        //bool caixaVazia = false;
+        //for (int i = 0; i < repositorioCaixa.vetorDeCaixa.Length; i++)
+        //{
+        //    if (repositorioCaixa.vetorDeCaixa[i] != null)
+        //        caixaVazia = true;
+        //}
+
+        //if (!caixaVazia)
+        //{
+        //    NotificarCor.ExibirMensagem("Você Precisa Criar uma caixa antes de Cadastrar uma nova Revista!", ConsoleColor.Red);
+
+        //    return;
+        //}
+
         Console.Write("Digite o Titulo da Revista: ");
         string titulo = Console.ReadLine();
 
@@ -73,9 +87,10 @@ public class TelaRevistas
         int numEdicao = Convert.ToInt32(Console.ReadLine());
 
         Console.Write("Ano de Publicação. (yyyy): ");
-        DateTime anoPublicacao = Convert.ToDateTime(Console.ReadLine());
+        int anoPublicacao = Convert.ToInt32(Console.ReadLine());
 
         repositorioCaixa.SelecionarTodos();
+
         Console.WriteLine("-----------------------------------------------------\n");
 
         Console.Write("Selecione uma Caixa: ");
@@ -85,7 +100,7 @@ public class TelaRevistas
 
         Caixa caixaObtida = repositorioCaixa.SelecionarPorId(idCaixa);
 
-        Revistas novaRevista = new Revistas(titulo, numEdicao, anoPublicacao, statusCaixa, caixaObtida);
+        Revista novaRevista = new Revista(titulo, numEdicao, anoPublicacao, statusCaixa, caixaObtida);
 
         string revistaValida = novaRevista.ValidarRevista();
 
@@ -96,7 +111,7 @@ public class TelaRevistas
             return;
         }
 
-        repositorioRevistas.CadastrarRevista(novaRevista);
+        repositorioRevista.CadastrarRevista(novaRevista);
 
         NotificarCor.ExibirMensagem("Revista Cadastrada...", ConsoleColor.Green);
     }
@@ -124,7 +139,7 @@ public class TelaRevistas
         int numEdicao = Convert.ToInt32(Console.ReadLine());
 
         Console.Write("Ano de Publicação. (yyyy): ");
-        DateTime anoPublicacao = Convert.ToDateTime(Console.ReadLine());
+        int anoPublicacao = Convert.ToInt32(Console.ReadLine());
 
         repositorioCaixa.SelecionarTodos();
         Console.Write("Selecione uma Caixa: ");
@@ -135,7 +150,7 @@ public class TelaRevistas
         Console.Write("Status atual da Revista: [1 - Disponivel] [2 - Emprestada] [3 - Reservada]");
         int statusRevista = Convert.ToInt32(Console.ReadLine());
 
-        string statusAtual="";
+        string statusAtual = "";
         switch (statusRevista)
         {
             case 1:
@@ -150,18 +165,18 @@ public class TelaRevistas
 
         }
 
-        Revistas revistaEditada = new Revistas(titulo, numEdicao, anoPublicacao, statusAtual, caixa );
+        Revista revistaEditada = new Revista(titulo, numEdicao, anoPublicacao, statusAtual, caixa);
 
         string ehValida = revistaEditada.ValidarRevista();
 
-        if(ehValida.Length > 0)
+        if (ehValida.Length > 0)
         {
             NotificarCor.ExibirMensagem(ehValida, ConsoleColor.Red);
 
             return;
         }
 
-        repositorioRevistas.Editar(idEditarRevista, revistaEditada);
+        repositorioRevista.Editar(idEditarRevista, revistaEditada);
 
         NotificarCor.ExibirMensagem("Revista Editada com Sucesso!", ConsoleColor.Green);
     }
@@ -178,7 +193,7 @@ public class TelaRevistas
         Console.WriteLine("Selecione o Id da Revista que deseja Excluir: ");
         int idExcluir = Convert.ToInt32(Console.ReadLine());
 
-        Revistas excluir =  repositorioRevistas.SelecionarPorId(idExcluir);
+        Revista excluir = repositorioRevista.SelecionarPorId(idExcluir);
 
         Console.WriteLine(
             "{0, -10} | {1, -15} | {2, -11} | {3, -15} | {4, -15} | {5, -10}",
@@ -194,7 +209,7 @@ public class TelaRevistas
 
         if (simNao == "S")
         {
-            bool excluiu = repositorioRevistas.Excluir(idExcluir);
+            bool excluiu = repositorioRevista.Excluir(idExcluir);
 
             if (excluiu)
                 NotificarCor.ExibirMensagem("Revista Excluida com Sucesso!", ConsoleColor.Green);
@@ -217,11 +232,11 @@ public class TelaRevistas
             "IdRevista", "Titulo", "Num. Edição", "Ano Edição", "Status", "CaixaAtual"
         );
 
-        Revistas[] revistasCadastradas = repositorioRevistas.SelecionarRevistas();
+        Revista[] revistasCadastradas = repositorioRevista.SelecionarRevistas();
 
         for (int i = 0; i < revistasCadastradas.Length; i++)
         {
-            Revistas rev = revistasCadastradas[i];
+            Revista rev = revistasCadastradas[i];
 
             if (rev == null) continue;
 
