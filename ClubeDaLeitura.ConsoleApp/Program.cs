@@ -1,8 +1,4 @@
-﻿using ClubeDaLeitura.ConsoleApp.Compatilhado;
-using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
-using ClubeDaLeitura.ConsoleApp.ModuloCaixa;
-using ClubeDaLeitura.ConsoleApp.ModuloEmprestimo;
-using ClubeDaLeitura.ConsoleApp.ModuloRevistas;
+﻿using ClubeDaLeitura.ConsoleApp.Util;
 
 namespace ClubeDaLeitura.ConsoleApp
 {
@@ -10,8 +6,17 @@ namespace ClubeDaLeitura.ConsoleApp
     {
         static void Main(string[] args)
         {
-            
- 
+            TelaPrincipal telaPrincipal = new TelaPrincipal();
+
+            while (true)
+            {
+                telaPrincipal.ApresentarMenuPrincipal();
+
+
+
+
+
+            }
 
            
             
