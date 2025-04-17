@@ -11,4 +11,6 @@ public abstract class EntidadeBase
     public int Id { get; set; }
 
     public abstract string Validar();
+
+    public abstract void EditarRegistro();
 }

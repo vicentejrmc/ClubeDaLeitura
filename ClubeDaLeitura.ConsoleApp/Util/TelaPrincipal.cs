@@ -1,16 +1,17 @@
 ﻿using ClubeDaLeitura.ConsoleApp.Compatilhado;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ClubeDaLeitura.ConsoleApp.Util;
 
 public class TelaPrincipal
 {
-    private char mainOption;
+    private char mainOption;     // criar instancias de objetos respositorios
+
+    // private RepositorioAmigo repositorioAmigo;
+    //------------------------------------------------------------------------
+    public TelaPrincipal()
+    {
+        //Construtor da tela - instanciar repositorios depois de criados.
+    }
 
     public void ApresentarMenuPrincipal()
     {
