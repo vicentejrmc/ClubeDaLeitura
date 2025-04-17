@@ -12,5 +12,5 @@ public abstract class EntidadeBase
 
     public abstract string Validar();
 
-    public abstract void EditarRegistro();
+    public abstract void AtualizarRegistro();  // Inportará metodo filho
 }

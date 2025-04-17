@@ -18,6 +18,8 @@ namespace ClubeDaLeitura.ConsoleApp.Compatilhado
             this.repositorio = repositorio;
         }
 
+        internal abstract void VisualizarRegistros(bool e); // Método abstract, será importado da classe filho
+
         public void ExibirCabecalho()
         {
             Console.Clear();
@@ -42,11 +44,6 @@ namespace ClubeDaLeitura.ConsoleApp.Compatilhado
         }
 
         internal void InserirRegistro()
-        {
-            ExibirCabecalho();
-        }
-
-        internal void VisualizarRegistro()
         {
             ExibirCabecalho();
         }

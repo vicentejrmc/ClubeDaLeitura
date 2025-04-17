@@ -6,7 +6,7 @@ public class TelaPrincipal
 {
     private char mainOption;     // criar instancias de objetos respositorios
 
-    // private RepositorioAmigo repositorioAmigo;
+    // (ex): private RepositorioAmigo repositorioAmigo;
     //------------------------------------------------------------------------
     public TelaPrincipal()
     {
@@ -37,7 +37,5 @@ public class TelaPrincipal
       throw new NotImplementedException();
         //implementar switch() case: break das opções do menu após implementação de Modulos filho.
     }
-
-
 
 }
