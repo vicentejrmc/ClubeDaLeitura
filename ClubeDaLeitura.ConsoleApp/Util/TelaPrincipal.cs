@@ -9,7 +9,7 @@ namespace ClubeDaLeitura.ConsoleApp.Util;
 
 public class TelaPrincipal
 {
-    private char opcaoPrincipal;
+    private char mainOption;
 
     public void ApresentarMenuPrincipal()
     {
@@ -27,7 +27,7 @@ public class TelaPrincipal
         Console.WriteLine("    | [S] Sair...                |");
         Console.WriteLine("    ------------------------------");
         Console.Write("    | Escolha uma opção válida: ");
-        opcaoPrincipal = Console.ReadLine().ToUpper()![0];
+        mainOption = Console.ReadLine().ToUpper()![0];
     }
 
 
