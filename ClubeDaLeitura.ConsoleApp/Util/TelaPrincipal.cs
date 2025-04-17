@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClubeDaLeitura.ConsoleApp.Compatilhado;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Linq;
@@ -30,7 +31,11 @@ public class TelaPrincipal
         mainOption = Console.ReadLine().ToUpper()![0];
     }
 
-
+    public TelaBase ObterTela()  // Método depentende de ApresentarMenuPrincipal()
+    {
+      throw new NotImplementedException();
+        //implementar switch() case: break das opções do menu após implementação de Modulos filho.
+    }
 
 
 

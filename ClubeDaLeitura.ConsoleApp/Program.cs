@@ -1,27 +1,32 @@
-﻿using ClubeDaLeitura.ConsoleApp.Util;
+﻿using ClubeDaLeitura.ConsoleApp.Compatilhado;
+using ClubeDaLeitura.ConsoleApp.Util;
 
-namespace ClubeDaLeitura.ConsoleApp
+namespace ClubeDaLeitura.ConsoleApp;
+
+internal class Program
 {
-    internal class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
+        TelaPrincipal telaPrincipal = new TelaPrincipal();
+
+        while (true)
         {
-            TelaPrincipal telaPrincipal = new TelaPrincipal();
+            telaPrincipal.ApresentarMenuPrincipal();
 
-            while (true)
+            TelaBase telaSelecionada = telaPrincipal.ObterTela();
+
+            char opscaoEscolhida = telaSelecionada.ApresentarMenu();
+
+            switch (opscaoEscolhida)
             {
-                telaPrincipal.ApresentarMenuPrincipal();
+                case '1': telaSelecionada.InserirRegistro(); break;
 
+                case '2': telaSelecionada.VisualizarRegistro(); break;
 
+                case '3': telaSelecionada.EditarRegistro(); break;
 
-
-
+                case '4': telaSelecionada.ExcluirRegistro(); break;
             }
-
-           
-            
-            
         }
     }
-
 }
