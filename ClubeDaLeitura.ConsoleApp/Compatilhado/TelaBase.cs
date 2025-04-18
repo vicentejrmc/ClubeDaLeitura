@@ -33,12 +33,17 @@ public abstract class TelaBase
 
     public virtual char ApresentarMenu()
     {
-        Console.WriteLine($"[1] Cadastrar {nomeEntidade}.");
-        Console.WriteLine($"[2] Visualizar {nomeEntidade}.");
-        Console.WriteLine($"[3] Editar {nomeEntidade}.");
-        Console.WriteLine($"[4] Excluir {nomeEntidade}.");
-        Console.WriteLine($"[S] Sair do Menu Atual.");
-        Console.WriteLine("------------------------------------------");
+        Console.Clear();
+        ExibirCabecalho();
+
+        Console.WriteLine("    ------------------------------");
+        Console.WriteLine($"    | [1] Cadastrar {nomeEntidade}        |");
+        Console.WriteLine($"    | [2] Visualizar {nomeEntidade}       |");
+        Console.WriteLine($"    | [3] Editar {nomeEntidade}           |");
+        Console.WriteLine($"    | [4] Excluir {nomeEntidade}          |");
+        Console.WriteLine($"    | [S] Sair...                |");
+        Console.WriteLine("    ------------------------------");
+        Console.Write("    | Escolha uma opção válida: ");
 
         Console.Write("Escolha uma opção válida: ");
         char opcao = Convert.ToChar(Console.ReadLine()!.ToUpper());

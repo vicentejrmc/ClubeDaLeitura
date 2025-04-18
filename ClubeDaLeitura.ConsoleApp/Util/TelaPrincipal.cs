@@ -5,10 +5,10 @@ namespace ClubeDaLeitura.ConsoleApp.Util;
 
 public class TelaPrincipal
 {
-    private char mainOption; 
+    private char mainOption;
     private RepositorioAmigo repositorioAmigo; // instancia de repositorio.
 
-    public TelaPrincipal(RepositorioAmigo repositorioAmigo)  // Construtor de TelaPrincipal
+    public TelaPrincipal()  // Construtor de TelaPrincipal
     {
         this.repositorioAmigo = repositorioAmigo;
     }
@@ -34,8 +34,22 @@ public class TelaPrincipal
 
     public TelaBase ObterTela()  // Método depentende de ApresentarMenuPrincipal()
     {
-      throw new NotImplementedException();
-        //implementar switch() case: break das opções do menu após implementação de Modulos filho.
+        if (mainOption == '1')
+            return new TelaAmigo(repositorioAmigo);
+
+        //else if (mainOption == '2')
+
+        //    return new TelaCaixa();
+
+        //else if (mainOption == '3')
+
+        //    return new TelaRevista();
+        //else if (mainOption == '4')
+
+        //    return new TelaEmprestimo();
+
+        //else
+        return null;
     }
 
 }
