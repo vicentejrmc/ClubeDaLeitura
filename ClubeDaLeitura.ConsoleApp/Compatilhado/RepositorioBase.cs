@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -79,8 +80,6 @@ namespace ClubeDaLeitura.ConsoleApp.Compatilhado
         {
             return registros;
         }
-
-
 
 
     }

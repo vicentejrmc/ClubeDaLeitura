@@ -21,7 +21,7 @@ internal class Program
             {
                 case '1': telaSelecionada.InserirRegistro(); break;
 
-                case '2': telaSelecionada.VisualizarRegistro(); break;
+                case '2': telaSelecionada.VisualizarRegistros(true); break;
 
                 case '3': telaSelecionada.EditarRegistro(); break;
 
