@@ -39,7 +39,7 @@ namespace ClubeDaLeitura.ConsoleApp.Compatilhado
 
                 else if (registros[i].Id == idRegistro)
                 {
-                  //  registros[i].AtualizarRegistro(registroEditado); //aguardando metodo filho ser criado
+                  // registros[i].AtualizarRegistro(registroEditado); //aguardando metodo filho ser criado
                     return true;
                 }
             }
