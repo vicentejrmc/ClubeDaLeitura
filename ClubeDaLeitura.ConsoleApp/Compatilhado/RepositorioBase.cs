@@ -31,7 +31,7 @@ namespace ClubeDaLeitura.ConsoleApp.Compatilhado
 
         }
 
-        public bool EditarRegistro(int idRegistro, EntidadeBase registroEditado) // ## Impmentação filho pendente:
+        public bool EditarRegistro(int idRegistro, EntidadeBase registroEditado)
         {
             for (int i = 0; i < registros.Length; i++)
             {
@@ -39,7 +39,7 @@ namespace ClubeDaLeitura.ConsoleApp.Compatilhado
 
                 else if (registros[i].Id == idRegistro)
                 {
-                  // registros[i].AtualizarRegistro(registroEditado); //aguardando metodo filho ser criado
+                   registros[i].AtualizarRegistro(registroEditado);
                     return true;
                 }
             }
