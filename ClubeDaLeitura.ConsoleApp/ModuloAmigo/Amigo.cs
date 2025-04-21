@@ -39,9 +39,8 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
             if (Responsavel.Length < 3 || Responsavel.Length > 100)
                 errosValidacao += "Erro! O nome do responsável deve ter entre 3 e 100 caracteres.\n";
 
-            // Abaixo 'EndsWith()' compara o final de uma cadeia de caracteres é diferente do especificado na condição e retorno (true/false)
-            if (!Telefone.EndsWith("XXXX-XXXX") && !Telefone.EndsWith("XXXXX-XXXX")) 
-                errosValidacao += "Erro! O telefone deve estar no formato (XX) XXXX-XXXX ou (XX) XXXXX-XXXX.\n";
+            if (Telefone.Length < 11 || Telefone.Length > 13) 
+                errosValidacao += "Erro! O telefone deve estar no formato XX XXXX-XXXX ou XX XXXXX-XXXX\n";
 
             // criar metodo para varrer vetor de amigos para comparar o telefone
 

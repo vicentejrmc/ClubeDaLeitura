@@ -12,6 +12,14 @@ namespace ClubeDaLeitura.ConsoleApp.Compatilhado
         private EntidadeBase[] registros = new EntidadeBase[100];
         private int contadorIds = 0;
 
+        public void CadastrarRegistro(EntidadeBase novoRegistro)
+        {
+            novoRegistro.Id = ++contadorIds;
+
+            InserirRegistro(novoRegistro);
+
+        }
+
         private void InserirRegistro(EntidadeBase registro)
         {
             for (int i = 0; i < registros.Length; i++)
@@ -22,14 +30,6 @@ namespace ClubeDaLeitura.ConsoleApp.Compatilhado
                     return;
                 }
             }
-        }
-
-        public void CadastrarRegistro(EntidadeBase novoRegistro)
-        {
-            novoRegistro.Id = ++contadorIds;
-
-            InserirRegistro(novoRegistro);
-
         }
 
         public bool EditarRegistro(int idRegistro, EntidadeBase registroEditado)

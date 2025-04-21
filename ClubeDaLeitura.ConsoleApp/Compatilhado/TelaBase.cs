@@ -1,4 +1,5 @@
-﻿using ClubeDaLeitura.ConsoleApp.Util;
+﻿using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
+using ClubeDaLeitura.ConsoleApp.Util;
 using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
@@ -27,7 +28,7 @@ public abstract class TelaBase
     {
         Console.Clear();
         Console.WriteLine("------------------------------------------");
-        Console.WriteLine($"         Gestao de {nomeEntidade}.       ");
+        Console.WriteLine($"Gestão de {nomeEntidade}.");
         Console.WriteLine("------------------------------------------\n");
     }
 
@@ -36,14 +37,13 @@ public abstract class TelaBase
         Console.Clear();
         ExibirCabecalho();
 
-        Console.WriteLine("    ------------------------------");
-        Console.WriteLine($"    | [1] Cadastrar {nomeEntidade}        |");
-        Console.WriteLine($"    | [2] Visualizar {nomeEntidade}       |");
-        Console.WriteLine($"    | [3] Editar {nomeEntidade}           |");
-        Console.WriteLine($"    | [4] Excluir {nomeEntidade}          |");
-        Console.WriteLine($"    | [S] Sair...                |");
-        Console.WriteLine("    ------------------------------");
-        Console.Write("    | Escolha uma opção válida: ");
+        Console.WriteLine("------------------------------------------");
+        Console.WriteLine($"[1] Cadastrar {nomeEntidade}");
+        Console.WriteLine($"[2] Visualizar {nomeEntidade}");
+        Console.WriteLine($"[3] Editar {nomeEntidade}");
+        Console.WriteLine($"[4] Excluir {nomeEntidade}");
+        Console.WriteLine($"[S] Sair...");
+        Console.WriteLine("------------------------------------------");
 
         Console.Write("Escolha uma opção válida: ");
         char opcao = Convert.ToChar(Console.ReadLine()!.ToUpper());
@@ -55,6 +55,7 @@ public abstract class TelaBase
     {
         ExibirCabecalho();
 
+        Console.WriteLine("------------------------------------------");
         Console.WriteLine($"Cadastrando {nomeEntidade}.");
         Console.WriteLine("------------------------------------------\n");
 
@@ -64,7 +65,9 @@ public abstract class TelaBase
 
         if (ehValido.Length > 0)
         {
-            Notificar.ExibirMensagem(ehValido, ConsoleColor.Red); return;
+            Notificar.ExibirMensagem(ehValido, ConsoleColor.Red);
+            InserirRegistro(); // retorna ao método para nova tentativa(loop)
+            return;
         }
 
         repositorio.CadastrarRegistro(novoRegistro); // Método da classe pai RepositorioBase
