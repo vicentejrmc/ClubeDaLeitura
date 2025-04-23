@@ -14,11 +14,11 @@ class Program
         {
             telaPrincipal.ApresentarMenuPrincipal();
 
-            TelaBase telaSelecionada = telaPrincipal.ObterTela();
+            ItelaCrud telaSelecionada = telaPrincipal.ObterTela();
 
-            char opscaoEscolhida = telaSelecionada.ApresentarMenu();
+            char opcaoEscolhida = telaSelecionada.ApresentarMenu();
 
-            switch (opscaoEscolhida)
+            switch (opcaoEscolhida)
             {
                 case '1': telaSelecionada.InserirRegistro(); break;
 
@@ -27,6 +27,7 @@ class Program
                 case '3': telaSelecionada.EditarRegistro(); break;
 
                 case '4': telaSelecionada.ExcluirRegistro(); break;
+
             }
         }
     }

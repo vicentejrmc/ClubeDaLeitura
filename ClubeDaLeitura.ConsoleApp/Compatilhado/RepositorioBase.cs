@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace ClubeDaLeitura.ConsoleApp.Compatilhado
 {
-    public abstract class RepositorioBase
+    public abstract class RepositorioBase<T> where T : EntidadeBase<T>
     {
-        private ArrayList registros = new ArrayList();
+        private List<T> registros = new List<T>();
         private int contadorIds = 0;
 
-        public void CadastrarRegistro(EntidadeBase novoRegistro)
+        public void CadastrarRegistro(T novoRegistro)
         {
             novoRegistro.Id = ++contadorIds;
 
@@ -21,9 +21,9 @@ namespace ClubeDaLeitura.ConsoleApp.Compatilhado
 
         }
 
-        public bool EditarRegistro(int idRegistro, EntidadeBase registroEditado)
+        public bool EditarRegistro(int idRegistro, T registroEditado)
         {
-            foreach(EntidadeBase entidade in registros)
+            foreach(T entidade in registros)
             {
                 if(entidade.Id == idRegistro)
                 {
@@ -38,7 +38,7 @@ namespace ClubeDaLeitura.ConsoleApp.Compatilhado
 
         public bool ExcluirRegistro(int idRegistro)
         {
-            EntidadeBase registroSelecionado = SelecionarRegistroPorId(idRegistro);
+            T registroSelecionado = SelecionarRegistroPorId(idRegistro);
 
             if (registroSelecionado != null)
             {
@@ -49,9 +49,9 @@ namespace ClubeDaLeitura.ConsoleApp.Compatilhado
             return false;
         }
 
-        public EntidadeBase SelecionarRegistroPorId(int idRegistro)
+        public T SelecionarRegistroPorId(int idRegistro)
         {
-            foreach (EntidadeBase entidade in registros)
+            foreach (T entidade in registros)
             {
                 if (entidade == null)
                     continue;
@@ -63,7 +63,7 @@ namespace ClubeDaLeitura.ConsoleApp.Compatilhado
             return null;
         }
 
-        public ArrayList SelecionarTodos()  // Método a ser usado pelos repositorios filhos ao pelo método Visualizar()
+        public List<T> SelecionarTodos()  // Método a ser usado pelos repositorios filhos ao pelo método Visualizar()
         {
             return registros;
         }

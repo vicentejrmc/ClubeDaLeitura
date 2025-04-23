@@ -9,19 +9,19 @@ using System.Threading.Tasks;
 
 namespace ClubeDaLeitura.ConsoleApp.Compatilhado;
 
-public abstract class TelaBase
+public abstract class TelaBase<T> where T : EntidadeBase<T>
 {
     protected string nomeEntidade;
-    public RepositorioBase repositorio;
+    public RepositorioBase<T> repositorio;
 
-    protected TelaBase(string nomeEntidade, RepositorioBase repositorio)
+    protected TelaBase(string nomeEntidade, RepositorioBase<T> repositorio)
     {
         this.nomeEntidade = nomeEntidade;
         this.repositorio = repositorio;
     }
 
     public abstract void VisualizarRegistros(); // Método abstract, será importado da classe filho
-    public abstract EntidadeBase ObterDados(); // Método abstract, será importado da classe filho
+    public abstract T ObterDados(); // Método abstract, será importado da classe filho
 
 
     public void ExibirCabecalho()
@@ -59,7 +59,7 @@ public abstract class TelaBase
         Console.WriteLine($"Cadastrando {nomeEntidade}.");
         Console.WriteLine("------------------------------------------\n");
 
-        EntidadeBase novoRegistro = ObterDados(); //Método Override da classe filho trazendo dados especificos.
+        T novoRegistro = ObterDados(); //Método Override da classe filho trazendo dados especificos.
 
         string ehValido = novoRegistro.Validar();
 
@@ -88,7 +88,7 @@ public abstract class TelaBase
         int idRegistro = Convert.ToInt32(Console.ReadLine());
         Console.WriteLine();
 
-        EntidadeBase registroEditado = ObterDados(); // Método override da classe filho
+        T registroEditado = ObterDados(); // Método override da classe filho
 
         string ehValido = registroEditado.Validar();
 

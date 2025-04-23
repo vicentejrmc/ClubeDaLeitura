@@ -6,7 +6,7 @@ using System.Collections;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
 {
-    public class TelaAmigo : TelaBase
+    public class TelaAmigo : TelaBase<Amigo>, ItelaCrud
     {
         public RepositorioAmigo repositorioAmigo;
 
@@ -15,7 +15,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
             this.repositorioAmigo = repositorioAmigo;
         }
 
-        public override EntidadeBase ObterDados()
+        public override Amigo ObterDados()
         {
             Console.Write("Insira o nome: ");
             string nome = Console.ReadLine()!;
@@ -65,9 +65,9 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
 
             Console.WriteLine("{0, -10} | {1, -20} | {2, -20} | {3, -15}", "ID" , "Nome", "Responsável", "Telefone");
 
-            ArrayList registros = repositorioAmigo.SelecionarTodos();
+            List<Amigo> registros = repositorioAmigo.SelecionarTodos();
 
-            foreach (Amigo amigo in registros)
+            foreach (var amigo in registros)
             {
                 Console.WriteLine("{0, -10} | {1, -20} | {2, -20} | {3, -15}",
                     amigo.Id, amigo.Nome, amigo.Responsavel, amigo.Telefone);

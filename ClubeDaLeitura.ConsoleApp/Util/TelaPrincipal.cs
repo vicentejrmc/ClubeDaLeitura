@@ -1,5 +1,6 @@
 ﻿using ClubeDaLeitura.ConsoleApp.Compatilhado;
 using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
+using System.Threading.Channels;
 
 namespace ClubeDaLeitura.ConsoleApp.Util;
 
@@ -32,8 +33,16 @@ public class TelaPrincipal
         mainOption = Console.ReadLine().ToUpper()![0];
     }
 
-    public TelaBase ObterTela()  // Método depentende de ApresentarMenuPrincipal()
+    public ItelaCrud ObterTela()  // Método depentende de ApresentarMenuPrincipal()
     {
+        if(mainOption == 'S')
+        {
+            Console.WriteLine("Saindo do Sistema....");
+            Thread.Sleep(2000);
+            Environment.Exit(0);
+        }
+
+
         if (mainOption == '1')
             return new TelaAmigo(repositorioAmigo);
 

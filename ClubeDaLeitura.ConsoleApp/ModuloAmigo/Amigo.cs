@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
 {
-    public class Amigo : EntidadeBase
+    public class Amigo : EntidadeBase<Amigo>
     {
         public string Nome { get; set; }
         public string Responsavel { get; set; }
@@ -21,7 +21,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
             Telefone = telefone;
         }
 
-        public override void AtualizarRegistro(EntidadeBase resgitroEditado)
+        public override void AtualizarRegistro(Amigo resgitroEditado)
         {
             Amigo amigoEditado = (Amigo)resgitroEditado;
 
