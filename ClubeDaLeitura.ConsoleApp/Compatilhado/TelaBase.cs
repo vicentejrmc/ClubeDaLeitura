@@ -12,7 +12,7 @@ namespace ClubeDaLeitura.ConsoleApp.Compatilhado;
 public abstract class TelaBase
 {
     protected string nomeEntidade;
-    private RepositorioBase repositorio;
+    public RepositorioBase repositorio;
 
     protected TelaBase(string nomeEntidade, RepositorioBase repositorio)
     {
@@ -20,7 +20,7 @@ public abstract class TelaBase
         this.repositorio = repositorio;
     }
 
-    public abstract void VisualizarRegistros(bool e); // Método abstract, será importado da classe filho
+    public abstract void VisualizarRegistros(); // Método abstract, será importado da classe filho
     public abstract EntidadeBase ObterDados(); // Método abstract, será importado da classe filho
 
 
@@ -82,7 +82,7 @@ public abstract class TelaBase
         Console.WriteLine($"Editando {nomeEntidade}.");
         Console.WriteLine("------------------------------------------\n");
 
-        VisualizarRegistros(false); // Método override da classe filho
+        VisualizarRegistros(); // Método override da classe filho
 
         Console.WriteLine($"Digite o ID do {nomeEntidade} que deseja editar: ");
         int idRegistro = Convert.ToInt32(Console.ReadLine());
@@ -117,7 +117,7 @@ public abstract class TelaBase
         Console.WriteLine($"Excluindo {nomeEntidade}.");
         Console.WriteLine("------------------------------------------\n");
 
-        VisualizarRegistros(false); // Método override da classe filho
+        VisualizarRegistros(); // Método override da classe filho
 
         Console.WriteLine($"Digite o ID do {nomeEntidade} que deseja excluir: ");
         int idRegistro = Convert.ToInt32(Console.ReadLine());

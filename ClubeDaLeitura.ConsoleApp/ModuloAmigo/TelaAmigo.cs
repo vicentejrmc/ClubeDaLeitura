@@ -1,10 +1,8 @@
 ﻿using ClubeDaLeitura.ConsoleApp.Compatilhado;
 using ClubeDaLeitura.ConsoleApp.Util;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Collections;
+
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
 {
@@ -12,13 +10,12 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
     {
         public RepositorioAmigo repositorioAmigo;
 
-        public TelaAmigo(RepositorioAmigo repositorioAmigo) 
-            : base("Amigo", repositorioAmigo)
+        public TelaAmigo(RepositorioAmigo repositorioAmigo) : base ("Amigo", repositorioAmigo)
         {
             this.repositorioAmigo = repositorioAmigo;
         }
 
-        public override Amigo ObterDados()
+        public override EntidadeBase ObterDados()
         {
             Console.Write("Insira o nome: ");
             string nome = Console.ReadLine()!;
@@ -53,17 +50,33 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
                 return;
             }
 
-            RepositorioAmigo repositorioAmigo = new RepositorioAmigo();
-
             repositorioAmigo.CadastrarRegistro(novoRegistro);
 
             Notificar.ExibirMensagem($"Cadastro de {nomeEntidade} realizado com sucesso!", ConsoleColor.Green);
         }
 
 
-        public override void VisualizarRegistros(bool e)
+        public override void VisualizarRegistros()
         {
-            throw new NotImplementedException();
+            ExibirCabecalho();
+
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine($"Visualizando Amigos.");
+            Console.WriteLine("------------------------------------------\n");
+
+            Console.WriteLine("{0, -10} | {1, -20} | {2, -20} | {3, -15}", "ID" , "Nome", "Responsável", "Telefone");
+
+            ArrayList registros = repositorioAmigo.SelecionarTodos();
+
+            foreach (Amigo amigo in registros)
+            {
+                Console.WriteLine("{0, -10} | {1, -20} | {2, -20} | {3, -15}",
+                    amigo.Id, amigo.Nome, amigo.Responsavel, amigo.Telefone);
+            }
+
+            Console.WriteLine();
+            Notificar.ExibirMensagem("Pressione entera para continuar", ConsoleColor.Yellow);
+           
         }
     }
 }

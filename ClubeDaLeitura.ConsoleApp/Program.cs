@@ -1,9 +1,10 @@
 ﻿using ClubeDaLeitura.ConsoleApp.Compatilhado;
+using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
 using ClubeDaLeitura.ConsoleApp.Util;
 
 namespace ClubeDaLeitura.ConsoleApp;
 
-internal class Program
+class Program
 {
     static void Main(string[] args)
     {
@@ -21,7 +22,7 @@ internal class Program
             {
                 case '1': telaSelecionada.InserirRegistro(); break;
 
-                case '2': telaSelecionada.VisualizarRegistros(true); break;
+                case '2': telaSelecionada.VisualizarRegistros(); break;
 
                 case '3': telaSelecionada.EditarRegistro(); break;
 

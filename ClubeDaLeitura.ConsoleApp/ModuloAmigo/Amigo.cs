@@ -1,4 +1,5 @@
 ﻿using ClubeDaLeitura.ConsoleApp.Compatilhado;
+using ClubeDaLeitura.ConsoleApp.Util;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,6 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
 {
     public class Amigo : EntidadeBase
     {
-
         public string Nome { get; set; }
         public string Responsavel { get; set; }
         public string Telefone { get; set; }
@@ -24,6 +24,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
         public override void AtualizarRegistro(EntidadeBase resgitroEditado)
         {
             Amigo amigoEditado = (Amigo)resgitroEditado;
+
             Nome = amigoEditado.Nome;
             Responsavel = amigoEditado.Responsavel;
             Telefone = amigoEditado.Telefone;
@@ -42,11 +43,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
             if (Telefone.Length < 11 || Telefone.Length > 13) 
                 errosValidacao += "Erro! O telefone deve estar no formato XX XXXX-XXXX ou XX XXXXX-XXXX\n";
 
-            // criar metodo para varrer vetor de amigos para comparar o telefone
-
-            //if (repositorioAmigo.ExisteAmigoComMesmoNomeETelefone(Nome, Telefone))
-            //    errosValidacao += "Erro! Já existe um amigo cadastrado com o mesmo nome e telefone.\n";
-
+            //Verificar se já existe um amigo cadastrado com o mesmo nome e telefone
             //Não permitir excluir um amigo caso tenha empréstimos vinculados
 
             return errosValidacao;

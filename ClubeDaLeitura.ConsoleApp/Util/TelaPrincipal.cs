@@ -6,11 +6,11 @@ namespace ClubeDaLeitura.ConsoleApp.Util;
 public class TelaPrincipal
 {
     private char mainOption;
-    private RepositorioAmigo repositorioAmigo; // instancia de repositorio.
+    public RepositorioAmigo repositorioAmigo; // instancia de repositorio.
 
     public TelaPrincipal()  // Construtor de TelaPrincipal
     {
-        this.repositorioAmigo = repositorioAmigo;
+        this.repositorioAmigo = new RepositorioAmigo();
     }
 
     public void ApresentarMenuPrincipal()

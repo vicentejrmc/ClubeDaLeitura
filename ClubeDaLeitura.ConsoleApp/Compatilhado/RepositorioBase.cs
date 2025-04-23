@@ -1,5 +1,6 @@
 ﻿using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,74 +10,60 @@ namespace ClubeDaLeitura.ConsoleApp.Compatilhado
 {
     public abstract class RepositorioBase
     {
-        private EntidadeBase[] registros = new EntidadeBase[100];
+        private ArrayList registros = new ArrayList();
         private int contadorIds = 0;
 
         public void CadastrarRegistro(EntidadeBase novoRegistro)
         {
             novoRegistro.Id = ++contadorIds;
 
-            InserirRegistro(novoRegistro);
+            registros.Add(novoRegistro);
 
-        }
-
-        private void InserirRegistro(EntidadeBase registro)
-        {
-            for (int i = 0; i < registros.Length; i++)
-            {
-                if (registros[i] == null)
-                {
-                    registros[i] = registro;
-                    return;
-                }
-            }
         }
 
         public bool EditarRegistro(int idRegistro, EntidadeBase registroEditado)
         {
-            for (int i = 0; i < registros.Length; i++)
+            foreach(EntidadeBase entidade in registros)
             {
-                if (registros[i] == null) continue;
-
-                else if (registros[i].Id == idRegistro)
+                if(entidade.Id == idRegistro)
                 {
-                   registros[i].AtualizarRegistro(registroEditado);
+                    entidade.AtualizarRegistro(registroEditado);
+
                     return true;
                 }
             }
+
             return false;
         }
 
         public bool ExcluirRegistro(int idRegistro)
         {
-            for(int i = 0; i < registros.Length; i++)
-            {
-                if (registros[i] == null) continue;
+            EntidadeBase registroSelecionado = SelecionarRegistroPorId(idRegistro);
 
-                else if(registros[i].Id == idRegistro)
-                {
-                    registros[i] = null;
-                    return true;
-                }
+            if (registroSelecionado != null)
+            {
+                registros.Remove(registroSelecionado);
+                return true;
             }
+
             return false;
         }
 
         public EntidadeBase SelecionarRegistroPorId(int idRegistro)
         {
-            for (int i = 0; i < registros.Length; i++)
+            foreach (EntidadeBase entidade in registros)
             {
-                EntidadeBase ent = registros[i];
+                if (entidade == null)
+                    continue;
 
-                if (ent == null) continue;
-
-                else if(ent.Id == idRegistro)
-                    return ent;
+                else if (entidade.Id == idRegistro)
+                    return entidade;
             }
+
             return null;
         }
 
-        public EntidadeBase[] SelecionarTodos()  // Método a ser usado pelos repositorios filhos ao pelo método Visualizar()
+        public ArrayList SelecionarTodos()  // Método a ser usado pelos repositorios filhos ao pelo método Visualizar()
         {
             return registros;
         }
