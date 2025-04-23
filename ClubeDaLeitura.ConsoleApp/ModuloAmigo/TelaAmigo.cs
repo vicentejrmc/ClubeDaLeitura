@@ -55,7 +55,6 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
             Notificar.ExibirMensagem($"Cadastro de {nomeEntidade} realizado com sucesso!", ConsoleColor.Green);
         }
 
-
         public override void VisualizarRegistros()
         {
             ExibirCabecalho();
@@ -77,6 +76,35 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
             Console.WriteLine();
             Notificar.ExibirMensagem("Pressione entera para continuar", ConsoleColor.Yellow);
            
+        }
+
+        public override void EditarRegistro()
+        {
+            ExibirCabecalho();
+
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine($"Editando Amigo.");
+            Console.WriteLine("------------------------------------------\n");
+
+            VisualizarRegistros();
+
+            Console.Write("Digite o ID do amigo que deseja editar: ");
+            int id = Convert.ToInt32(Console.ReadLine()!);
+
+            Amigo amigoSelecionado = (Amigo)repositorioAmigo.SelecionarRegistroPorId(id);
+
+            Amigo amigoEditado = (Amigo)ObterDados();
+
+            bool conseguiuEditar = repositorioAmigo.EditarRegistro(id, amigoEditado);
+
+            if(!conseguiuEditar)
+            {
+                Notificar.ExibirMensagem($"Erro! Não foi possível editar o amigo com ID {id}.", ConsoleColor.Red);
+
+                return;
+            }
+
+            Notificar.ExibirMensagem("Amigo Editado com Sucesso!", ConsoleColor.Green);
         }
     }
 }
