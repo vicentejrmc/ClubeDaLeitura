@@ -10,7 +10,6 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
 {
     public class Amigo : EntidadeBase<Amigo>
     {
-
         public string Nome { get; set; }
         public string Responsavel { get; set; }
         public string Telefone { get; set; }
@@ -34,6 +33,15 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
         public override string Validar()
         {
             string errosValidacao = "";
+
+            if(String.IsNullOrWhiteSpace(Nome))
+                errosValidacao += "Erro! O nome não pode ser vazio.\n";
+
+            if (String.IsNullOrWhiteSpace(Responsavel))
+                errosValidacao += "Erro! O nome do responsável não pode ser vazio.\n";
+
+            if (String.IsNullOrWhiteSpace(Telefone))
+                errosValidacao += "Erro! O telefone não pode ser vazio.\n";
 
             if (Nome.Length < 3 || Nome.Length > 100)
                 errosValidacao += "Erro! O nome deve ter entre 3 e 100 caracteres.\n";

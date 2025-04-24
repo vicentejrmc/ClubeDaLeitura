@@ -1,5 +1,6 @@
 ﻿using ClubeDaLeitura.ConsoleApp.Compatilhado;
 using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
+using ClubeDaLeitura.ConsoleApp.ModuloCaixa;
 using System.Threading.Channels;
 
 namespace ClubeDaLeitura.ConsoleApp.Util;
@@ -8,6 +9,7 @@ public class TelaPrincipal
 {
     private char mainOption;
     public RepositorioAmigo repositorioAmigo; // instancia de repositorio.
+    public RepositorioCaixa repositorioCaixa; // instancia de repositorio.
 
     public TelaPrincipal()  // Construtor de TelaPrincipal
     {
@@ -46,7 +48,8 @@ public class TelaPrincipal
         if (mainOption == '1')
             return new TelaAmigo(repositorioAmigo);
 
-        //else if (mainOption == '2')
+        else if (mainOption == '2')
+            return new TelaCaixa(repositorioCaixa);
 
         //    return new TelaCaixa();
 

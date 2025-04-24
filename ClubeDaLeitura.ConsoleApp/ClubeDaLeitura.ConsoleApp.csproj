@@ -8,9 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="ModuloCaixa\" />
     <Folder Include="ModuloEmprestimo\" />
-    <Folder Include="ModuloRevista\" />
   </ItemGroup>
 
 </Project>

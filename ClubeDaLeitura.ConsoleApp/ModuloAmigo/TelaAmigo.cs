@@ -50,7 +50,6 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
                 return;
             }
 
-            // Verifica se já existe um amigo cadastrado com o mesmo nome ou telefone 'Refatorar posteriormente para a Classe Amigo'
             foreach (var amigo in repositorioAmigo.SelecionarTodos())
             {
                 if (amigo.Nome.Equals(novoRegistro.Nome)) 
