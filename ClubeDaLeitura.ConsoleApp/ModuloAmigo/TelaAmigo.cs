@@ -50,6 +50,21 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
                 return;
             }
 
+            // Verifica se já existe um amigo cadastrado com o mesmo nome ou telefone 'Refatorar posteriormente para a Classe Amigo'
+            foreach (var amigo in repositorioAmigo.SelecionarTodos())
+            {
+                if (amigo.Nome.Equals(novoRegistro.Nome)) 
+                {
+                    Notificar.ExibirMensagem("Erro! Já existe um amigo cadastrado com o mesmo Nome.", ConsoleColor.Red);
+                    return;
+                }
+                if (amigo.Telefone.Equals(novoRegistro.Telefone))
+                {
+                    Notificar.ExibirMensagem("Erro! Já existe um amigo cadastrado com o mesmo Telefone.", ConsoleColor.Red);
+                    return;
+                }
+            }
+
             repositorioAmigo.CadastrarRegistro(novoRegistro);
 
             Notificar.ExibirMensagem($"Cadastro de {nomeEntidade} realizado com sucesso!", ConsoleColor.Green);

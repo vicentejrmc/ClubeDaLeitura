@@ -10,6 +10,8 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
 {
     public class Amigo : EntidadeBase<Amigo>
     {
+        private object repositorioAmigo;
+
         public string Nome { get; set; }
         public string Responsavel { get; set; }
         public string Telefone { get; set; }
@@ -30,7 +32,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
             Telefone = amigoEditado.Telefone;
         }
 
-        public override string Validar()
+        public override string Validar(Amigo amigo)
         {
             string errosValidacao = "";
 
@@ -43,7 +45,6 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
             if (Telefone.Length < 11 || Telefone.Length > 13) 
                 errosValidacao += "Erro! O telefone deve estar no formato XX XXXX-XXXX ou XX XXXXX-XXXX\n";
 
-            //Verificar se já existe um amigo cadastrado com o mesmo nome e telefone
             //Não permitir excluir um amigo caso tenha empréstimos vinculados
 
             return errosValidacao;

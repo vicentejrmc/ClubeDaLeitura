@@ -23,7 +23,6 @@ public abstract class TelaBase<T> where T : EntidadeBase<T>
     public abstract void VisualizarRegistros(); // Método abstract, será importado da classe filho
     public abstract T ObterDados(); // Método abstract, será importado da classe filho
 
-
     public void ExibirCabecalho()
     {
         Console.Clear();
