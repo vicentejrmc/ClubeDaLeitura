@@ -10,7 +10,6 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
 {
     public class Amigo : EntidadeBase<Amigo>
     {
-        private object repositorioAmigo;
 
         public string Nome { get; set; }
         public string Responsavel { get; set; }
@@ -32,7 +31,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
             Telefone = amigoEditado.Telefone;
         }
 
-        public override string Validar(Amigo amigo)
+        public override string Validar()
         {
             string errosValidacao = "";
 
