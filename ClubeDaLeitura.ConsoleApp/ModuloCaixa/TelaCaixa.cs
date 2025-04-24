@@ -1,5 +1,4 @@
 ﻿using ClubeDaLeitura.ConsoleApp.Compatilhado;
-using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
 using ClubeDaLeitura.ConsoleApp.Util;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,7 +14,6 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
             this.repositorioCaixa = repositorioCaixa;
         }
 
-
         public override Caixa ObterDados()
         {
             Console.Write("Insira o nome da Etiqueta (Sem espaços em branco): ");
@@ -28,34 +26,60 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
 
             Caixa novaCaixa = new Caixa(etiqueta, cor, diasEmprestimo);
 
-            foreach (var caixa in repositorioCaixa.SelecionarTodos())
+            return novaCaixa;
+        }
+
+        public override void InserirRegistro()
+        {
+            ExibirCabecalho();
+
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine($"Cadastrando Caixa.");
+            Console.WriteLine("------------------------------------------\n");
+
+            Caixa novaCaixa = (Caixa)ObterDados();
+
+            string ehValido = novaCaixa.Validar();
+
+            if (ehValido.Length > 0)
             {
-                if (caixa.Etiqueta.Equals(etiqueta))
+                Notificar.ExibirMensagem(ehValido, ConsoleColor.Red);
+                InserirRegistro();
+                return;
+            }
+
+            foreach (Caixa caixa in repositorioCaixa.SelecionarTodos())
+            {
+                if (caixa.Etiqueta.Equals(novaCaixa.Etiqueta))
                 {
                     Notificar.ExibirMensagem("Erro! Já existe uma caixa cadastrada com a mesma etiqueta.", ConsoleColor.Red);
-
-                    return null;
+                    return;
                 }
             }
 
-            return novaCaixa;
+            repositorioCaixa.CadastrarRegistro(novaCaixa);
 
+            Notificar.ExibirMensagem($"Cadastro de {nomeEntidade} realizado com sucesso!", ConsoleColor.Green);
         }
 
         public string PaletaCor()
         {
             Console.WriteLine("Escolha uma cor para a caixa:");
 
-            Notificar.ExibirMensagem("[1] Azul", ConsoleColor.Blue);
-            Notificar.ExibirMensagem("[2] Verde", ConsoleColor.Green);
-            Notificar.ExibirMensagem("[3] Vermelho", ConsoleColor.Red);
-            Notificar.ExibirMensagem("[4] Amarelo", ConsoleColor.Yellow);
-            Notificar.ExibirMensagem("[5] Ciano", ConsoleColor.Cyan);
-            Notificar.ExibirMensagem("[6] Cinza", ConsoleColor.Gray);
-            Notificar.ExibirMensagem("[7] Magenta", ConsoleColor.Magenta);
-            Notificar.ExibirMensagem("[8] Preto", ConsoleColor.Black);
-            Notificar.ExibirMensagem("[9] Branco", ConsoleColor.White);
+            Notificar.ExibirCores("[1] Azul", ConsoleColor.Blue);
+            Notificar.ExibirCores("[2] Verde", ConsoleColor.Green);
+            Notificar.ExibirCores("[3] Vermelho", ConsoleColor.Red);
+            Notificar.ExibirCores("[4] Amarelo", ConsoleColor.Yellow);
+            Notificar.ExibirCores("[5] Ciano", ConsoleColor.Cyan);
+            Notificar.ExibirCores("[6] Cinza", ConsoleColor.Gray);
+            Notificar.ExibirCores("[7] Magenta", ConsoleColor.Magenta);
+            Notificar.ExibirCores("[8] Vermelho-Escuro", ConsoleColor.DarkRed);
+            Notificar.ExibirCores("[9] Branco", ConsoleColor.White);
 
+            Console.WriteLine("------------------------------------------");
+
+
+            Console.Write("Escolha uma opção válida: ");
             int opcao = Convert.ToInt32(Console.ReadLine());
 
             string corEscolhida = "";

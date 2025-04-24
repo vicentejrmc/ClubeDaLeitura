@@ -18,12 +18,6 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
             DiasEmprestimo = diasEmprestimo;
         }
 
-        RepositorioCaixa repositorioCaixa;
-        public Caixa(RepositorioCaixa repositorioCaixa)
-        {
-            this.repositorioCaixa = repositorioCaixa;
-        }
-
         public override string Validar()
         {
             string errosValidacao = "";
@@ -33,6 +27,9 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
 
             if (Etiqueta.Length < 3 || Etiqueta.Length > 50)
                 errosValidacao += "Erro! A etiqueta deve ter entre 3 e 50 caracteres.\n";
+
+            if (String.IsNullOrWhiteSpace(Cor))
+                errosValidacao += "Erro! A cor não pode ser vazia.\n";
 
             return errosValidacao;
         }

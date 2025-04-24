@@ -14,6 +14,7 @@ public class TelaPrincipal
     public TelaPrincipal()  // Construtor de TelaPrincipal
     {
         this.repositorioAmigo = new RepositorioAmigo();
+        this.repositorioCaixa = new RepositorioCaixa();
     }
 
     public void ApresentarMenuPrincipal()
@@ -39,8 +40,10 @@ public class TelaPrincipal
     {
         if(mainOption == 'S')
         {
+            Console.WriteLine("\n---------------------");
             Console.WriteLine("Saindo do Sistema....");
-            Thread.Sleep(2000);
+            Console.WriteLine("---------------------");
+            Thread.Sleep(1500);;
             Environment.Exit(0);
         }
 

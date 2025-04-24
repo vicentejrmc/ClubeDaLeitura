@@ -13,4 +13,11 @@ internal class Notificar
         Console.ReadLine();
     }
 
+    public static void ExibirCores(string descricao, ConsoleColor cor)
+    {
+        Console.ForegroundColor = cor;
+        Console.WriteLine(descricao);
+        Console.ResetColor();
+    }
+
 }
