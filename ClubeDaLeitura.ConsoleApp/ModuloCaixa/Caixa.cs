@@ -6,9 +6,8 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
 {
     public class Caixa : EntidadeBase<Caixa>
     {
-
         public string Etiqueta{ get; set; }
-        public string Cor { get; init; }
+        public string Cor { get; set; }
         public int DiasEmprestimo { get; set; }
 
         public Caixa(string etiqueta, string cor, int diasEmprestimo)
@@ -16,6 +15,14 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
             Etiqueta = etiqueta;
             Cor = cor;
             DiasEmprestimo = diasEmprestimo;
+        }
+        public override void AtualizarRegistro(Caixa resgitroEditado)
+        {
+            Caixa caixaEditada = (Caixa)resgitroEditado;
+
+            Etiqueta = caixaEditada.Etiqueta;
+            Cor = caixaEditada.Cor;
+            DiasEmprestimo = caixaEditada.DiasEmprestimo;
         }
 
         public override string Validar()
@@ -44,9 +51,6 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
             throw new NotImplementedException();
         }
 
-        public override void AtualizarRegistro(Caixa resgitroEditado)
-        {
-            throw new NotImplementedException();
-        }
+       
     }
 }

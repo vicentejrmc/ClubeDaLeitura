@@ -1,4 +1,5 @@
 ﻿using ClubeDaLeitura.ConsoleApp.Compatilhado;
+using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
 using ClubeDaLeitura.ConsoleApp.Util;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,39 +28,6 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
             Caixa novaCaixa = new Caixa(etiqueta, cor, diasEmprestimo);
 
             return novaCaixa;
-        }
-
-        public override void InserirRegistro()
-        {
-            ExibirCabecalho();
-
-            Console.WriteLine("------------------------------------------");
-            Console.WriteLine($"Cadastrando Caixa.");
-            Console.WriteLine("------------------------------------------\n");
-
-            Caixa novaCaixa = (Caixa)ObterDados();
-
-            string ehValido = novaCaixa.Validar();
-
-            if (ehValido.Length > 0)
-            {
-                Notificar.ExibirMensagem(ehValido, ConsoleColor.Red);
-                InserirRegistro();
-                return;
-            }
-
-            foreach (Caixa caixa in repositorioCaixa.SelecionarTodos())
-            {
-                if (caixa.Etiqueta.Equals(novaCaixa.Etiqueta))
-                {
-                    Notificar.ExibirMensagem("Erro! Já existe uma caixa cadastrada com a mesma etiqueta.", ConsoleColor.Red);
-                    return;
-                }
-            }
-
-            repositorioCaixa.CadastrarRegistro(novaCaixa);
-
-            Notificar.ExibirMensagem($"Cadastro de {nomeEntidade} realizado com sucesso!", ConsoleColor.Green);
         }
 
         public string PaletaCor()
@@ -120,6 +88,39 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
             return corEscolhida;
         }
 
+        public override void InserirRegistro()
+        {
+            ExibirCabecalho();
+
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine($"Cadastrando Caixa.");
+            Console.WriteLine("------------------------------------------\n");
+
+            Caixa novaCaixa = (Caixa)ObterDados();
+
+            string ehValido = novaCaixa.Validar();
+
+            if (ehValido.Length > 0)
+            {
+                Notificar.ExibirMensagem(ehValido, ConsoleColor.Red);
+                InserirRegistro();
+                return;
+            }
+
+            foreach (Caixa caixa in repositorioCaixa.SelecionarTodos())
+            {
+                if (caixa.Etiqueta.Equals(novaCaixa.Etiqueta))
+                {
+                    Notificar.ExibirMensagem("Erro! Já existe uma caixa cadastrada com a mesma etiqueta.", ConsoleColor.Red);
+                    return;
+                }
+            }
+
+            repositorioCaixa.CadastrarRegistro(novaCaixa);
+
+            Notificar.ExibirMensagem($"Cadastro de {nomeEntidade} realizado com sucesso!", ConsoleColor.Green);
+        }
+
         public override void VisualizarRegistros()
         {
             ExibirCabecalho();
@@ -141,6 +142,62 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
             Console.WriteLine();
             Notificar.ExibirMensagem("Pressione entera para continuar", ConsoleColor.Yellow);
 
+        }
+
+        public override void EditarRegistro()
+        {
+            ExibirCabecalho();
+
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine($"Editando Caixa.");
+            Console.WriteLine("------------------------------------------\n");
+
+            VisualizarRegistros();
+
+            Console.Write("Digite o ID da Caixa que deseja editar: ");
+            int id = Convert.ToInt32(Console.ReadLine()!);
+
+            Caixa caixaSelecionado = (Caixa)repositorioCaixa.SelecionarRegistroPorId(id);
+
+            Caixa caixaEditada = (Caixa)ObterDados();
+
+            string ehValido = caixaEditada.Validar();
+
+            bool conseguiuEditar = repositorioCaixa.EditarRegistro(id, caixaEditada);
+
+            if (!conseguiuEditar)
+            {
+                Notificar.ExibirMensagem($"Erro! Não foi possível editar a Caixa com ID {id}.", ConsoleColor.Red);
+
+                return;
+            }
+
+            Notificar.ExibirMensagem("Caixa Editada com Sucesso!", ConsoleColor.Green);
+
+
+        }
+
+        public override void ExcluirRegistro()
+        {
+            ExibirCabecalho();
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine($"Excluindo Caixa.");
+            Console.WriteLine("------------------------------------------\n");
+
+            VisualizarRegistros();
+
+            Console.Write("Digite o ID da Caixa que deseja excluir: ");
+            int id = Convert.ToInt32(Console.ReadLine()!);
+
+            bool conseguiuExcluir = repositorioCaixa.ExcluirRegistro(id);
+
+            if (!conseguiuExcluir)
+            {
+                Notificar.ExibirMensagem($"Erro! Não foi possível excluir a Caixa com ID {id}.", ConsoleColor.Red);
+                return;
+            }
+
+            Notificar.ExibirMensagem("Caixa excluída com sucesso!", ConsoleColor.Green);
         }
     }
 }

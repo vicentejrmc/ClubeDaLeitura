@@ -109,6 +109,15 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
 
             Amigo amigoEditado = (Amigo)ObterDados();
 
+            string ehValido = amigoEditado.Validar();
+
+            if (ehValido.Length > 0)
+            {
+                Notificar.ExibirMensagem(ehValido, ConsoleColor.Red);
+                EditarRegistro();
+                return;
+            }
+
             bool conseguiuEditar = repositorioAmigo.EditarRegistro(id, amigoEditado);
 
             if(!conseguiuEditar)
@@ -119,6 +128,38 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
             }
 
             Notificar.ExibirMensagem("Amigo Editado com Sucesso!", ConsoleColor.Green);
+        }
+
+        public override void ExcluirRegistro()
+        {
+            ExibirCabecalho();
+
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine($"Excluindo Amigo.");
+            Console.WriteLine("------------------------------------------\n");
+
+            VisualizarRegistros();
+
+            Console.Write("Digite o ID do amigo que deseja excluir: ");
+            int id = Convert.ToInt32(Console.ReadLine()!);
+
+            Amigo amigoSelecionado = (Amigo)repositorioAmigo.SelecionarRegistroPorId(id);
+            
+            if (amigoSelecionado == null)
+            {
+                Notificar.ExibirMensagem($"Erro! Não foi possível encontrar o amigo com ID {id}.", ConsoleColor.Red);
+                return;
+            }
+            
+            bool conseguiuExcluir = repositorioAmigo.ExcluirRegistro(id);
+            
+            if (!conseguiuExcluir)
+            {
+                Notificar.ExibirMensagem($"Erro! Não foi possível excluir o amigo com ID {id}.", ConsoleColor.Red);
+                return;
+            }
+
+            Notificar.ExibirMensagem($"Amigo com ID {id} excluído com sucesso!", ConsoleColor.Green);
         }
     }
 }
