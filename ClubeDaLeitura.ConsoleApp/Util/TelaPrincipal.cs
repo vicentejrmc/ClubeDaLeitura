@@ -1,6 +1,7 @@
 ﻿using ClubeDaLeitura.ConsoleApp.Compatilhado;
 using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
 using ClubeDaLeitura.ConsoleApp.ModuloCaixa;
+using ClubeDaLeitura.ConsoleApp.ModuloRevista;
 using System.Threading.Channels;
 
 namespace ClubeDaLeitura.ConsoleApp.Util;
@@ -8,13 +9,15 @@ namespace ClubeDaLeitura.ConsoleApp.Util;
 public class TelaPrincipal
 {
     private char mainOption;
-    public RepositorioAmigo repositorioAmigo; // instancia de repositorio.
-    public RepositorioCaixa repositorioCaixa; // instancia de repositorio.
+    public RepositorioAmigo repositorioAmigo; 
+    public RepositorioCaixa repositorioCaixa; 
+    public RepositorioRevista RepositorioRevista; 
 
     public TelaPrincipal()  // Construtor de TelaPrincipal
     {
         this.repositorioAmigo = new RepositorioAmigo();
         this.repositorioCaixa = new RepositorioCaixa();
+        this.RepositorioRevista = new RepositorioRevista();
     }
 
     public void ApresentarMenuPrincipal()
