@@ -9,9 +9,9 @@ namespace ClubeDaLeitura.ConsoleApp.Util;
 public class TelaPrincipal
 {
     private char mainOption;
-    public RepositorioAmigo repositorioAmigo; 
-    public RepositorioCaixa repositorioCaixa; 
-    public RepositorioRevista RepositorioRevista; 
+    public RepositorioAmigo repositorioAmigo;
+    public RepositorioCaixa repositorioCaixa;
+    public RepositorioRevista RepositorioRevista;
 
     public TelaPrincipal()  // Construtor de TelaPrincipal
     {
@@ -41,12 +41,12 @@ public class TelaPrincipal
 
     public ItelaCrud ObterTela()  // Método depentende de ApresentarMenuPrincipal()
     {
-        if(mainOption == 'S')
+        if (mainOption == 'S')
         {
             Console.WriteLine("\n---------------------");
             Console.WriteLine("Saindo do Sistema....");
             Console.WriteLine("---------------------");
-            Thread.Sleep(1500);;
+            Thread.Sleep(1500); ;
             Environment.Exit(0);
         }
 
@@ -57,11 +57,10 @@ public class TelaPrincipal
         else if (mainOption == '2')
             return new TelaCaixa(repositorioCaixa);
 
-        //    return new TelaCaixa();
-
         //else if (mainOption == '3')
+            return new TelaRevista(RepositorioRevista);
 
-        //    return new TelaRevista();
+
         //else if (mainOption == '4')
 
         //    return new TelaEmprestimo();
