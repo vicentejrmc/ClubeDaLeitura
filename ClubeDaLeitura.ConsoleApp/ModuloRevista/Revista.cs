@@ -1,4 +1,5 @@
 ﻿using ClubeDaLeitura.ConsoleApp.Compatilhado;
+using ClubeDaLeitura.ConsoleApp.ModuloCaixa;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +10,21 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
 {
     public class Revista : EntidadeBase<Revista>
     {
+        private Caixa caixaSelecionada;
+
         public string Titulo { get; set; }
         public int Edicao { get; set; }
         public int AnoPublicacao { get; set; }
         public string StatusEmprestimo { get; set; }
-        public string CaixaAtual { get; set; }
+        public Caixa Caixa { get; set; }
 
-        public Revista(string titulo, int edicao, int anoPublicacao, string statusEmprestimo, string caixaAtual)
+        public Revista(string titulo, int edicao, int anoPublicacao, string statusEmprestimo, Caixa caixa)
         {
             Titulo = titulo;
             Edicao = edicao;
             AnoPublicacao = anoPublicacao;
             StatusEmprestimo = statusEmprestimo;
-            CaixaAtual = caixaAtual;
+            Caixa = caixa;
         }
 
         public override void AtualizarRegistro(Revista resgitroEditado)
@@ -32,7 +35,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
             Edicao = revistarEditada.Edicao;
             AnoPublicacao = revistarEditada.AnoPublicacao;
             StatusEmprestimo = revistarEditada.StatusEmprestimo;
-            CaixaAtual = revistarEditada.CaixaAtual;
+            caixaSelecionada = revistarEditada.caixaSelecionada;
         }
 
         public override string Validar()

@@ -52,6 +52,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
             if (Telefone.Length < 11 || Telefone.Length > 13) 
                 errosValidacao += "Erro! O telefone deve estar no formato XX XXXX-XXXX ou XX XXXXX-XXXX\n";
 
+
             //Não permitir excluir um amigo caso tenha empréstimos vinculados
 
             return errosValidacao;

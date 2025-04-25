@@ -129,14 +129,14 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
             Console.WriteLine($"Visualizando Caixas.");
             Console.WriteLine("------------------------------------------\n");
 
-            Console.WriteLine("{0, -10} | {1, -20} | {2, -20} | {3, -15}", "ID", "Etiqueta", "Cor da Caixa", "Dias Emprestimo");
+            Console.WriteLine("{0, -10} | {1, -20} | {2, -20} | {3, -15} | {4, -10}", "ID", "Etiqueta", "Cor da Caixa", "Dias Emprestimo", "Qtd. Revistas");
 
             List<Caixa> registros = repositorioCaixa.SelecionarTodos();
 
             foreach (var caixa in registros)
             {
-                Console.WriteLine("{0, -10} | {1, -20} | {2, -20} | {3, -15}",
-                    caixa.Id, caixa.Etiqueta, caixa.Cor, caixa.DiasEmprestimo);
+                Console.WriteLine("{0, -10} | {1, -20} | {2, -20} | {3, -15} | {4, -10}",
+                    caixa.Id, caixa.Etiqueta, caixa.Cor, caixa.DiasEmprestimo, caixa.QtdRevistas);
             }
 
             Console.WriteLine();

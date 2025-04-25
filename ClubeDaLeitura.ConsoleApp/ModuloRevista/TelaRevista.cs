@@ -1,6 +1,10 @@
 ﻿using ClubeDaLeitura.ConsoleApp.Compatilhado;
+using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
+using ClubeDaLeitura.ConsoleApp.ModuloCaixa;
+using ClubeDaLeitura.ConsoleApp.Util;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,19 +16,113 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista;
 public class TelaRevista : TelaBase<Revista>, ItelaCrud
 {
     public RepositorioRevista repositorioRevista;
+    public RepositorioCaixa repositorioCaixa;
 
-    public TelaRevista(RepositorioRevista repositorioRevista) : base("Revista", repositorioRevista) // construtor de Tela para TelaRevista
+    public TelaRevista(RepositorioRevista repositorioRevista, RepositorioCaixa repositorioCaixa) : base("Revista", repositorioRevista) // construtor de Tela para TelaRevista
     {
         this.repositorioRevista = repositorioRevista;
+        this.repositorioCaixa = repositorioCaixa;
+    }
+
+    public override void InserirRegistro()
+    {
+        ExibirCabecalho();
+        Console.WriteLine("------------------------------------------");
+        Console.WriteLine($"Cadastrando Revista.");
+        Console.WriteLine("------------------------------------------\n");
+
+        List<Caixa> caixas = repositorioCaixa.SelecionarTodos();
+
+        if (caixas.Count == 0)
+        {
+            Notificar.ExibirMensagem("Você precisa Cadastrar uma caixa antes de Inserir uma nova Revista!", ConsoleColor.Red);
+            return;
+        }
+
+        Revista novaRevista = (Revista)ObterDados();
+
+        string ehValido = novaRevista.Validar();
+
+        if (ehValido.Length > 0)
+        {
+            Notificar.ExibirMensagem(ehValido, ConsoleColor.Red);
+            InserirRegistro();
+            return;
+        }
+
+        foreach (Revista revista in repositorioRevista.SelecionarTodos())
+        {
+            if (revista.Titulo.Equals(novaRevista.Titulo))
+            {
+                Notificar.ExibirMensagem("Erro! Já existe uma revista cadastrada com o mesmo Título.", ConsoleColor.Red);
+                return;
+            }
+            if (revista.Edicao.Equals(novaRevista.Edicao))
+            {
+                Notificar.ExibirMensagem("Erro! Já existe uma revista cadastrada com a mesma Edição.", ConsoleColor.Red);
+                return;
+            }
+        }
+
+        Caixa caixaSelecionada = novaRevista.Caixa;
+
+        caixaSelecionada.AdicionarRevista(novaRevista);
+
+        repositorioRevista.CadastrarRegistro(novaRevista);
+
+        Notificar.ExibirMensagem($"Cadastro de Revista realizado com sucesso!", ConsoleColor.Green);
     }
 
     public override Revista ObterDados()
     {
-        throw new NotImplementedException();
+        TelaCaixa telaCaixa = new TelaCaixa(repositorioCaixa);
+        telaCaixa.VisualizarRegistros();
+
+        Console.Write("Selecione a caixa para a revista: ");
+        int idCaixa = Convert.ToInt32(Console.ReadLine());
+
+        Caixa caixaSelecionada = repositorioCaixa.SelecionarRegistroPorId(idCaixa);
+
+        Console.Write("Digite o Título da Revista: ");
+        string titulo = Console.ReadLine()!;
+
+        Console.Write("Digite o Numero de Edição da Revista: ");
+        int edicao = Convert.ToInt32(Console.ReadLine()!);
+
+        Console.Write("Digite o Ano de Edição: ");
+        int anoEdicao = Convert.ToInt32(Console.ReadLine()!);
+
+        string statusEmprestimo = "Disponivel";
+
+        Revista novaRevista = new Revista(titulo, edicao, anoEdicao, statusEmprestimo, caixaSelecionada);
+
+        Console.WriteLine();
+        Notificar.ExibirMensagem("Por padrão, o Status da Revista será Disponivel!", ConsoleColor.Yellow);
+
+        return novaRevista;
     }
+    
 
     public override void VisualizarRegistros()
     {
-        throw new NotImplementedException();
+        ExibirCabecalho();
+
+        Console.WriteLine("------------------------------------------");
+        Console.WriteLine($"Visualizando Revistas.");
+        Console.WriteLine("------------------------------------------\n");
+
+        Console.WriteLine("{0, -10} | {1, -20} | {2, -15} | {3, -10} | {4, -15}", "ID", "Título", "Ano Edição", "Edição", "Status");
+
+        List<Revista> registros = repositorioRevista.SelecionarTodos();
+
+        foreach (var revista in registros)
+        {
+            Console.WriteLine("{0, -10} | {1, -20} | {2, -15} | {3, -10} | {4, -15}",
+                revista.Id, revista.Titulo, revista.AnoPublicacao, revista.Edicao, revista.StatusEmprestimo
+                );
+        }
+
+        Console.WriteLine();
+        Notificar.ExibirMensagem("Pressione entera para continuar", ConsoleColor.Yellow);
     }
 }
