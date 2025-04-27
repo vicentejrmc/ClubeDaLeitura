@@ -188,6 +188,8 @@ public class TelaRevista : TelaBase<Revista>, ItelaCrud
             return;
         }
 
+        revistaSelecionada.Caixa.RemoverRevista(revistaSelecionada);
+
         Notificar.ExibirMensagem($"Revista {revistaSelecionada.Titulo} excluída com sucesso!", ConsoleColor.Green);
     }
 

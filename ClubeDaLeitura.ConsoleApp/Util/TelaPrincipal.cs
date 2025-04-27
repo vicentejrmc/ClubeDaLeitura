@@ -1,6 +1,7 @@
 ﻿using ClubeDaLeitura.ConsoleApp.Compatilhado;
 using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
 using ClubeDaLeitura.ConsoleApp.ModuloCaixa;
+using ClubeDaLeitura.ConsoleApp.ModuloEmprestimo;
 using ClubeDaLeitura.ConsoleApp.ModuloRevista;
 using System.Threading.Channels;
 
@@ -12,6 +13,7 @@ public class TelaPrincipal
     public RepositorioAmigo repositorioAmigo;
     public RepositorioCaixa repositorioCaixa;
     public RepositorioRevista RepositorioRevista;
+    public RepositorioEmprestimo repositorioEmprestimo;
 
     public TelaPrincipal()  // Construtor de TelaPrincipal
     {
@@ -58,12 +60,10 @@ public class TelaPrincipal
             return new TelaCaixa(repositorioCaixa);
 
         else if (mainOption == '3')
-        return new TelaRevista(RepositorioRevista, repositorioCaixa);
+            return new TelaRevista(RepositorioRevista, repositorioCaixa);
 
-
-        //else if (mainOption == '4')
-
-        //    return new TelaEmprestimo();
+        else if (mainOption == '4')
+            return new TelaEmprestimo(repositorioEmprestimo);
 
         //else
         return null;
