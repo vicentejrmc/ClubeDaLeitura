@@ -63,7 +63,7 @@ public class TelaPrincipal
             return new TelaRevista(RepositorioRevista, repositorioCaixa);
 
         else if (mainOption == '4')
-            return new TelaEmprestimo(repositorioEmprestimo);
+            return new TelaEmprestimo(repositorioEmprestimo, RepositorioRevista, repositorioAmigo);
 
         //else
         return null;

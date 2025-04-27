@@ -29,7 +29,7 @@ public class TelaRevista : TelaBase<Revista>, ItelaCrud
         TelaCaixa telaCaixa = new TelaCaixa(repositorioCaixa);
         telaCaixa.VisualizarRegistros();
 
-        Console.Write("Selecione o Id caixa onde a revista será guarada: ");
+        Console.Write("Selecione o Id caixa onde a revista será guardada: ");
         int idCaixa = Convert.ToInt32(Console.ReadLine());
 
         Caixa caixaSelecionada = repositorioCaixa.SelecionarRegistroPorId(idCaixa);

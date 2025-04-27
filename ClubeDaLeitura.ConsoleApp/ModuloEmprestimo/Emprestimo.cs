@@ -7,14 +7,14 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
     public class Emprestimo : EntidadeBase<Emprestimo>
     {
         public Amigo Amigo { get; set; }
-        public Revista IdRevista { get; set; }
+        public Revista Revista { get; set; }
         public DateTime DataEmprestimo { get; set; }
         public string Situacao { get; set; }
 
-        public Emprestimo(Amigo amigo, Revista idRevista, DateTime dataEmprestimo, string situacao)
+        public Emprestimo(Amigo amigo, Revista revista, DateTime dataEmprestimo, string situacao)
         {
             Amigo = amigo;
-            IdRevista = idRevista;
+            Revista = revista;
             DataEmprestimo = dataEmprestimo;
             Situacao = situacao;
         }
