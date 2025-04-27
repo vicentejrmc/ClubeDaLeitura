@@ -24,6 +24,35 @@ public class TelaRevista : TelaBase<Revista>, ItelaCrud
         this.repositorioCaixa = repositorioCaixa;
     }
 
+    public override Revista ObterDados()
+    {
+        TelaCaixa telaCaixa = new TelaCaixa(repositorioCaixa);
+        telaCaixa.VisualizarRegistros();
+
+        Console.Write("Selecione o Id caixa onde a revista será guarada: ");
+        int idCaixa = Convert.ToInt32(Console.ReadLine());
+
+        Caixa caixaSelecionada = repositorioCaixa.SelecionarRegistroPorId(idCaixa);
+
+        Console.Write("Digite o Título da Revista: ");
+        string titulo = Console.ReadLine()!;
+
+        Console.Write("Digite o Numero de Edição da Revista: ");
+        int edicao = Convert.ToInt32(Console.ReadLine()!);
+
+        Console.Write("Digite o Ano de Edição: ");
+        int anoEdicao = Convert.ToInt32(Console.ReadLine()!);
+
+        string statusEmprestimo = "Disponivel";
+
+        Revista novaRevista = new Revista(titulo, edicao, anoEdicao, statusEmprestimo, caixaSelecionada);
+
+        Console.WriteLine();
+        Notificar.ExibirMensagem("Por padrão, o Status da Revista será Disponivel!", ConsoleColor.Yellow);
+
+        return novaRevista;
+    }
+
     public override void InserirRegistro()
     {
         ExibirCabecalho();
@@ -73,35 +102,43 @@ public class TelaRevista : TelaBase<Revista>, ItelaCrud
         Notificar.ExibirMensagem($"Cadastro de Revista realizado com sucesso!", ConsoleColor.Green);
     }
 
-    public override Revista ObterDados()
+    public override void EditarRegistro()
     {
-        TelaCaixa telaCaixa = new TelaCaixa(repositorioCaixa);
-        telaCaixa.VisualizarRegistros();
+        ExibirCabecalho();
 
-        Console.Write("Selecione a caixa para a revista: ");
-        int idCaixa = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("------------------------------------------");
+        Console.WriteLine($"Editando Revista.");
+        Console.WriteLine("------------------------------------------\n");
 
-        Caixa caixaSelecionada = repositorioCaixa.SelecionarRegistroPorId(idCaixa);
+        VisualizarRegistros();
 
-        Console.Write("Digite o Título da Revista: ");
-        string titulo = Console.ReadLine()!;
+        Console.Write("Selecione o Id da Revista que deseja Editar: ");
+        int idRevista = Convert.ToInt32(Console.ReadLine());
 
-        Console.Write("Digite o Numero de Edição da Revista: ");
-        int edicao = Convert.ToInt32(Console.ReadLine()!);
+        Revista revistaSelecionada = (Revista)repositorioRevista.SelecionarRegistroPorId(idRevista);
 
-        Console.Write("Digite o Ano de Edição: ");
-        int anoEdicao = Convert.ToInt32(Console.ReadLine()!);
+        Revista revistaEditada = ObterDados();
 
-        string statusEmprestimo = "Disponivel";
+        string ehvalido = revistaEditada.Validar();
 
-        Revista novaRevista = new Revista(titulo, edicao, anoEdicao, statusEmprestimo, caixaSelecionada);
+        if(ehvalido.Length > 0)
+        {
+            Notificar.ExibirMensagem(ehvalido, ConsoleColor.Red);
 
-        Console.WriteLine();
-        Notificar.ExibirMensagem("Por padrão, o Status da Revista será Disponivel!", ConsoleColor.Yellow);
+            return;
+        }
 
-        return novaRevista;
+        bool editou = repositorioRevista.EditarRegistro(idRevista, revistaEditada);
+
+        if(!editou)
+        {
+            Notificar.ExibirMensagem("Erro! Não foi possivel editar esse registro.", ConsoleColor.Red);
+
+            return;
+        }
+
+        Notificar.ExibirMensagem("Registro Editado com sucessao!", ConsoleColor.Green);
     }
-    
 
     public override void VisualizarRegistros()
     {
@@ -123,6 +160,6 @@ public class TelaRevista : TelaBase<Revista>, ItelaCrud
         }
 
         Console.WriteLine();
-        Notificar.ExibirMensagem("Pressione entera para continuar", ConsoleColor.Yellow);
+        Notificar.ExibirMensagem("Pressione [Enter] para continuar", ConsoleColor.Yellow);
     }
 }

@@ -163,6 +163,13 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
 
             string ehValido = caixaEditada.Validar();
 
+            if(ehValido.Length > 0)
+            {
+                Notificar.ExibirMensagem(ehValido, ConsoleColor.Red);
+
+                return;
+            }
+
             bool conseguiuEditar = repositorioCaixa.EditarRegistro(id, caixaEditada);
 
             if (!conseguiuEditar)

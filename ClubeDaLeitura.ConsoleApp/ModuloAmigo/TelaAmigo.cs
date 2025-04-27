@@ -114,7 +114,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
             if (ehValido.Length > 0)
             {
                 Notificar.ExibirMensagem(ehValido, ConsoleColor.Red);
-                EditarRegistro();
+
                 return;
             }
 
