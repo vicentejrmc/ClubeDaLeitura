@@ -57,7 +57,7 @@ public class TelaPrincipal
         else if (mainOption == '2')
             return new TelaCaixa(repositorioCaixa);
 
-        //else if (mainOption == '3')
+        else if (mainOption == '3')
         return new TelaRevista(RepositorioRevista, repositorioCaixa);
 
 

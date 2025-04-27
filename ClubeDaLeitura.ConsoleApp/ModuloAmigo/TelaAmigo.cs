@@ -130,7 +130,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
             Notificar.ExibirMensagem("Amigo Editado com Sucesso!", ConsoleColor.Green);
         }
 
-        public override void ExcluirRegistro()
+        public override void ExcluirRegistro()  // falta implementar Validação referente a emprestimos ativos
         {
             ExibirCabecalho();
 
@@ -138,12 +138,20 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
             Console.WriteLine($"Excluindo Amigo.");
             Console.WriteLine("------------------------------------------\n");
 
+            if (repositorioAmigo.SelecionarTodos().Count == 0)
+            {
+                Notificar.ExibirMensagem("Nenhum amigo cadastrado!", ConsoleColor.Red);
+                return;
+            }
+
             VisualizarRegistros();
 
             Console.Write("Digite o ID do amigo que deseja excluir: ");
             int id = Convert.ToInt32(Console.ReadLine()!);
 
             Amigo amigoSelecionado = (Amigo)repositorioAmigo.SelecionarRegistroPorId(id);
+
+            // Validação (Amigo com emprestimo ativo não pode ser excluido)
             
             if (amigoSelecionado == null)
             {
@@ -159,7 +167,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
                 return;
             }
 
-            Notificar.ExibirMensagem($"Amigo com ID {id} excluído com sucesso!", ConsoleColor.Green);
+            Notificar.ExibirMensagem($"Amigo {amigoSelecionado.Nome} excluído com sucesso!", ConsoleColor.Green);
         }
     }
 }

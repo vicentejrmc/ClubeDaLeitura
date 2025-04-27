@@ -60,6 +60,9 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
             if (AnoPublicacao > DateTime.Now.Year)
                 erros += "Erro! O campo 'Ano de Publicação' deve ser maior que 1900 e menor ou igual ao ano atual.\n";
 
+            if (StatusEmprestimo == "Emprestada")
+                erros += "Erro! Não é possível excluir uma revista que está emprestada.\n";
+
             return erros;
         }
 

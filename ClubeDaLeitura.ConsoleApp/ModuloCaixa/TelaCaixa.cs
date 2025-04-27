@@ -191,10 +191,24 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
             Console.WriteLine($"Excluindo Caixa.");
             Console.WriteLine("------------------------------------------\n");
 
+            if (repositorioCaixa.SelecionarTodos().Count == 0)
+            {
+                Notificar.ExibirMensagem("Não há caixas cadastradas para excluir.", ConsoleColor.Red);
+                return;
+            }
+
             VisualizarRegistros();
 
             Console.Write("Digite o ID da Caixa que deseja excluir: ");
             int id = Convert.ToInt32(Console.ReadLine()!);
+
+            Caixa caixaSelecionada = (Caixa)repositorioCaixa.SelecionarRegistroPorId(id);
+
+            if (caixaSelecionada.QtdRevistas > 0)
+            {
+                Notificar.ExibirMensagem("Erro! Não é possível excluir uma caixa que contém revistas.", ConsoleColor.Red);
+                return;
+            }
 
             bool conseguiuExcluir = repositorioCaixa.ExcluirRegistro(id);
 
@@ -204,7 +218,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
                 return;
             }
 
-            Notificar.ExibirMensagem("Caixa excluída com sucesso!", ConsoleColor.Green);
+            Notificar.ExibirMensagem($"Caixa {caixaSelecionada.Etiqueta} excluída com sucesso!", ConsoleColor.Green);
         }
     }
 }

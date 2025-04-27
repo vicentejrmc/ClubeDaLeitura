@@ -121,7 +121,7 @@ public class TelaRevista : TelaBase<Revista>, ItelaCrud
 
         string ehvalido = revistaEditada.Validar();
 
-        if(ehvalido.Length > 0)
+        if (ehvalido.Length > 0)
         {
             Notificar.ExibirMensagem(ehvalido, ConsoleColor.Red);
 
@@ -130,7 +130,7 @@ public class TelaRevista : TelaBase<Revista>, ItelaCrud
 
         bool editou = repositorioRevista.EditarRegistro(idRevista, revistaEditada);
 
-        if(!editou)
+        if (!editou)
         {
             Notificar.ExibirMensagem("Erro! Não foi possivel editar esse registro.", ConsoleColor.Red);
 
@@ -138,6 +138,57 @@ public class TelaRevista : TelaBase<Revista>, ItelaCrud
         }
 
         Notificar.ExibirMensagem("Registro Editado com sucessao!", ConsoleColor.Green);
+    }
+
+    public override void ExcluirRegistro()
+    {
+        ExibirCabecalho();
+        Console.WriteLine("------------------------------------------");
+        Console.WriteLine($"Excluindo Revista.");
+        Console.WriteLine("------------------------------------------\n");
+
+        if (repositorioRevista.SelecionarTodos().Count == 0)
+        {
+            Notificar.ExibirMensagem("Não há revistas cadastradas para excluir!", ConsoleColor.Red);
+            return;
+        }
+
+        VisualizarRegistros();
+
+        Console.Write("Digite o ID da Revista que deseja excluir: ");
+        int id = Convert.ToInt32(Console.ReadLine()!);
+
+        Revista revistaSelecionada = (Revista)repositorioRevista.SelecionarRegistroPorId(id);
+
+        string podeExcluir = revistaSelecionada.Validar();
+
+        if (podeExcluir.Length > 0)
+        {
+            Notificar.ExibirMensagem(podeExcluir, ConsoleColor.Red);
+            return;
+        }
+
+        if (revistaSelecionada.StatusEmprestimo.Equals("Reservada"))
+        {
+            Console.Write("Esta revista foi reservada, deseja confirmar a exclusão dela? S/N: ");
+            char opcao = Convert.ToChar(Console.ReadLine()!.ToUpper());
+
+            if (opcao == 'N')
+            {
+                Notificar.ExibirMensagem("Exclusão cancelada pelo usuário.", ConsoleColor.Yellow);
+                return;
+            }
+        }
+
+        bool excluiu = repositorioRevista.ExcluirRegistro(id);
+
+        if (!excluiu)
+        {
+            Notificar.ExibirMensagem($"Erro! Não foi possível excluir a Revista com ID {id}.", ConsoleColor.Red);
+            return;
+        }
+
+        Notificar.ExibirMensagem($"Revista {revistaSelecionada.Titulo} excluída com sucesso!", ConsoleColor.Green);
     }
 
     public override void VisualizarRegistros()
