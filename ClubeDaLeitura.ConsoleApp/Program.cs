@@ -28,7 +28,6 @@ class Program
                 case '3': telaSelecionada.EditarRegistro(); break;
 
                 case '4': telaSelecionada.ExcluirRegistro(); break;
-
             }
         }
     }

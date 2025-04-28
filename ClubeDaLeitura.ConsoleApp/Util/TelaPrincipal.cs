@@ -39,7 +39,7 @@ public class TelaPrincipal
         Console.WriteLine("[S] Sair...                ");
         Console.WriteLine("------------------------------------------");
         Console.Write("Escolha uma opção válida: ");
-        mainOption = Console.ReadLine().ToUpper()![0];
+        mainOption = Convert.ToChar(Console.ReadLine().ToUpper());
     }
 
     public ItelaCrud ObterTela() 

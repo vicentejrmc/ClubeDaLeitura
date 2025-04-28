@@ -3,6 +3,7 @@ using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
 using ClubeDaLeitura.ConsoleApp.ModuloCaixa;
 using ClubeDaLeitura.ConsoleApp.ModuloRevista;
 using ClubeDaLeitura.ConsoleApp.Util;
+using System.Reflection.Metadata;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 {
@@ -23,7 +24,6 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
             this.repositorioCaixa = repositorioCaixa;
         }
 
-
         public override char ApresentarMenu()
         {
             Console.Clear();
@@ -35,6 +35,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
             Console.WriteLine($"[3] Editar Emprestimo");
             Console.WriteLine($"[4] Excluir Emprestimo");
             Console.WriteLine($"[5] Registrar Devolução");
+
             Console.WriteLine($"[S] Sair...");
             Console.WriteLine("------------------------------------------");
 
@@ -46,7 +47,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 
             return opcao;
         }
-
+    
         public override void InserirRegistro()
         {
             ExibirCabecalho();
@@ -86,6 +87,9 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
             }
 
             repositorioEmprestimo.CadastrarRegistro(novoEmprestimo);
+
+            Revista revistaEmprestada = novoEmprestimo.Revista;
+            revistaEmprestada.Emprestar(novoEmprestimo.Revista);
 
             Notificar.ExibirMensagem($"Empréstimo cadastrado com sucesso!", ConsoleColor.Green);
         }
@@ -258,6 +262,9 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
             #endregion
 
             emprestimoSelecionado.RegistrarDevolucao();
+
+            Revista revistaDevolvida = emprestimoSelecionado.Revista;
+            revistaDevolvida.Devolver(emprestimoSelecionado.Revista);
 
             Notificar.ExibirMensagem($"Devolução registrada com sucesso!", ConsoleColor.Green);
         }

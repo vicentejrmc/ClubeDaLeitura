@@ -66,39 +66,39 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
             return erros;
         }
 
-        public void Emprestar() // Verificar Método
+        public void Emprestar(Revista revista) // Verificar Método
         {
-            if (StatusEmprestimo == "Emprestada")
+            if (revista.StatusEmprestimo == "Emprestada")
             {
                 return;
             }
             else
             {
-                StatusEmprestimo = "Disponível";
+                revista.StatusEmprestimo = "Disponível";
             }
         }
 
-        public void Devolver() // Verificar Método
+        public void Devolver(Revista revista) // Verificar Método
         {
-            if (StatusEmprestimo == "Disponível")
+            if (revista.StatusEmprestimo == "Disponível")
             {
                 return;
             }
             else
             {
-                StatusEmprestimo = "Emprestada";
+                revista.StatusEmprestimo = "Emprestada";
             }
         }
 
-        public void Reservar() // Verificar Método
+        public void Reservar(Revista revista) // Verificar Método
         {
-            if (StatusEmprestimo == "Reservada")
+            if (revista.StatusEmprestimo == "Reservada")
             {
                 return;
             }
             else
             {
-                StatusEmprestimo = "Reservada";
+                revista.StatusEmprestimo = "Reservada";
             }
         }
     }
