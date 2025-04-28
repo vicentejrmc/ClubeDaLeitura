@@ -20,6 +20,7 @@ public class TelaPrincipal
         this.repositorioAmigo = new RepositorioAmigo();
         this.repositorioCaixa = new RepositorioCaixa();
         this.RepositorioRevista = new RepositorioRevista();
+        this.repositorioEmprestimo = new RepositorioEmprestimo();
     }
 
     public void ApresentarMenuPrincipal()
@@ -41,7 +42,7 @@ public class TelaPrincipal
         mainOption = Console.ReadLine().ToUpper()![0];
     }
 
-    public ItelaCrud ObterTela()  // Método depentende de ApresentarMenuPrincipal()
+    public ItelaCrud ObterTela() 
     {
         if (mainOption == 'S')
         {
@@ -65,7 +66,11 @@ public class TelaPrincipal
         else if (mainOption == '4')
             return new TelaEmprestimo(repositorioEmprestimo, RepositorioRevista, repositorioAmigo, repositorioCaixa);
 
-        //else
+        else
+            Notificar.ExibirMensagem("Opção inválida! Tente novamente.", ConsoleColor.Red);
+
+        ApresentarMenuPrincipal();
+
         return null;
     }
 

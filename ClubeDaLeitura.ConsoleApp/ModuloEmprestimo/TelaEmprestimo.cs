@@ -44,7 +44,26 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 
             Emprestimo novoEmprestimo = ObterDados();
 
-            novoEmprestimo.Validar();
+            string ehValido = novoEmprestimo.Validar();
+
+            if (ehValido.Length > 0)
+            {
+                Notificar.ExibirMensagem(ehValido, ConsoleColor.Red);
+                return;
+            }
+
+            foreach(var amigo in repositorioEmprestimo.SelecionarTodos())
+            {
+                if (amigo.Amigo.Nome.Equals(novoEmprestimo.Amigo.Nome))
+                {
+                    Notificar.ExibirMensagem("Erro! Já existe um amigo cadastrado com o mesmo Nome.", ConsoleColor.Red);
+                    return;
+                }
+            }
+
+            repositorioEmprestimo.CadastrarRegistro(novoEmprestimo);
+
+            Notificar.ExibirMensagem($"Empréstimo cadastrado com sucesso!", ConsoleColor.Green);
         }
 
         public override Emprestimo ObterDados()
@@ -82,7 +101,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
             Console.WriteLine($"Visualizando Emprestimos.");
             Console.WriteLine("------------------------------------------\n");
 
-            Console.WriteLine("{0, -20} | {1, -20} | {2, -10} | {3, -10} | {4, -15}", "Revista", "Amigo", "Data Emprestimo", "Data Devolução", "Situação");
+            Console.WriteLine("{0, -10} | {1, -20} | {2, -20} | {3, -20} | {4, -20} | {5, -15}", "ID", "Revista", "Amigo", "Data Emprestimo", "Data Devolução", "Situação");
 
             if (repositorioEmprestimo.SelecionarTodos().Count == 0)
             {
@@ -94,8 +113,8 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 
             foreach (Emprestimo emp in registros)
             {
-                Console.WriteLine("{0, -20} | {1, -20} | {2, -10} | {3, -10} | {4, -15}",
-                    emp.Revista.Titulo, emp.Amigo.Nome, emp.DataEmprestimo.ToString("dd/MM/yyyy"), emp.DataDevolucao.ToString("dd/MM/yyyy"), emp.Situacao
+                Console.WriteLine("{0, -10} | {1, -20} | {2, -20} | {3, -20} | {4, -20} | {5, -15}",
+                    emp.Id, emp.Revista.Titulo, emp.Amigo.Nome, emp.DataEmprestimo.ToString("dd/MM/yyyy"), emp.DataDevolucao.ToString("dd/MM/yyyy"), emp.Situacao
                     );
             }
 
@@ -111,7 +130,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
             Console.WriteLine($"Visualizando Emprestimos.");
             Console.WriteLine("------------------------------------------\n");
 
-            Console.WriteLine("{0, -20} | {1, -20} | {2, -10} | {3, -10} | {4, -15}", "Revista", "Amigo", "Data Emprestimo", "Data Devolução", "Situação");
+            Console.WriteLine("{0, -20} | {1, -20} | {2, -10} | {3, -10} | {4, -15}", "Amigo", "Revista", "Data Emprestimo", "Data Devolução", "Situação");
 
             if (repositorioEmprestimo.SelecionarTodos().Count == 0)
             {
@@ -126,7 +145,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
                 if (emp.Situacao.Equals("Aberto"))
                 {
                     Console.WriteLine("{0, -20} | {1, -20} | {2, -10} | {3, -10} | {4, -15}",
-                        emp.Revista.Titulo, emp.Amigo.Nome, emp.DataEmprestimo.ToString("dd/MM/yyyy"), emp.DataDevolucao.ToString("dd/MM/yyyy"), emp.Situacao
+                         emp.Amigo.Nome, emp.Revista.Titulo, emp.DataEmprestimo.ToString("dd/MM/yyyy"), emp.DataDevolucao.ToString("dd/MM/yyyy"), emp.Situacao
                         );
                 }
             }
@@ -285,8 +304,6 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
             
             Notificar.ExibirMensagem($"Empréstimo excluído com sucesso!", ConsoleColor.Green);
         }
-
-
 
     }
 }

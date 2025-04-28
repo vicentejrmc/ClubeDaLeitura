@@ -26,24 +26,24 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 
         public override void AtualizarRegistro(Emprestimo registroAtualizado)
         {
-            throw new NotImplementedException();
+            Emprestimo emprestimoAtualizado = (Emprestimo)registroAtualizado;
+
+            Amigo = emprestimoAtualizado.Amigo;
+            Revista = emprestimoAtualizado.Revista;
+            DataEmprestimo = emprestimoAtualizado.DataEmprestimo;
+            Situacao = emprestimoAtualizado.Situacao;
+            DataDevolucao = emprestimoAtualizado.DataDevolucao;
         }
 
         public override string Validar()
         {
             string errosValidacao = "";
 
-            if (Revista.StatusEmprestimo.Equals("Reservada"))
+            if(Revista.StatusEmprestimo.Equals("Reservada"))
                 errosValidacao += "Erro! Não é possível realizar o empréstimo, pois a revista está reservada.\n";
 
-            foreach (var emprestimo in repositorioEmprestimo.SelecionarTodos())
-            {
-                if (emprestimo.Revista.Id == this.Revista.Id)
-                    errosValidacao += "Erro! Não é possível realizar o empréstimo! Já existe um Emprestimo em Aberto para essa Revista.\n";
-
-                if (emprestimo.Amigo.Id == this.Amigo.Id)
-                    errosValidacao += "Erro! Não é possível realizar o empréstimo! Já existe um Emprestimo em Abeerto para esse amigo.\n";
-            }
+            if(Revista.StatusEmprestimo.Equals("Emprestada"))
+                    errosValidacao += "Erro! Não é possível realizar o empréstimo, pois a revista já está emprestada.\n";
 
             return errosValidacao;
         }
