@@ -14,7 +14,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
         public RepositorioCaixa repositorioCaixa;
         public Emprestimo emprestimo;
 
-        public TelaEmprestimo(RepositorioEmprestimo repositorioEmprestimo, RepositorioRevista repositorioRevista, RepositorioAmigo repositorioAmigo, 
+        public TelaEmprestimo(RepositorioEmprestimo repositorioEmprestimo, RepositorioRevista repositorioRevista, RepositorioAmigo repositorioAmigo,
             RepositorioCaixa repositorioCaixa) : base("Empréstimo", repositorioEmprestimo)
         {
             this.repositorioEmprestimo = repositorioEmprestimo;
@@ -52,7 +52,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
                 return;
             }
 
-            foreach(var amigo in repositorioEmprestimo.SelecionarTodos())
+            foreach (var amigo in repositorioEmprestimo.SelecionarTodos())
             {
                 if (amigo.Amigo.Nome.Equals(novoEmprestimo.Amigo.Nome))
                 {
@@ -88,7 +88,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 
             DateTime devolucaoEmprestimo = DateTime.Now.AddDays(diasEmprestimo);
 
-            Emprestimo novoEmprestimo = new Emprestimo(amigoSelecionado, revistaSelecionada, dataEmprestimo, "Aberto", devolucaoEmprestimo );
+            Emprestimo novoEmprestimo = new Emprestimo(amigoSelecionado, revistaSelecionada, dataEmprestimo, "Aberto", devolucaoEmprestimo);
 
             return novoEmprestimo;
         }
@@ -113,6 +113,11 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 
             foreach (Emprestimo emp in registros)
             {
+                if (DateTime.Now > emp.DataDevolucao)
+                {
+                    emp.Situacao = "Atrasado";
+                }
+
                 Console.WriteLine("{0, -10} | {1, -20} | {2, -20} | {3, -20} | {4, -20} | {5, -15}",
                     emp.Id, emp.Revista.Titulo, emp.Amigo.Nome, emp.DataEmprestimo.ToString("dd/MM/yyyy"), emp.DataDevolucao.ToString("dd/MM/yyyy"), emp.Situacao
                     );
@@ -142,7 +147,12 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 
             foreach (Emprestimo emp in registros)
             {
-                if (emp.Situacao.Equals("Aberto"))
+                if (DateTime.Now > emp.DataDevolucao)
+                {
+                    emp.Situacao = "Atrasado";
+                }
+
+                if (emp.Situacao.Equals("Aberto") || emp.Situacao.Equals("Atrasado"))
                 {
                     Console.WriteLine("{0, -20} | {1, -20} | {2, -10} | {3, -10} | {4, -15}",
                          emp.Amigo.Nome, emp.Revista.Titulo, emp.DataEmprestimo.ToString("dd/MM/yyyy"), emp.DataDevolucao.ToString("dd/MM/yyyy"), emp.Situacao
@@ -170,7 +180,12 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 
             foreach (Emprestimo emp in registros)
             {
-                if (emp.Revista.StatusEmprestimo.Equals("Emprestada"))
+                if (DateTime.Now > emp.DataDevolucao)
+                {
+                    emp.Situacao = "Atrasado";
+                }
+
+                if (emp.Revista.StatusEmprestimo.Equals("Emprestada") || emp.Situacao.Equals("Atrasado"))
                 {
                     Console.WriteLine("{0, -20} | {1, -20} | {2, -10} | {3, -10} | {4, -15}",
                         emp.Revista.Titulo, emp.Amigo.Nome, emp.DataEmprestimo.ToString("dd/MM/yyyy"), emp.DataDevolucao.ToString("dd/MM/yyyy"), emp.Situacao
@@ -211,6 +226,44 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
                 return;
             }
 
+
+            if (DateTime.Now > emprestimoSelecionado.DataDevolucao)
+            {
+                Emprestimo emprestimo = emprestimoSelecionado;
+                emprestimo.ObterMulta(emprestimoSelecionado);
+
+                Notificar.ExibirCores("\nEsse empréstimo está atrasado!", ConsoleColor.Red);
+                Notificar.ExibirCores($"Multa: R$ {emprestimoSelecionado.Multa}", ConsoleColor.Red);
+
+                Console.WriteLine();
+
+                Notificar.ExibirCores("Você precisa Pagar a multa para realizar à devolução!", ConsoleColor.Yellow);
+                Notificar.ExibirCores("Caso contrario não poderá realizar Novos Emprestimos!", ConsoleColor.Yellow);
+
+                Console.Write("Deseja pagar a multa agora? S/N: ");
+                char opcao = Convert.ToChar(Console.ReadLine()!.ToUpper());
+
+                if (opcao == 'S')
+                {
+                    PagarMulta(emprestimoSelecionado);
+                }
+                else if (opcao == 'N')
+                {
+                    Console.WriteLine("Deseja prosseguir com a Devolução? S/N");
+                    char opcaoDevolucao = Convert.ToChar(Console.ReadLine()!.ToUpper());
+
+                    if (opcaoDevolucao == 'N')
+                    {
+                        Notificar.ExibirMensagem("Devolução cancelada pelo usuário.", ConsoleColor.Yellow);
+                        return;
+                    }
+                    else if (opcaoDevolucao == 'S')
+                    {
+                        Notificar.ExibirCores("Você não poderá fazer novos emprestimos até pagar a multa atual.!", ConsoleColor.Red);
+                    }
+                }
+            }
+
             emprestimoSelecionado.RegistrarDevolucao();
 
             Notificar.ExibirMensagem($"Devolução registrada com sucesso!", ConsoleColor.Green);
@@ -233,31 +286,31 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 
             Console.Write("Digite o ID do Empréstimo que deseja editar: ");
             int idEmprestimo = Convert.ToInt32(Console.ReadLine()!);
-           
+
             Emprestimo emprestimoSelecionado = repositorioEmprestimo.SelecionarRegistroPorId(idEmprestimo);
-            
+
             if (emprestimoSelecionado == null)
             {
                 Notificar.ExibirMensagem("Empréstimo não encontrado!", ConsoleColor.Red);
                 return;
             }
-            
+
             Emprestimo emprestimoEditado = ObterDados();
-            
+
             string ehValido = emprestimoEditado.Validar();
             if (ehValido.Length > 0)
             {
                 Notificar.ExibirMensagem(ehValido, ConsoleColor.Red);
                 return;
             }
-            
+
             bool conseguiuEditar = repositorioEmprestimo.EditarRegistro(idEmprestimo, emprestimoEditado);
             if (!conseguiuEditar)
             {
                 Notificar.ExibirMensagem($"Erro! Não foi possível editar o Empréstimo com ID {idEmprestimo}.", ConsoleColor.Red);
                 return;
             }
-            
+
             Notificar.ExibirMensagem($"Empréstimo editado com sucesso!", ConsoleColor.Green);
         }
 
@@ -267,21 +320,21 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
             Console.WriteLine("------------------------------------------");
             Console.WriteLine($"Excluindo Empréstimo.");
             Console.WriteLine("------------------------------------------\n");
-            
+
             if (repositorioEmprestimo.SelecionarTodos().Count == 0)
             {
                 Notificar.ExibirMensagem("Não há empréstimos cadastrados!", ConsoleColor.Red);
                 return;
-            
+
             }
-            
+
             VisualizarRegistros();
-            
+
             Console.Write("Digite o ID do Empréstimo que deseja excluir: ");
             int idEmprestimo = Convert.ToInt32(Console.ReadLine()!);
-            
+
             Emprestimo emprestimoSelecionado = repositorioEmprestimo.SelecionarRegistroPorId(idEmprestimo);
-            
+
             if (emprestimoSelecionado == null)
             {
                 Notificar.ExibirMensagem("Empréstimo não encontrado!", ConsoleColor.Red);
@@ -295,15 +348,43 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
             }
 
             bool conseguiuExcluir = repositorioEmprestimo.ExcluirRegistro(idEmprestimo);
-            
+
             if (!conseguiuExcluir)
             {
                 Notificar.ExibirMensagem($"Erro! Não foi possível excluir o Empréstimo com ID {idEmprestimo}.", ConsoleColor.Red);
                 return;
             }
-            
+
             Notificar.ExibirMensagem($"Empréstimo excluído com sucesso!", ConsoleColor.Green);
         }
 
+        public void PagarMulta(Emprestimo emprestimoSelecionado)
+        {
+            ExibirCabecalho();
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine($"Pagamento de Multa.");
+            Console.WriteLine("------------------------------------------\n");
+
+            double valorMulta = emprestimoSelecionado.Multa;
+            Console.WriteLine($"Valor da Multa: R$ {valorMulta}");
+
+            Console.Write("Digite o valor pago: ");
+            double valorPago = Convert.ToDouble(Console.ReadLine());
+
+            if (valorPago < valorMulta)
+            {
+                Notificar.ExibirMensagem("Valor pago é menor que o valor da multa!", ConsoleColor.Red);
+                return;
+            }
+
+            if (valorPago >= valorMulta)
+            {
+                double troco = valorPago - valorMulta;
+
+                Notificar.ExibirMensagem($"Troco = {troco.ToString("F2")}", ConsoleColor.Yellow);
+            }
+
+            Notificar.ExibirMensagem("Multa paga com sucesso!", ConsoleColor.Green);
+        }
     }
 }

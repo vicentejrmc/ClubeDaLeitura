@@ -13,6 +13,9 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
         public string Nome { get; set; }
         public string Responsavel { get; set; }
         public string Telefone { get; set; }
+        public string status { get; set; }
+
+        public double Multa { get; set; }
 
         public Amigo(string nome, string responsavel, string telefone) // Construtor amigo
         {
@@ -56,6 +59,12 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
             //Não permitir excluir um amigo caso tenha empréstimos vinculados
 
             return errosValidacao;
+        }
+
+        public void AdicionarMulta(Amigo amigo, double valor)
+        {
+            amigo.status = "Bloqueado";
+            amigo.Multa = valor;
         }
 
     }

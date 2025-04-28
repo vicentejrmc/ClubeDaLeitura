@@ -14,6 +14,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
         public string Situacao { get; set; }
         public DateTime DataEmprestimo { get; set; }
         public DateTime DataDevolucao { get; set; }
+        public double Multa { get; set; }
 
         public Emprestimo(Amigo amigo, Revista revista, DateTime dataEmprestimo, string situacao, DateTime dataDevolucao)
         {
@@ -39,15 +40,18 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
         {
             string errosValidacao = "";
 
-            if(Revista.StatusEmprestimo.Equals("Reservada"))
+            if (Revista.StatusEmprestimo.Equals("Reservada"))
                 errosValidacao += "Erro! Não é possível realizar o empréstimo, pois a revista está reservada.\n";
 
-            if(Revista.StatusEmprestimo.Equals("Emprestada"))
-                    errosValidacao += "Erro! Não é possível realizar o empréstimo, pois a revista já está emprestada.\n";
+            if (Revista.StatusEmprestimo.Equals("Emprestada"))
+                errosValidacao += "Erro! Não é possível realizar o empréstimo, pois a revista já está emprestada.\n";
+
+            if (Amigo.status.Equals("Bloqueado"))
+                errosValidacao += "Erro! Não é possível realizar o empréstimo. O amigo está Inativo ou com Multa Pentende.\n";
 
             return errosValidacao;
         }
-        
+
         public void RegistrarDevolucao()
         {
             foreach (var emprestimo in repositorioEmprestimo.SelecionarTodos())
@@ -60,5 +64,14 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
                 }
             }
         }
-    } 
+
+        public void ObterMulta(Emprestimo emprestimoSelecionado)
+        {
+            int diasAtraso = (int)(DateTime.Now - emprestimoSelecionado.DataDevolucao).TotalDays;
+            double valorMulta = 2;   // 2 reais por dia de atraso
+            double valorTotal = diasAtraso * valorMulta;
+
+            emprestimoSelecionado.Multa = valorTotal;
+        }
+    }
 }
