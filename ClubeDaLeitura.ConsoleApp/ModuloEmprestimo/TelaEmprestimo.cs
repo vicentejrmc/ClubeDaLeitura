@@ -22,7 +22,31 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
             this.repositorioAmigo = repositorioAmigo;
             this.repositorioCaixa = repositorioCaixa;
         }
-        
+
+
+        public override char ApresentarMenu()
+        {
+            Console.Clear();
+            ExibirCabecalho();
+
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine($"[1] Cadastrar Emprestimo");
+            Console.WriteLine($"[2] Visualizar Emprestimos");
+            Console.WriteLine($"[3] Editar Emprestimo");
+            Console.WriteLine($"[4] Excluir Emprestimo");
+            Console.WriteLine($"[5] Registrar Devolução");
+            Console.WriteLine($"[S] Sair...");
+            Console.WriteLine("------------------------------------------");
+
+            Console.Write("Escolha uma opção válida: ");
+            char opcao = Convert.ToChar(Console.ReadLine()!.ToUpper());
+
+            if(opcao == '5')
+                RegistrarDevolucao();
+
+            return opcao;
+        }
+
         public override void InserirRegistro()
         {
             ExibirCabecalho();
@@ -125,40 +149,6 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 
             Console.WriteLine();
             Notificar.ExibirMensagem("Pressione [Enter] para continuar", ConsoleColor.Yellow);
-        }
-
-        public void VisualizarAmigosEmprestimo()
-        {
-            ExibirCabecalho();
-
-            Console.WriteLine("------------------------------------------");
-            Console.WriteLine($"Visualizando Emprestimos.");
-            Console.WriteLine("------------------------------------------\n");
-
-            Console.WriteLine("{0, -20} | {1, -20} | {2, -10} | {3, -10} | {4, -15}", "Amigo", "Revista", "Data Emprestimo", "Data Devolução", "Situação");
-
-            if (repositorioEmprestimo.SelecionarTodos().Count == 0)
-            {
-                Notificar.ExibirMensagem("Não há empréstimos cadastrados!", ConsoleColor.Red);
-                return;
-            }
-
-            List<Emprestimo> registros = repositorioEmprestimo.SelecionarTodos();
-
-            foreach (Emprestimo emp in registros)
-            {
-                if (DateTime.Now > emp.DataDevolucao)
-                {
-                    emp.Situacao = "Atrasado";
-                }
-
-                if (emp.Situacao.Equals("Aberto") || emp.Situacao.Equals("Atrasado"))
-                {
-                    Console.WriteLine("{0, -20} | {1, -20} | {2, -10} | {3, -10} | {4, -15}",
-                         emp.Amigo.Nome, emp.Revista.Titulo, emp.DataEmprestimo.ToString("dd/MM/yyyy"), emp.DataDevolucao.ToString("dd/MM/yyyy"), emp.Situacao
-                        );
-                }
-            }
         }
 
         public void VisualizarRevistasEmprestadas()
