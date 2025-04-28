@@ -14,7 +14,6 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
         public string Responsavel { get; set; }
         public string Telefone { get; set; }
         public string status { get; set; }
-
         public double Multa { get; set; }
 
         public Amigo(string nome, string responsavel, string telefone) // Construtor amigo

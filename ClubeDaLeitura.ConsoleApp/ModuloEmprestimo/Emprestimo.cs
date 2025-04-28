@@ -49,6 +49,9 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
             if (Amigo.status.Equals("Bloqueado"))
                 errosValidacao += "Erro! Não é possível realizar o empréstimo. O amigo está Inativo ou com Multa Pentende.\n";
 
+            if (Amigo.Multa > 0)
+                errosValidacao += "Erro! Não é possível realizar o empréstimo. O amigo está Inativo ou com Multa Pentende.\n";
+
             return errosValidacao;
         }
 

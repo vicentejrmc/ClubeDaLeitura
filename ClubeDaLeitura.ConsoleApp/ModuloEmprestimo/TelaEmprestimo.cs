@@ -226,14 +226,14 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
                 return;
             }
 
-
+            #region Verifica se o emprestimo está em atrazo ou se tem multa pendente
             if (DateTime.Now > emprestimoSelecionado.DataDevolucao)
             {
                 Emprestimo emprestimo = emprestimoSelecionado;
                 emprestimo.ObterMulta(emprestimoSelecionado);
 
                 Notificar.ExibirCores("\nEsse empréstimo está atrasado!", ConsoleColor.Red);
-                Notificar.ExibirCores($"Multa: R$ {emprestimoSelecionado.Multa}", ConsoleColor.Red);
+                Notificar.ExibirCores($"Multa: R$ {emprestimo.Multa}", ConsoleColor.Red);
 
                 Console.WriteLine();
 
@@ -245,7 +245,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 
                 if (opcao == 'S')
                 {
-                    PagarMulta(emprestimoSelecionado);
+                    PagarMulta(emprestimo);
                 }
                 else if (opcao == 'N')
                 {
@@ -259,10 +259,13 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
                     }
                     else if (opcaoDevolucao == 'S')
                     {
+                        emprestimoSelecionado.Amigo.status = "Bloqueado";
+                        emprestimoSelecionado.Amigo.Multa = emprestimo.Multa;
                         Notificar.ExibirCores("Você não poderá fazer novos emprestimos até pagar a multa atual.!", ConsoleColor.Red);
                     }
                 }
             }
+            #endregion
 
             emprestimoSelecionado.RegistrarDevolucao();
 
@@ -383,6 +386,9 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 
                 Notificar.ExibirMensagem($"Troco = {troco.ToString("F2")}", ConsoleColor.Yellow);
             }
+
+            emprestimoSelecionado.Amigo.Multa = 0;
+            emprestimoSelecionado.Amigo.status = "Ativo";
 
             Notificar.ExibirMensagem("Multa paga com sucesso!", ConsoleColor.Green);
         }
