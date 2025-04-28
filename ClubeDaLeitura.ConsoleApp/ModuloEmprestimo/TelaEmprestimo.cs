@@ -86,10 +86,11 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
                 }
             }
 
-            repositorioEmprestimo.CadastrarRegistro(novoEmprestimo);
-
             Revista revistaEmprestada = novoEmprestimo.Revista;
             revistaEmprestada.Emprestar(novoEmprestimo.Revista);
+
+            repositorioEmprestimo.CadastrarRegistro(novoEmprestimo);
+
 
             Notificar.ExibirMensagem($"Empréstimo cadastrado com sucesso!", ConsoleColor.Green);
         }
@@ -157,12 +158,14 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 
         public void VisualizarRevistasEmprestadas()
         {
+            // Adicionar Id na visualização
+
             ExibirCabecalho();
             Console.WriteLine("------------------------------------------");
             Console.WriteLine($"Visualizando Emprestimos.");
             Console.WriteLine("------------------------------------------\n");
 
-            Console.WriteLine("{0, -20} | {1, -20} | {2, -10} | {3, -10} | {4, -15}", "Revista", "Amigo", "Data Emprestimo", "Data Devolução", "Situação");
+            Console.WriteLine("{0, -10} | {1, -20} | {2, -20} | {3, -10} | {4, -10} | {5, -15}","ID", "Revista", "Amigo", "Data Emprestimo", "Data Devolução", "Situação");
 
             if (repositorioEmprestimo.SelecionarTodos().Count == 0)
             {
@@ -181,11 +184,13 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 
                 if (emp.Revista.StatusEmprestimo.Equals("Emprestada") || emp.Situacao.Equals("Atrasado"))
                 {
-                    Console.WriteLine("{0, -20} | {1, -20} | {2, -10} | {3, -10} | {4, -15}",
-                        emp.Revista.Titulo, emp.Amigo.Nome, emp.DataEmprestimo.ToString("dd/MM/yyyy"), emp.DataDevolucao.ToString("dd/MM/yyyy"), emp.Situacao
+                    Console.WriteLine("{0, -10} | {1, -20} | {2, -20} | {3, -10} | {4, -10} | {5, -15}",
+                        emp.Id, emp.Revista.Titulo, emp.Amigo.Nome, emp.DataEmprestimo.ToString("dd/MM/yyyy"), emp.DataDevolucao.ToString("dd/MM/yyyy"), emp.Situacao
                         );
                 }
             }
+
+            Console.WriteLine();
         }
 
         public  void RegistrarDevolucao()

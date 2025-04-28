@@ -14,6 +14,7 @@ public class TelaPrincipal
     public RepositorioCaixa repositorioCaixa;
     public RepositorioRevista RepositorioRevista;
     public RepositorioEmprestimo repositorioEmprestimo;
+    public TelaEmprestimo telaEmprestimo;
 
     public TelaPrincipal()  // Construtor de TelaPrincipal
     {
@@ -21,6 +22,7 @@ public class TelaPrincipal
         this.repositorioCaixa = new RepositorioCaixa();
         this.RepositorioRevista = new RepositorioRevista();
         this.repositorioEmprestimo = new RepositorioEmprestimo();
+        this.telaEmprestimo = new TelaEmprestimo(repositorioEmprestimo, RepositorioRevista, repositorioAmigo, repositorioCaixa);
     }
 
     public void ApresentarMenuPrincipal()
@@ -65,7 +67,6 @@ public class TelaPrincipal
 
         else if (mainOption == '4')
         {
-            TelaEmprestimo telaEmprestimo = new TelaEmprestimo(repositorioEmprestimo, RepositorioRevista, repositorioAmigo, repositorioCaixa);
             telaEmprestimo.ApresentarMenu();
             return new TelaEmprestimo(repositorioEmprestimo, RepositorioRevista, repositorioAmigo, repositorioCaixa);
         }

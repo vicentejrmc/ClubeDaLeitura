@@ -74,7 +74,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
             }
             else
             {
-                revista.StatusEmprestimo = "Disponível";
+                revista.StatusEmprestimo = "Emprestada";
             }
         }
 
@@ -86,7 +86,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
             }
             else
             {
-                revista.StatusEmprestimo = "Emprestada";
+                revista.StatusEmprestimo = "Disponível";
             }
         }
 
