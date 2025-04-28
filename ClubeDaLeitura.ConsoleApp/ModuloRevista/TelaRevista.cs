@@ -203,6 +203,12 @@ public class TelaRevista : TelaBase<Revista>, ItelaCrud
 
         Console.WriteLine("{0, -10} | {1, -20} | {2, -15} | {3, -10} | {4, -15}", "ID", "Título", "Ano Edição", "Edição", "Status");
 
+        if (repositorioRevista.SelecionarTodos().Count == 0)
+        {
+            Notificar.ExibirMensagem("Não há revistas cadastradas!", ConsoleColor.Red);
+            return;
+        }
+
         List<Revista> registros = repositorioRevista.SelecionarTodos();
 
         foreach (var revista in registros)

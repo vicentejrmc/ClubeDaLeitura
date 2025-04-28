@@ -79,6 +79,12 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
 
             Console.WriteLine("{0, -10} | {1, -20} | {2, -20} | {3, -15}", "ID" , "Nome", "Responsável", "Telefone");
 
+            if (repositorioAmigo.SelecionarTodos().Count == 0)
+            {
+                Notificar.ExibirMensagem("Nenhum amigo cadastrado!", ConsoleColor.Red);
+                return;
+            }
+
             List<Amigo> registros = repositorioAmigo.SelecionarTodos();
 
             foreach (var amigo in registros)

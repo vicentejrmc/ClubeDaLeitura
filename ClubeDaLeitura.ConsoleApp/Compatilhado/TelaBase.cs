@@ -22,7 +22,6 @@ public abstract class TelaBase<T> where T : EntidadeBase<T>
 
     public abstract void VisualizarRegistros(); // Método abstract, será importado da classe filho
     public abstract T ObterDados(); // Método abstract, será importado da classe filho
-
     public void ExibirCabecalho()
     {
         Console.Clear();
@@ -132,4 +131,7 @@ public abstract class TelaBase<T> where T : EntidadeBase<T>
 
         Notificar.ExibirMensagem($"Exclusão de {nomeEntidade} realizada com sucesso!", ConsoleColor.Green);
     }
+
 }
+
+

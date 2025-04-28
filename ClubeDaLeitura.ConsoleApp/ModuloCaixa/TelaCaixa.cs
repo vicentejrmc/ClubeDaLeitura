@@ -131,6 +131,12 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
 
             Console.WriteLine("{0, -10} | {1, -20} | {2, -20} | {3, -15} | {4, -10}", "ID", "Etiqueta", "Cor da Caixa", "Dias Emprestimo", "Qtd. Revistas");
 
+            if (repositorioCaixa.SelecionarTodos().Count == 0)
+            {
+                Notificar.ExibirMensagem("Não há caixas cadastradas!", ConsoleColor.Red);
+                return;
+            }
+
             List<Caixa> registros = repositorioCaixa.SelecionarTodos();
 
             foreach (var caixa in registros)

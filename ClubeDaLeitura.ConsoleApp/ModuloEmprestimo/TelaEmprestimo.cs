@@ -22,7 +22,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
             this.repositorioAmigo = repositorioAmigo;
             this.repositorioCaixa = repositorioCaixa;
         }
-
+        
         public override void InserirRegistro()
         {
             ExibirCabecalho();
@@ -194,7 +194,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
             }
         }
 
-        public void RegistrarDevolucao()
+        public  void RegistrarDevolucao()
         {
             ExibirCabecalho();
             Console.WriteLine("------------------------------------------");
