@@ -39,10 +39,10 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
             foreach (var emprestimo in repositorioEmprestimo.SelecionarTodos())
             {
                 if (emprestimo.Revista.Id == this.Revista.Id)
-                    errosValidacao += "Erro! Não é possível realizar o empréstimo, pois a revista já está emprestada.\n";
+                    errosValidacao += "Erro! Não é possível realizar o empréstimo! Já existe um Emprestimo em Aberto para essa Revista.\n";
 
                 if (emprestimo.Amigo.Id == this.Amigo.Id)
-                    errosValidacao += "Erro! Não é possível realizar o empréstimo, pois o amigo já possui uma revista emprestada.\n";
+                    errosValidacao += "Erro! Não é possível realizar o empréstimo! Já existe um Emprestimo em Abeerto para esse amigo.\n";
             }
 
             return errosValidacao;
@@ -50,7 +50,15 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
         
         public void RegistrarDevolucao()
         {
-           
+            foreach (var emprestimo in repositorioEmprestimo.SelecionarTodos())
+            {
+                if (emprestimo.Revista.Id == this.Revista.Id)
+                {
+                    emprestimo.Situacao = "Concluído";
+                    emprestimo.DataDevolucao = DateTime.Now;
+                    break;
+                }
+            }
         }
     } 
 }

@@ -242,10 +242,51 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
             Notificar.ExibirMensagem($"Empréstimo editado com sucesso!", ConsoleColor.Green);
         }
 
+        public override void ExcluirRegistro()
+        {
+            ExibirCabecalho();
+            Console.WriteLine("------------------------------------------");
+            Console.WriteLine($"Excluindo Empréstimo.");
+            Console.WriteLine("------------------------------------------\n");
+            
+            if (repositorioEmprestimo.SelecionarTodos().Count == 0)
+            {
+                Notificar.ExibirMensagem("Não há empréstimos cadastrados!", ConsoleColor.Red);
+                return;
+            
+            }
+            
+            VisualizarRegistros();
+            
+            Console.Write("Digite o ID do Empréstimo que deseja excluir: ");
+            int idEmprestimo = Convert.ToInt32(Console.ReadLine()!);
+            
+            Emprestimo emprestimoSelecionado = repositorioEmprestimo.SelecionarRegistroPorId(idEmprestimo);
+            
+            if (emprestimoSelecionado == null)
+            {
+                Notificar.ExibirMensagem("Empréstimo não encontrado!", ConsoleColor.Red);
+                return;
+            }
 
-        //Editar(),
-        //Excluir(),
-        //RegistrarDevolucao()
+            if (emprestimoSelecionado.Situacao.Equals("Aberto"))
+            {
+                Notificar.ExibirMensagem("Esse empréstimo não pode ser excluído, pois está aberto!", ConsoleColor.Red);
+                return;
+            }
+
+            bool conseguiuExcluir = repositorioEmprestimo.ExcluirRegistro(idEmprestimo);
+            
+            if (!conseguiuExcluir)
+            {
+                Notificar.ExibirMensagem($"Erro! Não foi possível excluir o Empréstimo com ID {idEmprestimo}.", ConsoleColor.Red);
+                return;
+            }
+            
+            Notificar.ExibirMensagem($"Empréstimo excluído com sucesso!", ConsoleColor.Green);
+        }
+
+
 
     }
 }
