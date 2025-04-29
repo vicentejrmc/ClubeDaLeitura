@@ -5,9 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
+namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 {
-    public class RepositorioRevista : RepositorioBase<Revista>
-    {
-    }
+    public class ReposEmprestimoMemoria : ReposBaseMemoria<Emprestimo>;
 }

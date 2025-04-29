@@ -9,8 +9,8 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
 {
     public class TelaCaixa : TelaBase<Caixa>, ItelaCrud
     {
-        public RepositorioCaixa repositorioCaixa;
-        public TelaCaixa(RepositorioCaixa repositorioCaixa) : base("Caixa", repositorioCaixa)
+        public ReposCaixaMemoria repositorioCaixa;
+        public TelaCaixa(ReposCaixaMemoria repositorioCaixa) : base("Caixa", repositorioCaixa)
         {
             this.repositorioCaixa = repositorioCaixa;
         }

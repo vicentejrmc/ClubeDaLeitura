@@ -7,7 +7,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 {
     public class Emprestimo : EntidadeBase<Emprestimo>
     {
-        public RepositorioEmprestimo repositorioEmprestimo;
+        public ReposEmprestimoMemoria repositorioEmprestimo;
 
         public Amigo Amigo { get; set; }
         public Revista Revista { get; set; }

@@ -8,9 +8,9 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
 {
     public class TelaAmigo : TelaBase<Amigo>, ItelaCrud
     {
-        public RepositorioAmigo repositorioAmigo;
+        public ReposAmigoMemoria repositorioAmigo;
 
-        public TelaAmigo(RepositorioAmigo repositorioAmigo) : base ("Amigo", repositorioAmigo)
+        public TelaAmigo(ReposAmigoMemoria repositorioAmigo) : base ("Amigo", repositorioAmigo)
         {
             this.repositorioAmigo = repositorioAmigo;
         }

@@ -11,7 +11,7 @@ O Objetico é organizar os intens(Revistas Hqs etc.) em caixas, tendo cada uma de
 O Sistema possibilida a criação, edição, exclusão e visualizaçao das Entidades criadas.
 
 
-## Fucnionalidades de Menu.
+## Funcionalidades de Menu.
 
 - Cadastro  -  (Amigo, Caixa, Revista Emprestimo)
 - Editar  - (Amigo, Caixa, Revista Emprestimo)

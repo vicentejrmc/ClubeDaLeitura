@@ -9,14 +9,14 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 {
     public class TelaEmprestimo : TelaBase<Emprestimo>, ItelaCrud
     {
-        public RepositorioEmprestimo repositorioEmprestimo;
-        public RepositorioRevista repositorioRevista;
-        public RepositorioAmigo repositorioAmigo;
-        public RepositorioCaixa repositorioCaixa;
+        public ReposEmprestimoMemoria repositorioEmprestimo;
+        public ReposRevistaMemoria repositorioRevista;
+        public ReposAmigoMemoria repositorioAmigo;
+        public ReposCaixaMemoria repositorioCaixa;
         public Emprestimo emprestimo;
 
-        public TelaEmprestimo(RepositorioEmprestimo repositorioEmprestimo, RepositorioRevista repositorioRevista, RepositorioAmigo repositorioAmigo,
-            RepositorioCaixa repositorioCaixa) : base("Empréstimo", repositorioEmprestimo)
+        public TelaEmprestimo(ReposEmprestimoMemoria repositorioEmprestimo, ReposRevistaMemoria repositorioRevista, ReposAmigoMemoria repositorioAmigo,
+            ReposCaixaMemoria repositorioCaixa) : base("Empréstimo", repositorioEmprestimo)
         {
             this.repositorioEmprestimo = repositorioEmprestimo;
             this.repositorioRevista = repositorioRevista;

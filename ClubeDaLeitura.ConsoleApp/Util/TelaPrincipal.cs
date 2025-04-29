@@ -10,18 +10,18 @@ namespace ClubeDaLeitura.ConsoleApp.Util;
 public class TelaPrincipal
 {
     private char mainOption;
-    public RepositorioAmigo repositorioAmigo;
-    public RepositorioCaixa repositorioCaixa;
-    public RepositorioRevista RepositorioRevista;
-    public RepositorioEmprestimo repositorioEmprestimo;
+    public ReposAmigoMemoria repositorioAmigo;
+    public ReposCaixaMemoria repositorioCaixa;
+    public ReposRevistaMemoria RepositorioRevista;
+    public ReposEmprestimoMemoria repositorioEmprestimo;
     public TelaEmprestimo telaEmprestimo;
 
     public TelaPrincipal()  // Construtor de TelaPrincipal
     {
-        this.repositorioAmigo = new RepositorioAmigo();
-        this.repositorioCaixa = new RepositorioCaixa();
-        this.RepositorioRevista = new RepositorioRevista();
-        this.repositorioEmprestimo = new RepositorioEmprestimo();
+        this.repositorioAmigo = new ReposAmigoMemoria();
+        this.repositorioCaixa = new ReposCaixaMemoria();
+        this.RepositorioRevista = new ReposRevistaMemoria();
+        this.repositorioEmprestimo = new ReposEmprestimoMemoria();
         this.telaEmprestimo = new TelaEmprestimo(repositorioEmprestimo, RepositorioRevista, repositorioAmigo, repositorioCaixa);
     }
 

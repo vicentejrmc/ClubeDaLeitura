@@ -2,7 +2,5 @@
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
 {
-    public class RepositorioCaixa : RepositorioBase<Caixa>
-    {
-    }
+    public class ReposCaixaMemoria : ReposBaseMemoria<Caixa>;
 }

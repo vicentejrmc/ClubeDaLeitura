@@ -15,10 +15,10 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista;
 
 public class TelaRevista : TelaBase<Revista>, ItelaCrud
 {
-    public RepositorioRevista repositorioRevista;
-    public RepositorioCaixa repositorioCaixa;
+    public ReposRevistaMemoria repositorioRevista;
+    public ReposCaixaMemoria repositorioCaixa;
 
-    public TelaRevista(RepositorioRevista repositorioRevista, RepositorioCaixa repositorioCaixa) : base("Revista", repositorioRevista) // construtor de Tela para TelaRevista
+    public TelaRevista(ReposRevistaMemoria repositorioRevista, ReposCaixaMemoria repositorioCaixa) : base("Revista", repositorioRevista) // construtor de Tela para TelaRevista
     {
         this.repositorioRevista = repositorioRevista;
         this.repositorioCaixa = repositorioCaixa;

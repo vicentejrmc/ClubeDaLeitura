@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ClubeDaLeitura.ConsoleApp.Compatilhado
 {
-    public abstract class RepositorioBase<T> where T : EntidadeBase<T>
+    public abstract class ReposBaseMemoria<T> where T : EntidadeBase<T>
     {
         private List<T> registros = new List<T>();
         private int contadorIds = 0;
