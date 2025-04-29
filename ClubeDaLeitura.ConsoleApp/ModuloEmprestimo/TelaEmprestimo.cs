@@ -15,8 +15,8 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
         public IRepositorioCaixa repositorioCaixa;
         public Emprestimo emprestimo;
 
-        public TelaEmprestimo(IRepositorioEmprestimo repositorioEmprestimo, IRepositorioRevista repositorioRevista, IRepositorioAmigo repositorioAmigo,
-            IRepositorioCaixa repositorioCaixa) : base("Empréstimo", repositorioEmprestimo)
+        public TelaEmprestimo(IRepositorioEmprestimo repositorioEmprestimo, IRepositorioRevista repositorioRevista, 
+            IRepositorioAmigo repositorioAmigo, IRepositorioCaixa repositorioCaixa) : base("Emprestimo", repositorioEmprestimo)
         {
             this.repositorioEmprestimo = repositorioEmprestimo;
             this.repositorioRevista = repositorioRevista;

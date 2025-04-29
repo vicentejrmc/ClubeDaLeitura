@@ -15,7 +15,7 @@ public class TelaPrincipal
     public IRepositorioRevista repositorioRevista;
     public IRepositorioEmprestimo repositorioEmprestimo;
     private ContextoDados contexto;
-    public IRepositorioEmprestimo telaEmprestimo;
+    public TelaEmprestimo telaEmprestimo;
 
     public TelaPrincipal()  // Construtor de TelaPrincipal
     {
