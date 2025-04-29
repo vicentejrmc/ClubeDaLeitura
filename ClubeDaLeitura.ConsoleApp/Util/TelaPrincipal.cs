@@ -10,19 +10,21 @@ namespace ClubeDaLeitura.ConsoleApp.Util;
 public class TelaPrincipal
 {
     private char mainOption;
-    public ReposAmigoMemoria repositorioAmigo;
-    public ReposCaixaMemoria repositorioCaixa;
-    public ReposRevistaMemoria RepositorioRevista;
-    public ReposEmprestimoMemoria repositorioEmprestimo;
-    public TelaEmprestimo telaEmprestimo;
+    public IRepositorioAmigo repositorioAmigo;
+    public IRepositorioCaixa repositorioCaixa;
+    public IRepositorioRevista repositorioRevista;
+    public IRepositorioEmprestimo repositorioEmprestimo;
+    private ContextoDados contexto;
+    public IRepositorioEmprestimo telaEmprestimo;
 
     public TelaPrincipal()  // Construtor de TelaPrincipal
     {
-        this.repositorioAmigo = new ReposAmigoMemoria();
-        this.repositorioCaixa = new ReposCaixaMemoria();
-        this.RepositorioRevista = new ReposRevistaMemoria();
-        this.repositorioEmprestimo = new ReposEmprestimoMemoria();
-        this.telaEmprestimo = new TelaEmprestimo(repositorioEmprestimo, RepositorioRevista, repositorioAmigo, repositorioCaixa);
+        this.contexto = new ContextoDados(true);
+        this.repositorioAmigo = new ReposAmigoArquivo(contexto);
+        this.repositorioCaixa = new ReposCaixaArquivo(contexto);
+        this.repositorioRevista = new ReposRevistaArquivo(contexto);
+        this.repositorioEmprestimo = new ReposEmprestimoArquivo(contexto);
+        this.telaEmprestimo = new TelaEmprestimo(repositorioEmprestimo, repositorioRevista, repositorioAmigo, repositorioCaixa);
     }
 
     public void ApresentarMenuPrincipal()
@@ -63,10 +65,10 @@ public class TelaPrincipal
             return new TelaCaixa(repositorioCaixa);
 
         else if (mainOption == '3')
-            return new TelaRevista(RepositorioRevista, repositorioCaixa);
+            return new TelaRevista(repositorioRevista, repositorioCaixa);
 
         else if (mainOption == '4')
-            return new TelaEmprestimo(repositorioEmprestimo, RepositorioRevista, repositorioAmigo, repositorioCaixa);
+            return new TelaEmprestimo(repositorioEmprestimo, repositorioRevista, repositorioAmigo, repositorioCaixa);
 
         else
             Notificar.ExibirMensagem("Opção inválida! Tente novamente.", ConsoleColor.Red);

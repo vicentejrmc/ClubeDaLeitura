@@ -8,4 +8,5 @@ using System.Threading.Tasks;
 namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
 {
     public class ReposRevistaMemoria : ReposBaseMemoria<Revista>, IRepositorioRevista;
+
 }

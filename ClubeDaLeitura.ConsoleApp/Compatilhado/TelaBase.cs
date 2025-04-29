@@ -12,9 +12,9 @@ namespace ClubeDaLeitura.ConsoleApp.Compatilhado;
 public abstract class TelaBase<T> where T : EntidadeBase<T>
 {
     protected string nomeEntidade;
-    public ReposBaseMemoria<T> repositorio;
+    public IRepositorio<T> repositorio;
 
-    protected TelaBase(string nomeEntidade, ReposBaseMemoria<T> repositorio)
+    protected TelaBase(string nomeEntidade, IRepositorio<T> repositorio)
     {
         this.nomeEntidade = nomeEntidade;
         this.repositorio = repositorio;
