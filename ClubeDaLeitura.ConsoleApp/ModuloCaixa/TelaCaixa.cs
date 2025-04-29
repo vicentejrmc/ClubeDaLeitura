@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
 {
-    public class TelaCaixa : TelaBase<Caixa>, ItelaCrud
+    public class TelaCaixa : TelaBase<Caixa>, ITelaCrud
     {
         public ReposCaixaMemoria repositorioCaixa;
         public TelaCaixa(ReposCaixaMemoria repositorioCaixa) : base("Caixa", repositorioCaixa)

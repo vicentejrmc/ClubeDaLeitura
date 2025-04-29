@@ -6,7 +6,7 @@ using System.Collections;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
 {
-    public class TelaAmigo : TelaBase<Amigo>, ItelaCrud
+    public class TelaAmigo : TelaBase<Amigo>, ITelaCrud
     {
         public ReposAmigoMemoria repositorioAmigo;
 

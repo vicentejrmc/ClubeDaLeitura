@@ -44,7 +44,7 @@ public class TelaPrincipal
         mainOption = Convert.ToChar(Console.ReadLine().ToUpper());
     }
 
-    public ItelaCrud ObterTela() 
+    public ITelaCrud ObterTela() 
     {
         if (mainOption == 'S')
         {

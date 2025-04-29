@@ -13,7 +13,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista;
 
 //Criar metodo interno validar Emprestimo de revista dado seu status "emprestada" ou "disponivel" ou "Reservada"
 
-public class TelaRevista : TelaBase<Revista>, ItelaCrud
+public class TelaRevista : TelaBase<Revista>, ITelaCrud
 {
     public ReposRevistaMemoria repositorioRevista;
     public ReposCaixaMemoria repositorioCaixa;

@@ -7,7 +7,7 @@ using System.Reflection.Metadata;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 {
-    public class TelaEmprestimo : TelaBase<Emprestimo>, ItelaCrud
+    public class TelaEmprestimo : TelaBase<Emprestimo>, ITelaCrud
     {
         public ReposEmprestimoMemoria repositorioEmprestimo;
         public ReposRevistaMemoria repositorioRevista;

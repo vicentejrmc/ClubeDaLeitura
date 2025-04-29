@@ -1,6 +1,6 @@
 ﻿namespace ClubeDaLeitura.ConsoleApp.Compatilhado;
 
-public interface ItelaCrud
+public interface ITelaCrud
 {
     void InserirRegistro();
     void VisualizarRegistros();
