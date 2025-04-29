@@ -302,13 +302,6 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 
             Emprestimo emprestimoEditado = ObterDados();
 
-            string ehValido = emprestimoEditado.Validar();
-            if (ehValido.Length > 0)
-            {
-                Notificar.ExibirMensagem(ehValido, ConsoleColor.Red);
-                return;
-            }
-
             bool conseguiuEditar = repositorioEmprestimo.EditarRegistro(idEmprestimo, emprestimoEditado);
             if (!conseguiuEditar)
             {

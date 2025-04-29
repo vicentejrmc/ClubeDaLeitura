@@ -66,10 +66,8 @@ public class TelaPrincipal
             return new TelaRevista(RepositorioRevista, repositorioCaixa);
 
         else if (mainOption == '4')
-        {
-            telaEmprestimo.ApresentarMenu();
             return new TelaEmprestimo(repositorioEmprestimo, RepositorioRevista, repositorioAmigo, repositorioCaixa);
-        }
+
         else
             Notificar.ExibirMensagem("Opção inválida! Tente novamente.", ConsoleColor.Red);
 
