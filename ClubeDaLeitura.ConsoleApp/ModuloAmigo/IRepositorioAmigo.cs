@@ -2,5 +2,6 @@
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
 {
-    public class ReposAmigoMemoria : ReposBaseMemoria<Amigo>,  IRepositorioAmigo;
+    public interface IRepositorioAmigo : IRepositorio<Amigo>;
+
 }

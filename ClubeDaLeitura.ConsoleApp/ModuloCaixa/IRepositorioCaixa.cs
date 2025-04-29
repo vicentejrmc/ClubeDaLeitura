@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
+namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
 {
-    public class ReposRevistaMemoria : ReposBaseMemoria<Revista>, IRepositorioRevista;
+    public interface IRepositorioCaixa : IRepositorio<Caixa>;
 }

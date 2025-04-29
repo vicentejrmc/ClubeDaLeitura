@@ -7,5 +7,5 @@ using System.Threading.Tasks;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 {
-    public class ReposEmprestimoMemoria : ReposBaseMemoria<Emprestimo>;
+    public class ReposEmprestimoMemoria : ReposBaseMemoria<Emprestimo>, IRepositorioEmprestimo;
 }
