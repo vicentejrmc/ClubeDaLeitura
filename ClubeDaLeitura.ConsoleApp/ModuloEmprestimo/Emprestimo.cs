@@ -25,10 +25,8 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
             DataDevolucao = dataDevolucao;
         }
 
-        public override void AtualizarRegistro(Emprestimo registroAtualizado)
+        public override void AtualizarRegistro(Emprestimo emprestimoAtualizado)
         {
-            Emprestimo emprestimoAtualizado = (Emprestimo)registroAtualizado;
-
             Amigo = emprestimoAtualizado.Amigo;
             Revista = emprestimoAtualizado.Revista;
             DataEmprestimo = emprestimoAtualizado.DataEmprestimo;

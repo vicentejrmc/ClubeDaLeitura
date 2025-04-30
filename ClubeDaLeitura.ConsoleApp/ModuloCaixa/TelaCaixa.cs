@@ -146,7 +146,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
             }
 
             Console.WriteLine();
-            Notificar.ExibirMensagem("Pressione entera para continuar", ConsoleColor.Yellow);
+            Notificar.ExibirMensagem("Pressione [Enter] para continuar", ConsoleColor.Yellow);
 
         }
 
@@ -169,7 +169,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
 
             string ehValido = caixaEditada.Validar();
 
-            if(ehValido.Length > 0)
+            if (ehValido.Length > 0)
             {
                 Notificar.ExibirMensagem(ehValido, ConsoleColor.Red);
 

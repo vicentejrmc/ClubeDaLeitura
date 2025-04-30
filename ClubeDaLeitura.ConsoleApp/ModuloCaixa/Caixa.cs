@@ -32,10 +32,8 @@ public class Caixa : EntidadeBase<Caixa>
         DiasEmprestimo = diasEmprestimo;
         Revistas = new Revista[100];
     }
-    public override void AtualizarRegistro(Caixa resgitroEditado)
+    public override void AtualizarRegistro(Caixa caixaEditada)
     {
-        Caixa caixaEditada = (Caixa)resgitroEditado;
-
         Etiqueta = caixaEditada.Etiqueta;
         Cor = caixaEditada.Cor;
         DiasEmprestimo = caixaEditada.DiasEmprestimo;

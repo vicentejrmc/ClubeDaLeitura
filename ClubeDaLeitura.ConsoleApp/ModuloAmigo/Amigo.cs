@@ -24,16 +24,6 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
             status = "Ativo";
         }
 
-        public override void AtualizarRegistro(Amigo resgitroEditado)
-        {
-            Amigo amigoEditado = (Amigo)resgitroEditado;
-
-            Nome = amigoEditado.Nome;
-            Responsavel = amigoEditado.Responsavel;
-            Telefone = amigoEditado.Telefone;
-            status = amigoEditado.status;
-        }
-
         public override string Validar()
         {
             string errosValidacao = "";
@@ -68,5 +58,12 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
             amigo.Multa = valor;
         }
 
+        public override void AtualizarRegistro(Amigo amigoEditado)
+        {
+            Nome = amigoEditado.Nome;
+            Responsavel = amigoEditado.Responsavel;
+            Telefone = amigoEditado.Telefone;
+            status = amigoEditado.status;
+        }
     }
 }

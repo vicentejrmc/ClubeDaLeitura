@@ -27,15 +27,13 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
             Caixa = caixa;
         }
 
-        public override void AtualizarRegistro(Revista resgitroEditado)
+        public override void AtualizarRegistro(Revista revistaEditada)
         {
-            Revista revistarEditada = (Revista)resgitroEditado;
-
-            Titulo = revistarEditada.Titulo;
-            Edicao = revistarEditada.Edicao;
-            AnoPublicacao = revistarEditada.AnoPublicacao;
-            StatusEmprestimo = revistarEditada.StatusEmprestimo;
-            caixaSelecionada = revistarEditada.caixaSelecionada;
+            Titulo = revistaEditada.Titulo;
+            Edicao = revistaEditada.Edicao;
+            AnoPublicacao = revistaEditada.AnoPublicacao;
+            StatusEmprestimo = revistaEditada.StatusEmprestimo;
+            caixaSelecionada = revistaEditada.caixaSelecionada;
         }
 
         public override string Validar()
