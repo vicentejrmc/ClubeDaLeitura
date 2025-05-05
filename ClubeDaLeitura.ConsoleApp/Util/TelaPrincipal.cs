@@ -2,6 +2,7 @@
 using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
 using ClubeDaLeitura.ConsoleApp.ModuloCaixa;
 using ClubeDaLeitura.ConsoleApp.ModuloEmprestimo;
+using ClubeDaLeitura.ConsoleApp.ModuloReservas;
 using ClubeDaLeitura.ConsoleApp.ModuloRevista;
 using System.Threading.Channels;
 
@@ -14,6 +15,7 @@ public class TelaPrincipal
     public IRepositorioCaixa repositorioCaixa;
     public IRepositorioRevista repositorioRevista;
     public IRepositorioEmprestimo repositorioEmprestimo;
+    public IRepositorioReserva repositorioReserva;
     private ContextoDados contexto;
     public TelaEmprestimo telaEmprestimo;
 
@@ -25,6 +27,7 @@ public class TelaPrincipal
         this.repositorioRevista = new ReposRevistaArquivo(contexto);
         this.repositorioEmprestimo = new ReposEmprestimoArquivo(contexto);
         this.telaEmprestimo = new TelaEmprestimo(repositorioEmprestimo, repositorioRevista, repositorioAmigo, repositorioCaixa);
+        this.repositorioReserva = new ReposReservarArquivo(contexto);
     }
 
     public void ApresentarMenuPrincipal()
@@ -40,29 +43,30 @@ public class TelaPrincipal
         Console.WriteLine("[2] Gestão de Caixas.      ");
         Console.WriteLine("[3] Gestão de Revistas.    ");
         Console.WriteLine("[4] Gestão de Emprestimos. ");
+        Console.WriteLine("[5] Gestão de Reservas. ");
         Console.WriteLine("[S] Sair...                ");
         Console.WriteLine("------------------------------------------");
         Console.Write("Escolha uma opção válida: ");
 
         string opcao = Console.ReadLine()!.ToUpper() ?? string.Empty;
-        if(opcao.Length > 0)
-            mainOption = Convert.ToChar(Console.ReadLine().ToUpper());
+        if (opcao.Length > 0)
+            mainOption = Convert.ToChar(opcao[0]);
         else
         {
             Notificar.ExibirMensagem("Opção inválida! Tente novamente.", ConsoleColor.Red);
 
-            return;
+            ApresentarMenuPrincipal();
         }
     }
 
-    public ITelaCrud ObterTela() 
+    public ITelaCrud ObterTela()
     {
         if (mainOption == 'S')
         {
             Console.WriteLine("\n---------------------");
             Console.WriteLine("Saindo do Sistema....");
             Console.WriteLine("---------------------");
-            Thread.Sleep(1500); ;
+            Thread.Sleep(2000); ;
             Environment.Exit(0);
         }
 
@@ -79,9 +83,14 @@ public class TelaPrincipal
         else if (mainOption == '4')
             return new TelaEmprestimo(repositorioEmprestimo, repositorioRevista, repositorioAmigo, repositorioCaixa);
 
-        else
-            Notificar.ExibirMensagem("Opção inválida! Tente novamente.", ConsoleColor.Red);
+        else if (mainOption == '5')
+            return new TelaReserva(repositorioReserva, repositorioAmigo, repositorioRevista);
 
+        else
+        {
+            Notificar.ExibirMensagem("Opção inválida! Tente novamente.", ConsoleColor.Red);
+            ApresentarMenuPrincipal();
+        }
         return null;
     }
 

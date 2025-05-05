@@ -17,11 +17,8 @@ class Program
 
             ITelaCrud telaSelecionada = telaPrincipal.ObterTela();
 
-            if (telaSelecionada == null)
-            {
-                Notificar.ExibirMensagem("Opção inválida! Tente novamente.", ConsoleColor.Red);
+            if (telaSelecionada == null)        
                 break;
-            }
 
             char opcaoEscolhida = telaSelecionada.ApresentarMenu();
 

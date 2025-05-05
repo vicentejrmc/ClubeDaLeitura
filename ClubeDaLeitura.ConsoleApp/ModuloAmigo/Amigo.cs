@@ -65,5 +65,10 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
             Telefone = amigoEditado.Telefone;
             status = amigoEditado.status;
         }
+
+        public void BloquearAmigo(Amigo amigo)
+        {
+            amigo.status = "Bloqueado";
+        }
     }
 }

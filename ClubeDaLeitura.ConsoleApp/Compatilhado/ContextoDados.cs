@@ -2,6 +2,7 @@
 using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
 using ClubeDaLeitura.ConsoleApp.ModuloCaixa;
 using ClubeDaLeitura.ConsoleApp.ModuloEmprestimo;
+using ClubeDaLeitura.ConsoleApp.ModuloReservas;
 using ClubeDaLeitura.ConsoleApp.ModuloRevista;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -15,6 +16,8 @@ namespace ClubeDaLeitura.ConsoleApp.Compatilhado
         public List<Revista> Revistas { get; set; }
         public List<Emprestimo> Emprestimos { get; set; }
 
+        public List<Reserva> Reservas { get; set; }
+
         private string pastaArmazenamento = "F:\\ArquivosJson";
         private string arquivoArmazenamento = "dados.json";
 
@@ -24,6 +27,7 @@ namespace ClubeDaLeitura.ConsoleApp.Compatilhado
             Caixas = new List<Caixa>();
             Revistas = new List<Revista>();
             Emprestimos = new List<Emprestimo>();
+            Reservas = new List<Reserva>();
         }
 
         public ContextoDados(bool carregarDados) : this()
@@ -53,6 +57,7 @@ namespace ClubeDaLeitura.ConsoleApp.Compatilhado
             this.Caixas = contextoArmazenado.Caixas;
             this.Revistas = contextoArmazenado.Revistas;
             this.Emprestimos = contextoArmazenado.Emprestimos;
+            this.Reservas = contextoArmazenado.Reservas;
         }
 
         public void Salvar()
