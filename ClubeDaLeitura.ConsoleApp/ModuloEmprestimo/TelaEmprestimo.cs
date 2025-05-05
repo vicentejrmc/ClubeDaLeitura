@@ -35,6 +35,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
             Console.WriteLine($"[3] Editar Emprestimo");
             Console.WriteLine($"[4] Excluir Emprestimo");
             Console.WriteLine($"[5] Registrar Devolução");
+            Console.WriteLine($"[6] Visualizar Multas.");
 
             Console.WriteLine($"[S] Sair...");
             Console.WriteLine("------------------------------------------");
@@ -44,6 +45,9 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 
             if(opcao == '5')
                 RegistrarDevolucao();
+
+            if (opcao == '6')
+                VisulizarMultas();
 
             return opcao;
         }
@@ -228,7 +232,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
             #region Verifica se o emprestimo está em atrazo ou se tem multa pendente
             if (DateTime.Now > emprestimoSelecionado.DataDevolucao)
             {
-                Emprestimo emprestimo = emprestimoSelecionado;
+
                 emprestimo.ObterMulta(emprestimoSelecionado);
 
                 Notificar.ExibirCores("\nEsse empréstimo está atrasado!", ConsoleColor.Red);
@@ -387,5 +391,37 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 
             Notificar.ExibirMensagem("Multa paga com sucesso!", ConsoleColor.Green);
         }
+
+        public void VisulizarMultas()
+        {
+            ExibirCabecalho();
+
+            Console.WriteLine("-------------------------------------");
+            Console.WriteLine("Visualizando Multas....");
+            Console.WriteLine("\n-------------------------------------");
+
+
+            Console.WriteLine("{0, -10} | {1, -20} | {2, -20} | {3, -10} | {4, -10} | {5, -15}", "ID",
+                "Revista", "Amigo", "Data Devolução", "Dias em Atrazo", "Valor de Multa");
+
+            List<Emprestimo> registros = repositorioEmprestimo.SelecionarTodos();
+
+            foreach (Emprestimo emp in registros)
+            {
+                if (DateTime.Now > emp.DataDevolucao)
+                {
+                    TimeSpan diferenca = DateTime.Now - emp.DataDevolucao ;
+                    
+
+                    Console.WriteLine("{0, -10} | {1, -20} | {2, -20} | {3, -10} | {4, -10} | {5, -15}", "ID",
+                        emp.Revista, emp.Amigo, emp.DataDevolucao, diferenca, emp.Multa);
+                }
+            }
+
+            Console.ReadLine();        
+        }
+
+
+    
     }
 }
