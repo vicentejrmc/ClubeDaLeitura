@@ -15,7 +15,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
         public IRepositorioCaixa repositorioCaixa;
         public Emprestimo emprestimo;
 
-        public TelaEmprestimo(IRepositorioEmprestimo repositorioEmprestimo, IRepositorioRevista repositorioRevista, 
+        public TelaEmprestimo(IRepositorioEmprestimo repositorioEmprestimo, IRepositorioRevista repositorioRevista,
             IRepositorioAmigo repositorioAmigo, IRepositorioCaixa repositorioCaixa) : base("Emprestimo", repositorioEmprestimo)
         {
             this.repositorioEmprestimo = repositorioEmprestimo;
@@ -41,9 +41,18 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
             Console.WriteLine("------------------------------------------");
 
             Console.Write("Escolha uma opção válida: ");
-            char opcao = Convert.ToChar(Console.ReadLine()!.ToUpper());
+            string opcaoStr = Console.ReadLine()!.ToUpper() ?? string.Empty;
 
-            if(opcao == '5')
+            char opcao = '0';
+            if (opcaoStr.Length > 0)
+                opcao = Convert.ToChar(opcaoStr);
+            else
+            {
+                Notificar.ExibirMensagem("Opção inválida! Tente novamente.", ConsoleColor.Red);
+                return '0';
+            }
+
+            if (opcao == '5')
                 RegistrarDevolucao();
 
             if (opcao == '6')
@@ -51,7 +60,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 
             return opcao;
         }
-    
+
         public override void InserirRegistro()
         {
             ExibirCabecalho();
@@ -169,7 +178,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
             Console.WriteLine($"Visualizando Emprestimos.");
             Console.WriteLine("------------------------------------------\n");
 
-            Console.WriteLine("{0, -10} | {1, -20} | {2, -20} | {3, -10} | {4, -10} | {5, -15}","ID", "Revista", "Amigo", "Data Emprestimo", "Data Devolução", "Situação");
+            Console.WriteLine("{0, -10} | {1, -20} | {2, -20} | {3, -10} | {4, -10} | {5, -15}", "ID", "Revista", "Amigo", "Data Emprestimo", "Data Devolução", "Situação");
 
             if (repositorioEmprestimo.SelecionarTodos().Count == 0)
             {
@@ -197,7 +206,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
             Console.WriteLine();
         }
 
-        public  void RegistrarDevolucao()
+        public void RegistrarDevolucao()
         {
             ExibirCabecalho();
             Console.WriteLine("------------------------------------------");
@@ -410,18 +419,18 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
             {
                 if (DateTime.Now > emp.DataDevolucao)
                 {
-                    TimeSpan diferenca = DateTime.Now - emp.DataDevolucao ;
-                    
+                    TimeSpan diferenca = DateTime.Now - emp.DataDevolucao;
+
 
                     Console.WriteLine("{0, -10} | {1, -20} | {2, -20} | {3, -10} | {4, -10} | {5, -15}", "ID",
                         emp.Revista, emp.Amigo, emp.DataDevolucao, diferenca, emp.Multa);
                 }
             }
 
-            Console.ReadLine();        
+            Console.ReadLine();
         }
 
 
-    
+
     }
 }

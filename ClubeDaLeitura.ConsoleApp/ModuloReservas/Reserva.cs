@@ -45,8 +45,8 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloReservas
             Regex regex = new Regex(@"^\d{2}/\d{2}/\d{4}$");
             if (!regex.IsMatch(DataReserva.ToString("dd/MM/yyyy")))
                 erros += "Erro! A data da reserva deve estar no formato dd/MM/yyyy.\n";
-
-            if(AmigoReserv.Multa ==  )
+            
+            // validação de amigo com Emprestimo ou multa em atrazado deverá ser feito na TelaReserva(Amigo não pode reservar)
 
             return erros;
         }
