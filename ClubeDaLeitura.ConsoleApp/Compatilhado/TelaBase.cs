@@ -82,6 +82,12 @@ public abstract class TelaBase<T> where T : EntidadeBase<T>
 
         VisualizarRegistros(); // Método override da classe filho
 
+        if (repositorio.SelecionarTodos().Count == 0)
+        {
+            Notificar.ExibirMensagem($"Não há {nomeEntidade} cadastrados para editar!", ConsoleColor.Red);
+            return;
+        }
+
         Console.WriteLine($"Digite o ID do {nomeEntidade} que deseja editar: ");
         int idRegistro = Convert.ToInt32(Console.ReadLine());
         Console.WriteLine();
@@ -116,6 +122,12 @@ public abstract class TelaBase<T> where T : EntidadeBase<T>
         Console.WriteLine("------------------------------------------\n");
 
         VisualizarRegistros(); // Método override da classe filho
+
+        if (repositorio.SelecionarTodos().Count == 0)
+        {
+            Notificar.ExibirMensagem($"Não há {nomeEntidade} cadastrados para excluir!", ConsoleColor.Red);
+            return;
+        }
 
         Console.WriteLine($"Digite o ID do {nomeEntidade} que deseja excluir: ");
         int idRegistro = Convert.ToInt32(Console.ReadLine());

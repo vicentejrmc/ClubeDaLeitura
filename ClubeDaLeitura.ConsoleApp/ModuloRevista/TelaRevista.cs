@@ -11,8 +11,6 @@ using System.Threading.Tasks;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloRevista;
 
-//Criar metodo interno validar Emprestimo de revista dado seu status "emprestada" ou "disponivel" ou "Reservada"
-
 public class TelaRevista : TelaBase<Revista>, ITelaCrud
 {
     public IRepositorioRevista repositorioRevista;
@@ -43,7 +41,7 @@ public class TelaRevista : TelaBase<Revista>, ITelaCrud
         Console.Write("Digite o Ano de Edição: ");
         int anoEdicao = Convert.ToInt32(Console.ReadLine()!);
 
-        string statusEmprestimo = "Disponivel";
+        string statusEmprestimo = "Disponível";
 
         Revista novaRevista = new Revista(titulo, edicao, anoEdicao, statusEmprestimo, caixaSelecionada);
 
@@ -111,6 +109,10 @@ public class TelaRevista : TelaBase<Revista>, ITelaCrud
         Console.WriteLine("------------------------------------------\n");
 
         VisualizarRegistros();
+        if (repositorioRevista.SelecionarTodos().Count == 0)
+        {
+            Notificar.ExibirMensagem("Não há revistas cadastradas para editar!", ConsoleColor.Red); return;
+        }
 
         Console.Write("Selecione o Id da Revista que deseja Editar: ");
         int idRevista = Convert.ToInt32(Console.ReadLine());

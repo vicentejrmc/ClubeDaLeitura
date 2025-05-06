@@ -12,20 +12,22 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloReservas
 {
     public class Reserva : EntidadeBase<Reserva>
     {
-        public Amigo AmigoReserv { get; set; }
+        public Reserva() { }
+
+        public Amigo AmigoRes { get; set; }
         public Revista Revista { get; set; }
         public DateTime DataReserva { get; set; }
 
-        public Reserva(Amigo amigo, Revista revista, DateTime dataReserva)
+        public Reserva(Amigo amigoRes, Revista revista, DateTime dataReserva)
         {
-            AmigoReserv = amigo;
+            AmigoRes = amigoRes;
             Revista = revista;
             DataReserva = dataReserva;
         }
 
         public override void AtualizarRegistro(Reserva resgitroEditado)
         {
-            AmigoReserv = resgitroEditado.AmigoReserv;
+            AmigoRes = resgitroEditado.AmigoRes;
             Revista = resgitroEditado.Revista;
             DataReserva = resgitroEditado.DataReserva;
         }
@@ -34,16 +36,16 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloReservas
         {
             string erros = "";
 
-            if (AmigoReserv == null)
+            if (AmigoRes == null)
                 erros += "Erro! O amigo não pode ser nulo.\n";
 
-            if(!AmigoReserv.status.Equals("Ativo"))
+            if(!AmigoRes.status.Equals("Ativo"))
                 erros += "Erro! O amigo não pode efetuara uma reserva. Possiveis Motivos: Reserva em Aberto, Multa pendente ou Emprestimo. / \n";
 
             if (Revista == null)
                 erros += "Erro! A revista não pode ser nula.\n";
 
-            if(!Revista.StatusEmprestimo.Equals("Disponível"))
+            //if(!Revista.StatusEmprestimo.Equals("Disponivel"))
                 erros += "Erro! A revista não pode ser reservada. A mesma se já está Emprestada ou Reservada.\n";
 
             Regex regex = new Regex(@"^\d{2}/\d{2}/\d{4}$");
