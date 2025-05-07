@@ -1,6 +1,7 @@
 ﻿using ClubeDaLeitura.ConsoleApp.Compatilhado;
 using ClubeDaLeitura.ConsoleApp.ModuloRevista;
 using ClubeDaLeitura.ConsoleApp.Util;
+using System.Reflection.Metadata.Ecma335;
 
 namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa;
 
@@ -9,7 +10,7 @@ public class Caixa : EntidadeBase<Caixa>
     public string Etiqueta{ get; set; }
     public string Cor { get; set; }
     public int DiasEmprestimo { get; set; }
-    public Revista[] Revistas { get; private set; }
+    public Revista[] Revistas { get; set; }
 
     public int QtdRevistas
     {
@@ -25,6 +26,10 @@ public class Caixa : EntidadeBase<Caixa>
         }
     }
 
+    public Caixa()
+    {
+    }
+
     public Caixa(string etiqueta, string cor, int diasEmprestimo)
     {
         Etiqueta = etiqueta;
@@ -32,6 +37,7 @@ public class Caixa : EntidadeBase<Caixa>
         DiasEmprestimo = diasEmprestimo;
         Revistas = new Revista[100];
     }
+
     public override void AtualizarRegistro(Caixa caixaEditada)
     {
         Etiqueta = caixaEditada.Etiqueta;
