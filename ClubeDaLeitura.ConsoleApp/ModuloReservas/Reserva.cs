@@ -46,7 +46,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloReservas
                 erros += "Erro! A revista não pode ser nula.\n";
 
             //if(!Revista.StatusEmprestimo.Equals("Disponivel"))
-                erros += "Erro! A revista não pode ser reservada. A mesma se já está Emprestada ou Reservada.\n";
+               // erros += "Erro! A revista não pode ser reservada. A mesma se já está Emprestada ou Reservada.\n";
 
             Regex regex = new Regex(@"^\d{2}/\d{2}/\d{4}$");
             if (!regex.IsMatch(DataReserva.ToString("dd/MM/yyyy")))
