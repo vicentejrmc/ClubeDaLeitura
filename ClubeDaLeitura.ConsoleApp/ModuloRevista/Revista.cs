@@ -20,7 +20,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
 
         public Revista(Caixa caixa)
         {
-            Caixa = caixa;
+           Caixa = caixa;
         }
 
         public Revista(string titulo, int edicao, int anoPublicacao, string statusEmprestimo, Caixa caixa)

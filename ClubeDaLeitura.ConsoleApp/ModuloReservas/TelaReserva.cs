@@ -1,6 +1,7 @@
 ﻿using ClubeDaLeitura.ConsoleApp.Compatilhado;
 using ClubeDaLeitura.ConsoleApp.ModuloAmigo;
 using ClubeDaLeitura.ConsoleApp.ModuloCaixa;
+using ClubeDaLeitura.ConsoleApp.ModuloEmprestimo;
 using ClubeDaLeitura.ConsoleApp.ModuloRevista;
 using ClubeDaLeitura.ConsoleApp.Util;
 using System;
@@ -16,6 +17,7 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloReservas
         protected IRepositorioReserva repositorioReserva;
         protected IRepositorioAmigo repositorioAmigo;
         protected IRepositorioRevista repositorioRevista;
+        protected IRepositorioEmprestimo repositorioEmprestimo;
         private IRepositorioCaixa repositorioCaixa;
 
         public TelaReserva(IRepositorioReserva repositorioReserva, IRepositorioAmigo repositorioAmigo, IRepositorioRevista repositorioRevista)
@@ -63,9 +65,52 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloReservas
         private void ConverterReserva()
         {
             ExibirCabecalho();
+
+            Console.WriteLine($"Convertendo Reserva.");
+            Console.WriteLine("------------------------------------------\n");
+
             VisualizarRegistros();
 
-            Console.WriteLine("Digite o Id da Reserva");
+            Console.Write("Digite o Id Da Reserva: ");
+            int idReserva = Convert.ToInt32(Console.ReadLine()! ?? string.Empty);
+
+            Reserva reservaSelecionada = (Reserva)repositorioReserva.SelecionarRegistroPorId(idReserva);
+
+            if (reservaSelecionada == null)
+            {
+                Notificar.ExibirMensagem("Reserva não encontrada!", ConsoleColor.Red);
+                return;
+            }
+
+            Console.Write("A Reserva dessa revista será removida, deseja confirmar? S/N: ");
+            string escolha = Console.ReadLine()!.ToUpper() ?? string.Empty;
+
+            if (escolha != "S")
+            {
+                Notificar.ExibirMensagem("Conersão de Reserva para emprestimo cancelada!", ConsoleColor.Yellow); return;
+            }
+            else
+            {
+                reservaSelecionada.Revista.Devolver(reservaSelecionada.Revista);
+
+                Notificar.ExibirMensagem("Status de Reserva da Revista Cancelado", ConsoleColor.Green);
+            }
+
+            Console.WriteLine("Convertendo Reserva em Emprestimo...");
+            Thread.Sleep(1000);
+
+            DateTime dataAtual = DateTime.Now;
+
+            int diasEmprestimo = reservaSelecionada.Revista.Caixa.DiasEmprestimo;
+
+            DateTime dataDevol = DateTime.Now.AddDays(diasEmprestimo);
+
+            Emprestimo emprestimo = new Emprestimo(reservaSelecionada.AmigoRes, reservaSelecionada.Revista, dataAtual, "Emprestada", dataDevol);
+
+            repositorioEmprestimo.CadastrarRegistro(emprestimo);
+
+            Notificar.ExibirMensagem("Reserva Convertida com sucesso!", ConsoleColor.Green);
+
         }
 
         public override void InserirRegistro()
@@ -112,13 +157,13 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloReservas
         {
             TelaAmigo telaAmigo = new TelaAmigo(repositorioAmigo);
             telaAmigo.VisualizarRegistros();
-            Console.WriteLine("Selecione o Id do Amigo que irá efetuar a reserva: ");
+            Console.Write("Selecione o Id do Amigo que irá efetuar a reserva: ");
             int idAmigo = Convert.ToInt32(Console.ReadLine()! ?? string.Empty);
             Amigo amigo = (Amigo)repositorioAmigo.SelecionarRegistroPorId(idAmigo);
 
             TelaRevista telaRevista = new TelaRevista(repositorioRevista, repositorioCaixa);
             telaRevista.VisualizarRegistros();
-            Console.WriteLine("Selecione o Id da Revista que irá ser reservada: ");
+            Console.Write("Selecione o Id da Revista que irá ser reservada: ");
             int idRevista = Convert.ToInt32(Console.ReadLine()! ?? string.Empty);
             Revista revista = (Revista)repositorioRevista.SelecionarRegistroPorId(idRevista);
 
