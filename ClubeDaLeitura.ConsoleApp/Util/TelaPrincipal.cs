@@ -16,18 +16,16 @@ public class TelaPrincipal
     public IRepositorioRevista repositorioRevista;
     public IRepositorioEmprestimo repositorioEmprestimo;
     public IRepositorioReserva repositorioReserva;
-    private ContextoDados contexto;
     public TelaEmprestimo telaEmprestimo;
 
     public TelaPrincipal()  // Construtor de TelaPrincipal
     {
-        this.contexto = new ContextoDados(true);
-        this.repositorioAmigo = new ReposAmigoArquivo(contexto);
-        this.repositorioCaixa = new ReposCaixaArquivo(contexto);
-        this.repositorioRevista = new ReposRevistaArquivo(contexto);
-        this.repositorioEmprestimo = new ReposEmprestimoArquivo(contexto);
+        this.repositorioAmigo = new ReposAmigoArquivo();
+        this.repositorioCaixa = new ReposCaixaArquivo();
+        this.repositorioRevista = new ReposRevistaArquivo();
+        this.repositorioEmprestimo = new ReposEmprestimoArquivo();
         this.telaEmprestimo = new TelaEmprestimo(repositorioEmprestimo, repositorioRevista, repositorioAmigo, repositorioCaixa);
-        this.repositorioReserva = new ReposReservarArquivo(contexto);
+        this.repositorioReserva = new ReposReservarArquivo();
     }
 
     public void ApresentarMenuPrincipal()

@@ -9,13 +9,10 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloCaixa
 {
     public class ReposCaixaArquivo : ReposBaseArquivo<Caixa>, IRepositorioCaixa
     {
-        public ReposCaixaArquivo(ContextoDados contexto) : base(contexto)
-        {
-        }
 
         protected override List<Caixa> ObterRegistros()
         {
-           return contexto.Caixas;
+           return new List<Caixa>();
         }
     }
 }

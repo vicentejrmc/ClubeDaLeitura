@@ -9,13 +9,9 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloAmigo
 {
     public class ReposAmigoArquivo : ReposBaseArquivo<Amigo>, IRepositorioAmigo
     {
-        public ReposAmigoArquivo(ContextoDados contexto) : base(contexto)
-        {
-        }
-
         protected override List<Amigo> ObterRegistros()
         {
-            return contexto.Amigos;
+            return new List<Amigo>();
         }
     }
 }

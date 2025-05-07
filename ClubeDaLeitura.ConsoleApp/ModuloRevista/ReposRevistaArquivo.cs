@@ -9,13 +9,9 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloRevista
 {
     public class ReposRevistaArquivo : ReposBaseArquivo<Revista>, IRepositorioRevista
     {
-        public ReposRevistaArquivo(ContextoDados contexto) : base(contexto)
-        {
-        }
-
         protected override List<Revista> ObterRegistros()
         {
-            return contexto.Revistas;
+            return new List<Revista>();
         }
     }
 }

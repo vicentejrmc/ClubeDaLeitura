@@ -9,12 +9,9 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloReservas
 {
     public class ReposReservarArquivo : ReposBaseArquivo<Reserva>, IRepositorioReserva
     {
-        public ReposReservarArquivo(ContextoDados contexto) : base(contexto)
-        {
-        }
         protected override List<Reserva> ObterRegistros()
         {
-            return contexto.Reservas;
+            return new List<Reserva>();
         }
     }
 }

@@ -6,12 +6,8 @@ namespace ClubeDaLeitura.ConsoleApp.Compatilhado
         private List<T> registros = new List<T>();
         private int contadorIds = 0;
 
-        protected ContextoDados contexto;
-
-        protected ReposBaseArquivo(ContextoDados contexto)
+        protected ReposBaseArquivo()
         {
-            this.contexto = contexto;
-
             registros = ObterRegistros();
 
             int maiorId = 0;   // No construtor, usamos esse metodo para garantir que o Id virá corretamente ordenado quando recuperarmos os arquivos
@@ -31,9 +27,6 @@ namespace ClubeDaLeitura.ConsoleApp.Compatilhado
             novoRegistro.Id = ++contadorIds;
 
             registros.Add(novoRegistro);
-
-            contexto.Salvar();
-
         }
 
         public bool EditarRegistro(int idRegistro, T registroEditado)
@@ -43,8 +36,6 @@ namespace ClubeDaLeitura.ConsoleApp.Compatilhado
                 if (entidade.Id == idRegistro)
                 {
                     entidade.AtualizarRegistro(registroEditado);
-
-                    contexto.Salvar();
 
                     return true;
                 }
@@ -60,8 +51,6 @@ namespace ClubeDaLeitura.ConsoleApp.Compatilhado
             if (registroSelecionado != null)
             {
                 registros.Remove(registroSelecionado);
-
-                contexto.Salvar();
 
                 return true;
             }

@@ -9,13 +9,9 @@ namespace ClubeDaLeitura.ConsoleApp.ModuloEmprestimo
 {
     public class ReposEmprestimoArquivo : ReposBaseArquivo<Emprestimo>, IRepositorioEmprestimo
     {
-        public ReposEmprestimoArquivo(ContextoDados contexto) : base(contexto)
-        {
-        }
-
         protected override List<Emprestimo> ObterRegistros()
         {
-            return contexto.Emprestimos;
+            return new List<Emprestimo>();
         }
     }
 
